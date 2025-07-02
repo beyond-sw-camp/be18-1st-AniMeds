@@ -1,6 +1,9 @@
 ![image](https://github.com/user-attachments/assets/7536f239-fdbe-4d41-9959-ec67b4f445d8)
 <div align="center">
-  <img src="https://github.com/oka1313/oka1313/assets/101691440/92118a53-c5b6-40bc-b130-bf8c398d7b51" />
+  <img src="https://user-images.githubusercontent.com/101691440/92118a53-c5b6-40bc-b130-bf8c398d7b51" width="120" alt="AniMeds Logo"/>
+  <h1>🐾 AniMeds</h1>
+  <h3>반려동물 맞춤형 약물 추천 & 복약 관리 플랫폼</h3>
+  <p>동물의 건강을 위한 똑똑한 약물관리, AniMeds와 함께 하세요.</p>
 </div>
 # be18-1st-5team
 # 🐾 AniMeds – 반려동물 맞춤형 약물 추천 & 복약 관리 플랫폼
