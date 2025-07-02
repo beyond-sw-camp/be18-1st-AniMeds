@@ -46,7 +46,8 @@
 
 ## 📅 프로젝트 진행 일정 (WBS)
 
-![image](https://github.com/user-attachments/assets/e2d6e905-a4d7-4555-9ce3-6c6abd3663b9)
+![erd_last](https://github.com/user-attachments/assets/56fa0c05-e136-4d90-890b-b7387cdf8e25)
+
 
 ---
 
