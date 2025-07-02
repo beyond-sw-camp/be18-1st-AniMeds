@@ -78,10 +78,7 @@
 
 
 ### Schema DDL
-- `CREATE TABLE` + `INDEX` + `FOREIGN KEY` 포함
-- [schema/animeds_schema.sql](schema/animeds_schema.sql)
 
----
 
 ## 🧪 샘플 데이터 삽입 (DML)
 
