@@ -65,7 +65,7 @@
 - 인덱스 활용한 검색 최적화
 - 반응형 UI 지원
 - 데이터 무결성 보장 (FK, 제약조건)
-
+https://docs.google.com/spreadsheets/d/1ezIGvaFNwkBmDPlIIaDlnmjDzN0-As8Hf1kQjH_DhoM/edit?usp=sharing
 ---
 
 ## 🗂️ 데이터베이스 설계
