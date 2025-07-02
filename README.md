@@ -1,4 +1,3 @@
-![image](https://github.com/user-attachments/assets/7536f239-fdbe-4d41-9959-ec67b4f445d8)
 <div align="center">
   <img src="https://user-images.githubusercontent.com/101691440/92118a53-c5b6-40bc-b130-bf8c398d7b51" width="120" alt="AniMeds Logo"/>
   <h1>🐾 AniMeds</h1>
