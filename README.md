@@ -48,7 +48,7 @@
 ![image](https://github.com/user-attachments/assets/7112814b-3aa7-48ec-8944-a977059e8d3e)
 
 
-
+https://docs.google.com/spreadsheets/d/1220bBuBJ12cd4qBncc2iErHQUT1RVwtTA3J0CJ5_gtg/edit?gid=0#gid=0
 ---
 
 ## 🧾 요구사항 정의서
