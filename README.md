@@ -1,3 +1,5 @@
+# be18-1st-5team
+# 🐾 AniMeds – 반려동물 맞춤형 약물 추천 & 복약 관리 플랫폼
 <p align="center">
   <img src="https://github.com/user-attachments/assets/33172a31-5efb-4c38-bd91-208887c8c167" width="160" alt="AniMeds Logo" />
 </p>
@@ -8,8 +10,6 @@
   동물의 건강을 위한 똑똑한 약물관리, <strong>AniMeds</strong>와 함께 하세요.
 </p>
 
-# be18-1st-5team
-# 🐾 AniMeds – 반려동물 맞춤형 약물 추천 & 복약 관리 플랫폼
 
 > 반려동물의 건강을 한눈에, **AniMeds**와 함께
 
