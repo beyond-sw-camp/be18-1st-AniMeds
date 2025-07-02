@@ -75,6 +75,7 @@
 ## 🗂️ 데이터베이스 설계
 
 ### ERD
+![6Dvmdnc3LHzMYqKPy_1](https://github.com/user-attachments/assets/a257cfd4-031f-4e51-aedf-4929bdcda264)
 
 
 ### Schema DDL
