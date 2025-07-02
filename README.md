@@ -46,7 +46,6 @@
 
 ## 📅 프로젝트 진행 일정 (WBS)
 
-![erd_last](https://github.com/user-attachments/assets/56fa0c05-e136-4d90-890b-b7387cdf8e25)
 
 
 ---
@@ -72,7 +71,8 @@ https://docs.google.com/spreadsheets/d/1ezIGvaFNwkBmDPlIIaDlnmjDzN0-As8Hf1kQjH_D
 ## 🗂️ 데이터베이스 설계
 
 ### ERD
-![6Dvmdnc3LHzMYqKPy_1](https://github.com/user-attachments/assets/a257cfd4-031f-4e51-aedf-4929bdcda264)
+![erd_last](https://github.com/user-attachments/assets/21479827-f4e2-4deb-9abf-00f9d07af870)
+
 
 
 ### Schema DDL
