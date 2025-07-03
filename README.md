@@ -50,6 +50,14 @@
     <img src="https://github.com/user-attachments/assets/23825b24-6c1b-495b-a066-1b2fd5d01efd" alt="반려동물비율_국내" width="600">
   </a>
 </p>
+농림축산식품부는 국내 반려동물 시장을 2022년
+기준 약 8.5조원으로 추산하고 2032년 약 21조원으로 예측했다.
+<p align="center">
+  <a href="https://www.dailyvet.co.kr/news/industry/214784">
+    <img src="https://github.com/user-attachments/assets/d5a7ecce-f093-4a6c-a39f-ed239bb69c51" alt="반려동물비율_국내" width="600">
+  </a>
+</p>
+
 
 
 그러나 동일한 해 서울디지털재단이 해당 부 동물보호관리시스템에 등록된 데이터로 동물병원 현황을 분석한 결과 서울시 기준 병원 1개소당 662마리의 반려견을 담당하고 있음을 확인할 수 있습니다.
