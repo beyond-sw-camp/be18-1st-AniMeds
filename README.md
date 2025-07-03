@@ -93,8 +93,9 @@ https://docs.google.com/spreadsheets/d/1ezIGvaFNwkBmDPlIIaDlnmjDzN0-As8Hf1kQjH_D
 ## 🗂️ 데이터베이스 설계
 
 ### ERD
-![erd_last](https://github.com/user-attachments/assets/21479827-f4e2-4deb-9abf-00f9d07af870)
-
+<p align="center">
+  <img src="images/ERD_White.png" width="700" alt="ERD Diagram" />
+</p>
 
 
 ### Schema DDL
