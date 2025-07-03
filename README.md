@@ -1,17 +1,18 @@
-# be18-1st-5team-AniMeds
-# 🐾 AniMeds – 반려동물 맞춤형 약물 추천 & 복약 관리 플랫폼
+![header](https://capsule-render.vercel.app/api?type=cylinder&color=gradient&height=200&text=AniMeds%20Project&desc=반려동물%20맞춤형%20약물%20추천%20%26%20복약%20관리%20플랫폼&fontSize=70&descSize=20&animation=fadeIn)
+
 <p align="center">
   <img src="https://github.com/user-attachments/assets/33172a31-5efb-4c38-bd91-208887c8c167" width="160" alt="AniMeds Logo" />
 </p>
 
 <h1 align="center">🐾 AniMeds</h1>
 <h3 align="center">반려동물 맞춤형 약물 추천 & 복약 관리 플랫폼</h3>
+
 <p align="center">
   동물의 건강을 위한 똑똑한 약물관리, <strong>AniMeds</strong>와 함께 하세요.
 </p>
 
 
-> 반려동물의 건강을 한눈에, **AniMeds**와 함께
+> 반려동물의 건강을 한눈에, <strong>AniMeds</strong>와 함께
 
 ---
 
