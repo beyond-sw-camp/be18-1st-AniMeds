@@ -19,10 +19,13 @@
 
 | 이름     | 역할             | 담당 업무 |
 |----------|------------------|-----------|
-|    |       |  |
-|    |   |  |
-|    |      |  |
-|    |  |  |
+|[안진기](https://github.com/Jinki-Ahn) | 팀장 |  |
+|[김민수](https://github.com/minsu47722) | 팀원 |  |
+|[이승진](https://github.com/jintory) | 팀원 |  |
+[이원진](https://github.com/sumgo-ssri) | 팀원 | |
+|[최정우](https://github.com/JJJJungw) | 팀원 | |
+|[박채연](https://github.com/pcochoco) | 팀원 |  |
+
 
 ---
 
