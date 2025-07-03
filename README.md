@@ -25,7 +25,7 @@
 
 | <img src="https://cdn.discordapp.com/attachments/1387787445688602627/1390216556306235402/raw.png?ex=6867738f&is=6866220f&hm=a1389d7031f81e2b9d4e6f900c6b00f94729bd67f0966739c9ab76f3bc01ca7c&" width="200"><br>안진기     | 김민수             | <img src="https://github.com/user-attachments/assets/9a10061c-7c47-440c-ab35-3836f292e39a" width = "200"><br>이승진 | 이원진 | <img src="https://cdn.discordapp.com/attachments/1387787445688602627/1390218383307444295/i15052477984.jpg?ex=68677543&is=686623c3&hm=629e4d5a94d662705d11e8cfb2fb46b47cd7dfe68b9ee5db5c69c3eb88075f03&" width = "200"> <br>최정우 | 박채연 |
 |----------|------------------|-----------|----|---|------|
-| 팀장 | 팀원| 팀원| 팀원| 팀원| 팀원|
+| <p align="center">팀장</p> |<p align="center">팀장</p>| <p align="center">팀장</p>|<p align="center">팀장</p>|<p align="center">팀장</p>|<p align="center">팀장</p>|
 | <img a href = "https://github.com/Jinki-Ahn" src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=GitHub&logoColor=white"> | <img a href="https://github.com/minsu47722" src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=GitHub&logoColor=white"> |  <img a href = "https://github.com/jintory" src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=GitHub&logoColor=white"> | <img a href = "https://github.com/sumgo-ssri" src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=GitHub&logoColor=white"> | <img a href = "https://github.com/JJJJungw" src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=GitHub&logoColor=white"> | <img a href = "https://github.com/pcochoco" src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=GitHub&logoColor=white"> | 
 
 
