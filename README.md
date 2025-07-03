@@ -18,7 +18,7 @@
 <div style="position: relative; display: inline-block;">
   <img src="https://github.com/user-attachments/assets/33172a31-5efb-4c38-bd91-208887c8c167" width="160" alt="AniMeds Logo" alt="image" style="width: 100%;">
   <div style="position: absolute; top: 10px; left: 10px; color: white; background: rgba(0,0,0,0.5); padding: 4px;">
-    반려동물의 건강을 한눈에, <strong>AniMeds</strong>와 함께
+    "반려동물의 건강을 한눈에, <strong>AniMeds</strong>와 함께"
   </div>
 </div>
 
