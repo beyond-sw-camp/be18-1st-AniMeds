@@ -1,4 +1,4 @@
-# be18-1st-5team
+# be18-1st-5team-AniMeds
 # 🐾 AniMeds – 반려동물 맞춤형 약물 추천 & 복약 관리 플랫폼
 <p align="center">
   <img src="https://github.com/user-attachments/assets/33172a31-5efb-4c38-bd91-208887c8c167" width="160" alt="AniMeds Logo" />
