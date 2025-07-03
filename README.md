@@ -19,10 +19,12 @@
 
 ## 👥 팀원 소개
 
-| 안진기     | 김민수             | 이승진 | 이원진 | 최정우 | 박채연 | 
+| 안진기     | 김민수             | 이승진 | 이원진 | 최정우 | <img src="https://github.com/user-attachments/assets/c106f94a-cb07-4a20-8d75-d2e58aab46aa" width="300"/> <br>박채연 |
 |----------|------------------|-----------|----|---|------|
 | 팀장 | 팀원| 팀원| 팀원| 팀원| 팀원|
 | <img a href = "https://github.com/Jinki-Ahn" src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=GitHub&logoColor=white"> | <img a href="https://github.com/minsu47722" src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=GitHub&logoColor=white"> |  <img a href = "https://github.com/jintory" src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=GitHub&logoColor=white"> | <img a href = "https://github.com/sumgo-ssri" src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=GitHub&logoColor=white"> | <img a href = "https://github.com/JJJJungw" src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=GitHub&logoColor=white"> | <img a href = "https://github.com/pcochoco" src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=GitHub&logoColor=white"> | 
+
+
 
 
 ## 👥 담당 업무 
