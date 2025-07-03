@@ -25,7 +25,7 @@
 
 > 반려동물의 건강을 한눈에, <strong>AniMeds</strong>와 함께
 
----
+
 
 ## 👥 팀원 소개
 
@@ -84,7 +84,7 @@ https://docs.google.com/spreadsheets/d/1ezIGvaFNwkBmDPlIIaDlnmjDzN0-As8Hf1kQjH_D
 - 사용자 CRUD
 - 동물 등록 및 정보 조회
 - 증상 → 약물 추천 (금기, 권장용량 고려)
-- 처방기록, 부작용 로그 기록
+- 처방기록기록
 - 커뮤니티 글 작성 및 열람
 - 병원 광고 노출 및 클릭 이벤트 추적
 
