@@ -17,15 +17,13 @@
 
 ## 👥 팀원 소개
 
-| 이름     | 역할             | 담당 업무 |
-|----------|------------------|-----------|
-|[안진기](https://github.com/Jinki-Ahn) | 팀장 |  |
-|[김민수](https://github.com/minsu47722) | 팀원 |  |
-|[이승진](https://github.com/jintory) | 팀원 |  |
-[이원진](https://github.com/sumgo-ssri) | 팀원 | |
-|[최정우](https://github.com/JJJJungw) | 팀원 | |
-|[박채연](https://github.com/pcochoco) | 팀원 |  |
+| 안진기     | 김민수             | 이승진 | 이원진 | 최정우 | 박채연 | 
+|----------|------------------|-----------|----|---|------|
+| 팀장 | 팀원| 팀원| 팀원| 팀원| 팀원|
+| <img a href = "https://github.com/Jinki-Ahn" src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=GitHub&logoColor=white"> | <img a href="https://github.com/minsu47722" src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=GitHub&logoColor=white"> |  <img a href = "https://github.com/jintory" src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=GitHub&logoColor=white"> | <img a href = "https://github.com/sumgo-ssri" src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=GitHub&logoColor=white"> | <img a href = "https://github.com/JJJJungw" src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=GitHub&logoColor=white"> | <img a href = "https://github.com/pcochoco" src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=GitHub&logoColor=white"> | 
 
+
+## 👥 담당 업무 
 
 ---
 
