@@ -46,8 +46,7 @@
     <img src="https://github.com/user-attachments/assets/23825b24-6c1b-495b-a066-1b2fd5d01efd" alt="반려동물비율_국내" width="600">
   </a>
 </p>
-농림축산식품부는 국내 반려동물 시장을 2022년
-기준 약 8.5조원으로 추산하고 2032년 약 21조원으로 예측했다.
+또한 농림축산식품부는 국내 반려동물 시장을 2022년 기준 약 8.5조원으로 추산하고 2032년 약 21조원으로 예측했습니다.
 <p align="center">
   <a href="https://www.dailyvet.co.kr/news/industry/214784">
     <img src="https://github.com/user-attachments/assets/d5a7ecce-f093-4a6c-a39f-ed239bb69c51" alt="반려동물비율_국내" width="300">
