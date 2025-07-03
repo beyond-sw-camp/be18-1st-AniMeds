@@ -54,7 +54,7 @@
 기준 약 8.5조원으로 추산하고 2032년 약 21조원으로 예측했다.
 <p align="center">
   <a href="https://www.dailyvet.co.kr/news/industry/214784">
-    <img src="https://github.com/user-attachments/assets/d5a7ecce-f093-4a6c-a39f-ed239bb69c51" alt="반려동물비율_국내" width="600">
+    <img src="https://github.com/user-attachments/assets/d5a7ecce-f093-4a6c-a39f-ed239bb69c51" alt="반려동물비율_국내" width="300">
   </a>
 </p>
 
