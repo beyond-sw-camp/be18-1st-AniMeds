@@ -1,14 +1,18 @@
-![header](https://capsule-render.vercel.app/api?type=cylinder&color=0:FAF3E0,100:5DA8D2&height=200&text=AniMeds&desc=Smart%20Medication%20for%20Pets&fontSize=70&descSize=20&animation=fadeIn)
-
 <p align="center">
   <img src="https://github.com/user-attachments/assets/33172a31-5efb-4c38-bd91-208887c8c167" width="160" alt="AniMeds Logo" />
 </p>
 
-<h1 align="center">🐾 AniMeds</h1>
-<h3 align="center">반려동물 맞춤형 약물 추천 & 복약 관리 플랫폼</h3>
+<h1 align="center">🐾 <strong>AniMeds</strong></h1>
+<p align="center"><em>Smart Medication for Pets</em></p>
 
 <p align="center">
-  동물의 건강을 위한 똑똑한 약물관리, <strong>AniMeds</strong>와 함께 하세요.
+  반려동물 맞춤형 약물 추천 및 복약 관리 플랫폼  
+  <br />
+  <strong>동물의 건강을 위한 똑똑한 약물관리, AniMeds와 함께 하세요.</strong>
+</p>
+
+<p align="center">
+  <img src="https://capsule-render.vercel.app/api?type=soft&color=0:FAF3E0,100:5DA8D2&height=120&section=footer&text=AniMeds&fontSize=60&fontColor=ffffff&animation=fadeIn" />
 </p>
 
 
@@ -19,12 +23,10 @@
 
 ## 👥 팀원 소개
 
-| 안진기     | 김민수             | 이승진 | 이원진 | 최정우 | <img src="https://github.com/user-attachments/assets/c106f94a-cb07-4a20-8d75-d2e58aab46aa" width="300"/> <br>박채연 |
+| 안진기     | 김민수             | 이승진 | 이원진 | 최정우 | 박채연 | 
 |----------|------------------|-----------|----|---|------|
 | 팀장 | 팀원| 팀원| 팀원| 팀원| 팀원|
 | <img a href = "https://github.com/Jinki-Ahn" src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=GitHub&logoColor=white"> | <img a href="https://github.com/minsu47722" src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=GitHub&logoColor=white"> |  <img a href = "https://github.com/jintory" src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=GitHub&logoColor=white"> | <img a href = "https://github.com/sumgo-ssri" src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=GitHub&logoColor=white"> | <img a href = "https://github.com/JJJJungw" src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=GitHub&logoColor=white"> | <img a href = "https://github.com/pcochoco" src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=GitHub&logoColor=white"> | 
-
-
 
 
 ## 👥 담당 업무 
