@@ -71,7 +71,7 @@
 https://docs.google.com/spreadsheets/d/1220bBuBJ12cd4qBncc2iErHQUT1RVwtTA3J0CJ5_gtg/edit?gid=0#gid=0
 ---
 
-## 🧾 요구사항 정의서
+## 🧾 [요구사항 정의서](https://docs.google.com/spreadsheets/d/1ezIGvaFNwkBmDPlIIaDlnmjDzN0-As8Hf1kQjH_DhoM/edit?gid=0#gid=0)
 ![image](https://github.com/user-attachments/assets/65e20bc7-f8ec-445b-a02f-24a14fcbceb4)
 https://docs.google.com/spreadsheets/d/1ezIGvaFNwkBmDPlIIaDlnmjDzN0-As8Hf1kQjH_DhoM/edit?gid=0#gid=0
 ### ✅ 기능 요구사항
@@ -87,7 +87,7 @@ https://docs.google.com/spreadsheets/d/1ezIGvaFNwkBmDPlIIaDlnmjDzN0-As8Hf1kQjH_D
 - 인덱스 활용한 검색 최적화
 - 반응형 UI 지원
 - 데이터 무결성 보장 (FK, 제약조건)
-https://docs.google.com/spreadsheets/d/1ezIGvaFNwkBmDPlIIaDlnmjDzN0-As8Hf1kQjH_DhoM/edit?usp=sharing
+
 ---
 
 ## 🗂️ 데이터베이스 설계
