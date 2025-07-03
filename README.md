@@ -25,7 +25,22 @@
 
 > 반려동물의 건강을 한눈에, <strong>AniMeds</strong>와 함께
 
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/33172a31-5efb-4c38-bd91-208887c8c167" width="160" alt="AniMeds Logo" />
+</p>
 
+<h1 align="center">🐾 <strong>AniMeds</strong></h1>
+<p align="center"><em>Smart Medication for Pets</em></p>
+
+<p align="center">
+  반려동물 맞춤형 약물 추천 및 복약 관리 플랫폼  
+  <br />
+  <strong>동물의 건강을 위한 똑똑한 약물관리, AniMeds와 함께 하세요.</strong>
+</p>
+
+<p align="center">
+  <img src="https://capsule-render.vercel.app/api?type=soft&color=0:FAF3E0,100:5DA8D2&height=120&section=footer&text=AniMeds&fontSize=60&fontColor=ffffff&animation=fadeIn" />
+</p>
 
 ## 👥 팀원 소개
 
