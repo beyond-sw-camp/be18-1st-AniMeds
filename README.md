@@ -89,7 +89,8 @@
 ---
 
 ## 🧾 요구사항 정의서
-![image](https://github.com/user-attachments/assets/65e20bc7-f8ec-445b-a02f-24a14fcbceb4)
+![image](https://github.com/user-attachments/assets/8f0a6ea1-d011-491e-9976-46c336962994)
+
 
  [요구사항 정의서](https://docs.google.com/spreadsheets/d/1ezIGvaFNwkBmDPlIIaDlnmjDzN0-As8Hf1kQjH_DhoM/edit?gid=0#gid=0)
 ### ✅ 기능 요구사항
