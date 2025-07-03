@@ -74,12 +74,14 @@
 ![image](https://github.com/user-attachments/assets/7112814b-3aa7-48ec-8944-a977059e8d3e)
 
 
-https://docs.google.com/spreadsheets/d/1220bBuBJ12cd4qBncc2iErHQUT1RVwtTA3J0CJ5_gtg/edit?gid=0#gid=0
+[프로젝트 진행 일정(wbs)](https://docs.google.com/spreadsheets/d/1220bBuBJ12cd4qBncc2iErHQUT1RVwtTA3J0CJ5_gtg/edit?gid=0#gid=0)
+
 ---
 
-## 🧾 [요구사항 정의서](https://docs.google.com/spreadsheets/d/1ezIGvaFNwkBmDPlIIaDlnmjDzN0-As8Hf1kQjH_DhoM/edit?gid=0#gid=0)
+## 🧾 요구사항 정의서
 ![image](https://github.com/user-attachments/assets/65e20bc7-f8ec-445b-a02f-24a14fcbceb4)
-https://docs.google.com/spreadsheets/d/1ezIGvaFNwkBmDPlIIaDlnmjDzN0-As8Hf1kQjH_DhoM/edit?gid=0#gid=0
+
+ [요구사항 정의서](https://docs.google.com/spreadsheets/d/1ezIGvaFNwkBmDPlIIaDlnmjDzN0-As8Hf1kQjH_DhoM/edit?gid=0#gid=0)
 ### ✅ 기능 요구사항
 - 사용자 CRUD
 - 동물 등록 및 정보 조회
