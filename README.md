@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://github.com/user-attachments/assets/33172a31-5efb-4c38-bd91-208887c8c167" width="160" alt="AniMeds Logo" />
+  <img src="https://github.com/user-attachments/assets/33172a31-5efb-4c38-bd91-208887c8c167" width="180" alt="AniMeds Logo" />
 </p>
 
 <h1 align="center">🐾 <strong>AniMeds</strong></h1>
@@ -40,7 +40,9 @@
 ## 📊 Pet Ownership Rate in Korea (2017–2024)
 
 <p align="center">
-  <img src="https://github.com/your-username/your-repo/assets/your-image-id/pet_ownership_trend_2017_2024_en.jpg" alt="Pet Ownership Trend in Korea 2017–2024" width="600"/>
+  <img src=![KakaoTalk_20250704_084413843](https://github.com/user-attachments/assets/861b891e-56b5-4d24-9df2-7832bd6ca2e1)
+"![Uploading KakaoTalk_20250704_084413843.jpg…]()
+" alt="Pet Ownership Trend in Korea 2017–2024" width="600"/>
 </p>      
 
 2024년 농림축산식품부가 동물복지 국민의식조사를 실행한 바탕으로 약 28.6%에 달하는 국내 반려동물 양육인구 비율을 발표했습니다.
