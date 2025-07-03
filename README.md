@@ -42,8 +42,15 @@
 <p align="center">
   <img src="https://github.com/your-username/your-repo/assets/your-image-id/pet_ownership_trend_2017_2024_en.jpg" alt="Pet Ownership Trend in Korea 2017–2024" width="600"/>
 </p>      
+
 2024년 농림축산식품부가 동물복지 국민의식조사를 실행한 바탕으로 약 28.6%에 달하는 국내 반려동물 양육인구 비율을 발표했습니다.
 이는 그래프에서 확인할 수 있듯 매년 증가하는 추세입니다.
+<p align="center">
+  <a href="https://www.dailyvet.co.kr/news/policy/234742">
+    <img src="https://github.com/user-attachments/assets/23825b24-6c1b-495b-a066-1b2fd5d01efd" alt="반려동물비율_국내" width="600">
+  </a>
+</p>
+
 
 그러나 동일한 해 서울디지털재단이 해당 부 동물보호관리시스템에 등록된 데이터로 동물병원 현황을 분석한 결과 서울시 기준 병원 1개소당 662마리의 반려견을 담당하고 있음을 확인할 수 있습니다.
 
