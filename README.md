@@ -10,7 +10,7 @@
   <br />
   <strong>동물의 건강을 위한 똑똑한 약물관리, AniMeds와 함께 하세요.</strong>
 </p>
----
+
 <p align="center">
   <img src="https://capsule-render.vercel.app/api?type=soft&color=0:FAF3E0,100:5DA8D2&height=120&section=footer&text=AniMeds&fontSize=60&fontColor=ffffff&animation=fadeIn" />
 </p>
