@@ -69,19 +69,33 @@
 
 ## 🔧 주요 기능
 
-- **사용자/동물 등록 및 관리** ![사용자 등록및 마이펫 관리](https://github.com/user-attachments/assets/34efc7d2-85ec-45c2-aa0d-fa95e06c0e3b)
+<h3 align="center">🐾 AniMeds 주요 기능 소개</h3>
 
-- **증상 기반 약물 추천** (종, 금기 여부 필터링) ![증상기반 약 추천](https://github.com/user-attachments/assets/cd820192-bdbc-481c-bd3f-ad4befc2388e)
+<!-- 첫 줄: 3개 -->
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/34efc7d2-85ec-45c2-aa0d-fa95e06c0e3b" width="100" />
+  <img src="https://github.com/user-attachments/assets/cd820192-bdbc-481c-bd3f-ad4befc2388e" width="100" style="margin: 0 40px;" />
+  <img src="https://github.com/user-attachments/assets/8ab0c591-45ae-4a76-b855-22e35d20682b" width="100" />
+</p>
+<p align="center">
+  <strong>사용자/동물 등록</strong>&nbsp;&nbsp;&nbsp;&nbsp;
+  <strong>증상 기반 약 추천</strong>&nbsp;&nbsp;&nbsp;&nbsp;
+  <strong>복약 기록 이력 확인</strong>
+</p>
 
-- **복약 기록 저장 및 이력 확인** ![복약내역 저장 및 이력 관리](https://github.com/user-attachments/assets/8ab0c591-45ae-4a76-b855-22e35d20682b)
-
-- **약물 간 상호작용 정보 제공** ![약물간 상호작용](https://github.com/user-attachments/assets/6eb7592c-173b-4adb-a53a-2e6a5108dd15)
-
-- **병원 광고 노출 및 클릭 로그 기록** ![병원광고 노출](https://github.com/user-attachments/assets/31a9bb98-2355-4556-9754-fcac35bec4f3)
-
-- **커뮤니티 포스팅 및 열람** ![커뮤니티](https://github.com/user-attachments/assets/0e180be8-5cd7-4919-95fc-3ee16e1dcab1)
-
-- **제품 추천 및 제휴 상품 저장/클릭 로그 추적** ![물건 판매](https://github.com/user-attachments/assets/ab7b35f9-8fed-4d67-89a3-080f621c449f)
+<!-- 둘째 줄: 4개 -->
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/6eb7592c-173b-4adb-a53a-2e6a5108dd15" width="100" />
+  <img src="https://github.com/user-attachments/assets/31a9bb98-2355-4556-9754-fcac35bec4f3" width="100" style="margin: 0 30px;" />
+  <img src="https://github.com/user-attachments/assets/0e180be8-5cd7-4919-95fc-3ee16e1dcab1" width="100" />
+  <img src="https://github.com/user-attachments/assets/ab7b35f9-8fed-4d67-89a3-080f621c449f" width="100" />
+</p>
+<p align="center">
+  <strong>약물 상호작용</strong>&nbsp;&nbsp;
+  <strong>병원 광고 노출</strong>&nbsp;&nbsp;
+  <strong>커뮤니티</strong>&nbsp;&nbsp;
+  <strong>제휴 상품 추적</strong>
+</p>
 
 
 
