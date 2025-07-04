@@ -132,9 +132,9 @@
 ## 🧾 요구사항 정의서
 ![image](https://github.com/user-attachments/assets/3bfd4f75-52e3-48b6-b837-25336a56bae1)
 
-
  [요구사항 정의서](https://docs.google.com/spreadsheets/d/1ezIGvaFNwkBmDPlIIaDlnmjDzN0-As8Hf1kQjH_DhoM/edit?gid=0#gid=0)
 
+---
 ## ✅ 기능 요구사항
 - 사용자 계정 CRUD
 - 동물 등록 및 정보 조회
