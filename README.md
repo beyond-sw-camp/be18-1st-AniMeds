@@ -202,7 +202,7 @@ BEGIN
       AND m.contraindicated = FALSE;
 END$$
 DELIMITER ;
-***```***
+```
 ---
 🎓 회고록
 팀원	회고 내용
