@@ -69,31 +69,52 @@
 
 ## 🔧 주요 기능
 
-<!-- 첫 줄: 3개 -->
-<p align="center">
-  <img src="https://github.com/user-attachments/assets/34efc7d2-85ec-45c2-aa0d-fa95e06c0e3b" width="120" />
-  <img src="https://github.com/user-attachments/assets/cd820192-bdbc-481c-bd3f-ad4befc2388e" width="120" style="margin: 0 40px;" />
-  <img src="https://github.com/user-attachments/assets/8ab0c591-45ae-4a76-b855-22e35d20682b" width="120" />
-</p>
-<p align="center">
-  <strong>사용자/동물 등록</strong>&nbsp;&nbsp;&nbsp;&nbsp;
-  <strong>증상 기반 약 추천</strong>&nbsp;&nbsp;&nbsp;&nbsp;
-  <strong>복약 기록 이력 확인</strong>
-</p>
+<!-- 상단 3개 -->
+<table align="center">
+  <tr align="center">
+    <td>
+      <img src="https://github.com/user-attachments/assets/34efc7d2-85ec-45c2-aa0d-fa95e06c0e3b" width="100" /><br/>
+      <strong>사용자/동물 등록</strong>
+    </td>
+    <td style="width: 80px;"></td> <!-- 간격 -->
+    <td>
+      <img src="https://github.com/user-attachments/assets/cd820192-bdbc-481c-bd3f-ad4befc2388e" width="100" /><br/>
+      <strong>증상 기반 약 추천</strong>
+    </td>
+    <td style="width: 80px;"></td>
+    <td>
+      <img src="https://github.com/user-attachments/assets/8ab0c591-45ae-4a76-b855-22e35d20682b" width="100" /><br/>
+      <strong>복약 이력 관리</strong>
+    </td>
+  </tr>
+</table>
 
-<!-- 둘째 줄: 4개 -->
-<p align="center">
-  <img src="https://github.com/user-attachments/assets/6eb7592c-173b-4adb-a53a-2e6a5108dd15" width="120" />
-  <img src="https://github.com/user-attachments/assets/31a9bb98-2355-4556-9754-fcac35bec4f3" width="120" style="margin: 0 30px;" />
-  <img src="https://github.com/user-attachments/assets/0e180be8-5cd7-4919-95fc-3ee16e1dcab1" width="120" />
-  <img src="https://github.com/user-attachments/assets/ab7b35f9-8fed-4d67-89a3-080f621c449f" width="120" />
-</p>
-<p align="center">
-  <strong>약물 상호작용</strong>&nbsp;&nbsp;
-  <strong>병원 광고 노출</strong>&nbsp;&nbsp;
-  <strong>커뮤니티</strong>&nbsp;&nbsp;
-  <strong>제휴 상품 추적</strong>
-</p>
+<br/>
+
+<!-- 하단 4개 -->
+<table align="center">
+  <tr align="center">
+    <td>
+      <img src="https://github.com/user-attachments/assets/6eb7592c-173b-4adb-a53a-2e6a5108dd15" width="100" /><br/>
+      <strong>약물 상호작용</strong>
+    </td>
+    <td style="width: 60px;"></td>
+    <td>
+      <img src="https://github.com/user-attachments/assets/31a9bb98-2355-4556-9754-fcac35bec4f3" width="100" /><br/>
+      <strong>병원 광고 노출</strong>
+    </td>
+    <td style="width: 60px;"></td>
+    <td>
+      <img src="https://github.com/user-attachments/assets/0e180be8-5cd7-4919-95fc-3ee16e1dcab1" width="100" /><br/>
+      <strong>커뮤니티</strong>
+    </td>
+    <td style="width: 60px;"></td>
+    <td>
+      <img src="https://github.com/user-attachments/assets/ab7b35f9-8fed-4d67-89a3-080f621c449f" width="100" /><br/>
+      <strong>제휴 상품 추적</strong>
+    </td>
+  </tr>
+</table>
 
 
 
