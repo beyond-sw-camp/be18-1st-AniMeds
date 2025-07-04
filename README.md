@@ -220,13 +220,7 @@ DELIMITER ;
 팀원	회고 내용
 
 🚀 기술 스택
-DB: MariaDB
-
-Backend: Node.js / Express.js (or Python Flask)
-
-Frontend: React.js / Tailwind
-
-DevOps: Docker, GitHub Actions (선택사항)
+DB: Maria db
 
 📌 프로젝트 구조
 
