@@ -11,9 +11,30 @@
   <strong>동물의 건강을 위한 똑똑한 약물관리, AniMeds와 함께 하세요.</strong>
 </p>
 
+---
+
 <p align="center">
   <img src="https://capsule-render.vercel.app/api?type=soft&color=0:FAF3E0,100:5DA8D2&height=80&section=footer&text=AniMeds&fontSize=40&fontColor=ffffff&animation=fadeIn" />
 </p>
+## 📚 목차
+
+- [👥 팀원 소개](#-팀원-소개)
+- [🌟 프로젝트 개요](#-프로젝트-개요)
+- [💡 개발 배경 및 필요성](#-개발-배경-및-필요성)
+- [🔧 주요 기능](#-주요-기능)
+- [📅 프로젝트 진행 일정 (WBS)](#-프로젝트-진행-일정-wbs)
+- [📋 요구사항 명세](#-요구사항-명세)
+  - [✅ 기능 요구사항](#-기능-요구사항)
+  - [🚫 비기능 요구사항](#-비기능-요구사항)
+- [🗂️ 데이터베이스 설계](#-데이터베이스-설계)
+- [🧪 샘플 데이터 삽입 (DML)](#-샘플-데이터-삽입-dml)
+- [🧠 저장 프로시저 예시](#-저장-프로시저-예시)
+- [🎓 회고록](#-회고록)
+- [🚀 기술 스택](#-기술-스택)
+- [📁 프로젝트 구조](#-프로젝트-구조)
+- [🐾 About AniMeds](#-about-animeds)
+
+---
 
 ## 👥 팀원 소개
 
@@ -22,8 +43,7 @@
 | <p align="center">팀장</p> |<p align="center">팀원</p>| <p align="center">팀원</p>|<p align="center">팀원</p>|<p align="center">팀원</p>|<p align="center">팀원</p>|
 | <p align="center"> <a href="https://github.com/Jinki-Ahn"> <img src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=GitHub&logoColor=white" /> </a> |<p align="center"> <a href="https://github.com/minsu47722"> <img src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=GitHub&logoColor=white" /> </a> </p> | <p align="center"> <a href="https://github.com/jintory"> <img src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=GitHub&logoColor=white" />  </a> </p> | <p align="center"> <a href="https://github.com/sumgo-ssri"> <img src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=GitHub&logoColor=white" /> </a> </p> | <p align="center">  <a href="https://github.com/JJJJungw"> <img src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=GitHub&logoColor=white" /> </a> </p> | <p align="center">  <a href="https://github.com/pcochoco"> <img src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=GitHub&logoColor=white" />  </a> </p> |
 
-
-
+---
 
 ## 🌟 프로젝트 개요
 
@@ -60,7 +80,6 @@
 - 🐶 사용자 맞춤형 복약 정보 필요 (나이/종/체중에 따라)
 - 💬 보호자 간 소통 채널 부족 → 커뮤니티 필요  
 - 📢 병원과 제품 광고도 관리 가능한 통합 플랫폼 필요
-
 
 ---
 
@@ -113,8 +132,6 @@
   </tr>
 </table>
 
-
-
 ---
 
 ## 📅 프로젝트 진행 일정 (WBS)
@@ -125,12 +142,13 @@
 
 ---
 
+## 📋 요구사항 명세
+
 ## 🧾 요구사항 정의서
 ![image](https://github.com/user-attachments/assets/3bfd4f75-52e3-48b6-b837-25336a56bae1)
 
  [요구사항 정의서](https://docs.google.com/spreadsheets/d/1ezIGvaFNwkBmDPlIIaDlnmjDzN0-As8Hf1kQjH_DhoM/edit?gid=0#gid=0)
 
----
 ## ✅ 기능 요구사항
 - 사용자 계정 CRUD
 - 동물 등록 및 정보 조회
@@ -138,14 +156,13 @@
 - 사용자 처방 기록 저장
 - 커뮤니티 글 작성 및 열람
 - 병원 광고 노출 및 클릭 이벤트 추적
-
----
-
+--
 ## 🚫 비기능 요구사항
 - 인증 토큰 기반 세션 관리 (JWT 등)
 - 인덱스를 활용한 검색 성능 최적화
 - 반응형 UI 지원 (모바일/PC)
 - 데이터 무결성 보장 (외래키, 제약조건 등)
+
 ---
 
 ## 🗂️ 데이터베이스 설계
@@ -185,6 +202,7 @@ BEGIN
       AND m.contraindicated = FALSE;
 END$$
 DELIMITER ;
+
 🎓 회고록
 팀원	회고 내용
 
