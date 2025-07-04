@@ -16,6 +16,7 @@
 <p align="center">
   <img src="https://capsule-render.vercel.app/api?type=soft&color=0:FAF3E0,100:5DA8D2&height=80&section=footer&text=AniMeds&fontSize=40&fontColor=ffffff&animation=fadeIn" />
 </p>
+
 ## 📚 목차
 
 - [👥 팀원 소개](#-팀원-소개)
