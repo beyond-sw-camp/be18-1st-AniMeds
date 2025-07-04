@@ -217,7 +217,7 @@ DELIMITER ;
 ```
 
 ---
-<detail> 
+<details> 
 <summary>클릭해서 열기</summary>
 
 여기에 들어갈 숨겨진 내용입니다.  
