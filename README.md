@@ -30,6 +30,7 @@
 - [🗂️ 데이터베이스 설계](#-데이터베이스-설계)
 - [🧪 샘플 데이터 삽입 (DML)](#-샘플-데이터-삽입-dml)
 - [🧠 저장 프로시저 예시](#-저장-프로시저-예시)
+- 
 - [🎓 회고록](#-회고록)
 - [🚀 기술 스택](#-기술-스택)
 - [📁 프로젝트 구조](#-프로젝트-구조)
@@ -219,8 +220,8 @@ END$$
 DELIMITER ;
 ```
 ---
-## 시나리오
-<img width="772" height="664" alt="Image" src="https://github.com/user-attachments/assets/cf0d7496-98c9-443d-8701-577c46fe999c" />
+## :speech_balloon: 시나리오
+<img width="600" height="600" alt="Image" src="https://github.com/user-attachments/assets/cf0d7496-98c9-443d-8701-577c46fe999c" />
 
 ---
 <details> 
