@@ -403,7 +403,18 @@ CREATE TABLE ProductTag (
 ---
 
 ## 🧠 저장 프로시저 예시
+### 💊 증상 기반 약물 추천 - RecommendDrugBySymptom
+<details>
+<summary>📌 기능 설명 및 예시 보기</summary>
 
+**설명:** 증상 ID와 종 ID를 기준으로 금기 약물이 아닌 약물만 추천
+
+**🧪 사용 예시:**
+```sql
+CALL RecommendDrugBySymptom(3, 2);
+```
+
+**💾 저장 프로시저:**
 ```sql
 DELIMITER $$
 CREATE PROCEDURE RecommendDrugBySymptom (
@@ -421,6 +432,173 @@ BEGIN
 END$$
 DELIMITER ;
 ```
+</details>
+
+### ⚠️ 약물 간 상호작용 조회 - GetDrugInteraction
+<details>
+<summary>📌 기능 설명 및 예시 보기</summary>
+
+**설명:** 두 약물 간 상호작용 위험도 및 상세 설명을 조회
+
+**🧪 사용 예시:**
+```sql
+CALL GetDrugInteraction(1, 2);
+```
+
+**💾 저장 프로시저:**
+```sql
+DELIMITER $$
+CREATE PROCEDURE GetDrugInteraction (
+    IN in_drug_id_1 INT,
+    IN in_drug_id_2 INT
+)
+BEGIN
+    SELECT interaction_risk, interaction_detail
+    FROM DrugInteraction
+    WHERE (drug_id_1 = in_drug_id_1 AND drug_id_2 = in_drug_id_2)
+       OR (drug_id_1 = in_drug_id_2 AND drug_id_2 = in_drug_id_1);
+END$$
+DELIMITER ;
+```
+</details>
+
+### 📊 병원 광고 로그 기록 - LogVetAdClick
+<details>
+<summary>📌 기능 설명 및 예시 보기</summary>
+
+**설명:** 특정 사용자가 특정 동물로 본 광고 클릭/노출 로그 기록
+
+**🧪 사용 예시:**
+```sql
+CALL LogVetAdClick(1, 2, 3, '클릭');
+```
+
+**💾 저장 프로시저:**
+```sql
+DELIMITER $$
+CREATE PROCEDURE LogVetAdClick (
+    IN in_ad_id INT,
+    IN in_user_id INT,
+    IN in_animal_id INT,
+    IN in_event_type VARCHAR(20)
+)
+BEGIN
+    INSERT INTO VetAdLog (ad_id, user_id, animal_id, event_type, event_time)
+    VALUES (in_ad_id, in_user_id, in_animal_id, in_event_type, NOW());
+END$$
+DELIMITER ;
+```
+</details>
+
+### 👤 사용자 계정 생성 - CreateUser
+<details>
+<summary>📌 기능 설명 및 예시 보기</summary>
+
+**설명:** 새로운 사용자를 생성하고 초기 정보를 저장합니다.
+
+**🧪 사용 예시:**
+```sql
+CALL CreateUser('test@example.com', 'securePass123', '홍길동');
+```
+
+**💾 저장 프로시저:**
+```sql
+DELIMITER $$
+CREATE PROCEDURE CreateUser (
+    IN in_email VARCHAR(100),
+    IN in_password VARCHAR(100),
+    IN in_name VARCHAR(50)
+)
+BEGIN
+    INSERT INTO User (email, password, name, created_at)
+    VALUES (in_email, in_password, in_name, NOW());
+END$$
+DELIMITER ;
+```
+</details>
+
+### 🐶 반려동물 등록 - AddAnimal
+<details>
+<summary>📌 기능 설명 및 예시 보기</summary>
+
+**설명:** 사용자의 반려동물을 등록합니다.
+
+**🧪 사용 예시:**
+```sql
+CALL AddAnimal(1, '코코', 2, '2020-03-01');
+```
+
+**💾 저장 프로시저:**
+```sql
+DELIMITER $$
+CREATE PROCEDURE AddAnimal (
+    IN in_user_id INT,
+    IN in_name VARCHAR(50),
+    IN in_species_id INT,
+    IN in_birthdate DATE
+)
+BEGIN
+    INSERT INTO Animal (user_id, name, species_id, birthdate)
+    VALUES (in_user_id, in_name, in_species_id, in_birthdate);
+END$$
+DELIMITER ;
+```
+</details>
+
+### 🧾 복약 이력 저장 - LogPrescription
+<details>
+<summary>📌 기능 설명 및 예시 보기</summary>
+
+**설명:** 추천된 약물 정보를 반려동물의 복약 이력으로 저장합니다.
+
+**🧪 사용 예시:**
+```sql
+CALL LogPrescription(2, 5, 1, '5ml 1일 2회');
+```
+
+**💾 저장 프로시저:**
+```sql
+DELIMITER $$
+CREATE PROCEDURE LogPrescription (
+    IN in_animal_id INT,
+    IN in_drug_id INT,
+    IN in_symptom_id INT,
+    IN in_dose VARCHAR(50)
+)
+BEGIN
+    INSERT INTO PrescriptionHistory (animal_id, drug_id, symptom_id, dose, prescribed_at)
+    VALUES (in_animal_id, in_drug_id, in_symptom_id, in_dose, NOW());
+END$$
+DELIMITER ;
+```
+</details>
+
+### 🛒 관심 상품 등록 - SaveProduct
+<details>
+<summary>📌 기능 설명 및 예시 보기</summary>
+
+**설명:** 특정 사용자의 관심 상품을 저장합니다.
+
+**🧪 사용 예시:**
+```sql
+CALL SaveProduct(1, 101);
+```
+
+**💾 저장 프로시저:**
+```sql
+DELIMITER $$
+CREATE PROCEDURE SaveProduct (
+    IN in_user_id INT,
+    IN in_product_id INT
+)
+BEGIN
+    INSERT INTO UserSavedProduct (user_id, product_id, saved_at)
+    VALUES (in_user_id, in_product_id, NOW());
+END$$
+DELIMITER ;
+```
+</details>
+
 ---
 <details>
 <summary><b>인덱스</b></summary>
