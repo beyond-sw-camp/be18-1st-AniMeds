@@ -394,6 +394,62 @@ CREATE TABLE ProductTag (
     FOREIGN KEY (product_id) REFERENCES Product(product_id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 ```
+### 13. 전체 인덱스 목록
+<details>
+  
+```sql
+  -- 증상 기반 약물 추천 시 빠른 매칭을 위한 복합 인덱스
+CREATE INDEX idx_symptom_species ON Symptom_Drug_Map(symptom_id, drug_id);
+
+-- 종(species)에 따른 약물 권장 여부 판단을 위한 인덱스
+CREATE INDEX idx_drug_species ON DrugSpeciesMapping(drug_id, species_id);
+
+-- 사용자 + 동물 기준 광고 로그 조회 성능 향상
+CREATE INDEX idx_adlog_user_animal ON VetAdLog(user_id, animal_id);
+
+-- 사용자별 클릭 로그 조회 성능 향상
+CREATE INDEX idx_product_click_user ON ProductClickLog(user_id);
+
+-- 상품별 클릭 로그 통계 집계에 활용
+CREATE INDEX idx_product_click_product ON ProductClickLog(product_id);
+
+-- 사용자의 관심 상품 리스트 빠른 조회를 위한 인덱스
+CREATE INDEX idx_saved_product_user ON UserSavedProduct(user_id);
+
+-- 증상 + 종 기준으로 상품 추천 시 빠른 필터링
+CREATE INDEX idx_symptom_product ON Symptom_Product_Map(symptom_id, species_id);
+
+-- 커뮤니티에서 특정 사용자의 글을 빠르게 불러오기 위한 인덱스
+CREATE INDEX idx_community_user ON Community(user_id);
+
+-- 사용자 ID + 등록일 기준 커뮤니티 글 정렬 최적화
+CREATE INDEX idx_community_user_created ON Community(user_id, created_at);
+
+-- 광고 로그 이벤트 시간 기준 정렬용 인덱스
+CREATE INDEX idx_adlog_event_time ON VetAdLog(event_time);
+
+--  상품 태그 검색 최적화를 위한 인덱스
+CREATE INDEX idx_product_tag_name ON ProductTag(tag_name);
+
+-- 병원 광고 유효 기간 내 필터링 성능 향상
+CREATE INDEX idx_vetad_date_range ON VetAd(start_date, end_date);
+
+-- 약물 상호작용 검색을 위해 양방향 조합 최적화
+CREATE INDEX idx_drug_interaction_pair ON DrugInteraction(drug_id_1, drug_id_2);
+```
+</details>
+
+---
+<details>
+<summary><b>인덱스</b></summary>
+
+![스크린샷 2025-07-06 231903](https://github.com/user-attachments/assets/4d6ddb9f-1c70-4e62-964d-73e5039bd71f)
+
+
+</details>
+
+---
+
 ## 🧪 샘플 데이터 삽입 (DML)
 
 - [data/sample_data.sql](data/sample_data.sql)  
@@ -598,17 +654,6 @@ END$$
 DELIMITER ;
 ```
 </details>
-
----
-<details>
-<summary><b>인덱스</b></summary>
-
-![스크린샷 2025-07-06 231903](https://github.com/user-attachments/assets/4d6ddb9f-1c70-4e62-964d-73e5039bd71f)
-
-
-</details>
-
----
 
 ## 💬 시나리오
 <img width="600" height="600" alt="Image" src="https://github.com/user-attachments/assets/cf0d7496-98c9-443d-8701-577c46fe999c" />
