@@ -219,8 +219,181 @@
 ![Image](https://github.com/user-attachments/assets/d39fcda0-7dba-4f9d-86a3-4240078a4a49)
 
 ### Schema DDL
+### 1. 약물 간 상호작용 정보
 
+```sql
+-- 약물 간 상호작용 정보
+-- 두 약물 간의 위험 수준과 상세 설명을 저장
+CREATE TABLE DrugInteraction (
+    interaction_id INT PRIMARY KEY AUTO_INCREMENT,  -- 상호작용 ID
+    drug_id_1 INT,                                  -- 첫 번째 약물 ID
+    drug_id_2 INT,                                  -- 두 번째 약물 ID
+    interaction_risk VARCHAR(50),                   -- 위험 수준 (예: 높음, 중간, 낮음)
+    interaction_detail TEXT,                        -- 상호작용 상세 설명
+    FOREIGN KEY (drug_id_1) REFERENCES Drug(drug_id),
+    FOREIGN KEY (drug_id_2) REFERENCES Drug(drug_id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+```
 
+### 2. 커뮤니티 게시글
+
+```sql
+-- 커뮤니티에 작성된 게시글 정보를 저장
+CREATE TABLE Community (
+    post_id INT PRIMARY KEY AUTO_INCREMENT,     -- 게시글 ID
+    user_id INT,                                -- 작성자 사용자 ID
+    title VARCHAR(255),                         -- 제목
+    content TEXT,                               -- 내용
+    created_at DATETIME,                        -- 작성일
+    FOREIGN KEY (user_id) REFERENCES User(user_id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+```
+
+### 3. 병원 마스터
+
+```sql
+-- 병원 기본 정보
+CREATE TABLE Clinic (
+    clinic_id INT PRIMARY KEY AUTO_INCREMENT,   -- 병원 ID
+    name VARCHAR(100),                          -- 병원 이름
+    address VARCHAR(255),                       -- 주소
+    contact VARCHAR(50),                        -- 연락처
+    specialties TEXT                             -- 전문 진료 과목
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+```
+
+### 4. 병원 광고 정보
+
+```sql
+-- 병원 광고 정보를 종과 증상에 따라 저장
+CREATE TABLE VetAd (
+    ad_id INT PRIMARY KEY AUTO_INCREMENT,       -- 광고 ID
+    clinic_id INT,                              -- 병원 ID
+    target_species_id INT,                      -- 타겟 종 ID
+    target_symptom_id INT,                      -- 타겟 증상 ID
+    priority INT,                               -- 광고 우선순위
+    start_date DATE,                            -- 광고 시작일
+    end_date DATE,                              -- 광고 종료일
+    FOREIGN KEY (clinic_id) REFERENCES Clinic(clinic_id),
+    FOREIGN KEY (target_species_id) REFERENCES AnimalSpecies(species_id),
+    FOREIGN KEY (target_symptom_id) REFERENCES Symptom(symptom_id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+```
+
+### 5. 광고 로그 기록
+
+```sql
+-- 광고 노출 및 클릭 등 이벤트 로그 저장
+CREATE TABLE VetAdLog (
+    log_id INT PRIMARY KEY AUTO_INCREMENT,      -- 로그 ID
+    ad_id INT,                                  -- 광고 ID
+    user_id INT,                                -- 사용자 ID
+    animal_id INT,                              -- 동물 ID
+    event_type VARCHAR(50),                     -- 이벤트 유형 (노출, 클릭 등)
+    event_time DATETIME,                        -- 이벤트 발생 시각
+    FOREIGN KEY (ad_id) REFERENCES VetAd(ad_id),
+    FOREIGN KEY (user_id) REFERENCES User(user_id),
+    FOREIGN KEY (animal_id) REFERENCES Animal(animal_id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+```
+
+### 6. 병원 광고 예산 관리
+
+```sql
+-- 병원별 광고 예산 및 잔여 예산 관리
+CREATE TABLE VetAdBudget (
+    budget_id INT PRIMARY KEY AUTO_INCREMENT,   -- 예산 ID
+    clinic_id INT,                              -- 병원 ID
+    total_budget FLOAT,                         -- 전체 예산
+    remaining_budget FLOAT,                     -- 남은 예산
+    updated_at DATETIME,                        -- 마지막 수정일
+    FOREIGN KEY (clinic_id) REFERENCES Clinic(clinic_id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+```
+
+### 7. 제휴사 정보
+
+```sql
+-- 제휴사 정보 및 API 연동 URL 저장
+CREATE TABLE Partner (
+    partner_id INT PRIMARY KEY AUTO_INCREMENT,  -- 제휴사 ID
+    name VARCHAR(100),                          -- 제휴사 이름
+    commission_rate FLOAT,                      -- 수수료율
+    api_url VARCHAR(255)                        -- API 연동 URL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+```
+
+### 8. 상품 정보
+
+```sql
+-- 제휴사 연동을 통해 등록된 상품 정보
+CREATE TABLE Product (
+    product_id INT PRIMARY KEY AUTO_INCREMENT,  -- 상품 ID
+    partner_id INT,                             -- 제휴사 ID
+    name VARCHAR(100),                          -- 상품명
+    description TEXT,                           -- 상품 설명
+    image_url VARCHAR(255),                     -- 이미지 URL
+    price FLOAT,                                -- 가격
+    product_link VARCHAR(255),                  -- 상품 링크
+    FOREIGN KEY (partner_id) REFERENCES Partner(partner_id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+```
+
+### 9. 증상-상품 매핑
+
+```sql
+-- 증상과 종을 기준으로 상품을 연결
+CREATE TABLE Symptom_Product_Map (
+    map_id INT PRIMARY KEY AUTO_INCREMENT,      -- 매핑 ID
+    symptom_id INT,                             -- 증상 ID
+    species_id INT,                             -- 종 ID
+    product_id INT,                             -- 상품 ID
+    FOREIGN KEY (symptom_id) REFERENCES Symptom(symptom_id),
+    FOREIGN KEY (species_id) REFERENCES AnimalSpecies(species_id),
+    FOREIGN KEY (product_id) REFERENCES Product(product_id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+```
+
+### 10. 상품 클릭 로그
+
+```sql
+-- 사용자 상품 클릭 이벤트 기록
+CREATE TABLE ProductClickLog (
+    click_id INT PRIMARY KEY AUTO_INCREMENT,    -- 클릭 로그 ID
+    product_id INT,                             -- 상품 ID
+    user_id INT,                                -- 사용자 ID
+    click_time DATETIME,                        -- 클릭 시간
+    event_type VARCHAR(50),                     -- 이벤트 유형
+    FOREIGN KEY (product_id) REFERENCES Product(product_id),
+    FOREIGN KEY (user_id) REFERENCES User(user_id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+```
+
+### 11. 관심 상품 저장 내역
+
+```sql
+-- 사용자가 저장한 관심 상품 기록
+CREATE TABLE UserSavedProduct (
+    id INT PRIMARY KEY AUTO_INCREMENT,          -- 저장 ID
+    user_id INT,                                -- 사용자 ID
+    product_id INT,                             -- 상품 ID
+    saved_at DATETIME,                          -- 저장 시각
+    FOREIGN KEY (user_id) REFERENCES User(user_id),
+    FOREIGN KEY (product_id) REFERENCES Product(product_id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+```
+
+### 12. 상품 태그 정보
+
+```sql
+-- 상품 카테고리/필터 태그
+CREATE TABLE ProductTag (
+    tag_id INT PRIMARY KEY AUTO_INCREMENT,      -- 태그 ID
+    product_id INT,                             -- 상품 ID
+    tag_name VARCHAR(50),                       -- 태그명 (예: 관절, 알러지)
+    FOREIGN KEY (product_id) REFERENCES Product(product_id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+```
 ## 🧪 샘플 데이터 삽입 (DML)
 
 - [data/sample_data.sql](data/sample_data.sql)  
