@@ -188,6 +188,8 @@
   <img src="images/ERD_White.png" width="700" alt="ERD Diagram" />
 </p>
 
+### 테이블 관계
+![Image](https://github.com/user-attachments/assets/d39fcda0-7dba-4f9d-86a3-4240078a4a49)
 
 ### Schema DDL
 
