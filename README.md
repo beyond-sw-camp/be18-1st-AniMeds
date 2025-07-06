@@ -249,6 +249,15 @@ END$$
 DELIMITER ;
 ```
 ---
+<details>
+<summary><b>인덱스</b></summary>
+
+![스크린샷 2025-07-06 231903](https://github.com/user-attachments/assets/4d6ddb9f-1c70-4e62-964d-73e5039bd71f)
+
+
+</details>
+
+---
 
 ## 💬 시나리오
 <img width="600" height="600" alt="Image" src="https://github.com/user-attachments/assets/cf0d7496-98c9-443d-8701-577c46fe999c" />
