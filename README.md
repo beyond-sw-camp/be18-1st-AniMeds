@@ -672,36 +672,7 @@ SELECT * FROM Drug;
 ```
 </details>
 
-<details>
-<summary>앨범 좋아요 누르기 기능</summary>
-<div markdown="1">
 
-<img src="https://github.com/user-attachments/assets/0e65b0e0-0e65-4088-bcf0-0ed0eb305312" width="500" height="300"/>
-<img src="https://github.com/user-attachments/assets/6f03db42-b589-4d84-b6a3-0d7b03ef36ab" width="500" height="300"/>
-
-```SQL
-    DELIMITER $$
-    CREATE OR REPLACE PROCEDURE member_add_album_like(
-    	IN uid BIGINT (20),
-    	IN a_id BIGINT (20)
-    )
-    BEGIN 
-    	IF NOT EXISTS (
-    		SELECT *
-    		FROM like_cnt
-    		WHERE member_id = uid AND album_id = a_id
-    	) 
-    	THEN
-    		INSERT INTO like_cnt(member_id, album_id) VALUES (uid, a_id);
-    	ELSE
-    		SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT =  '이미 좋아요를 누른 곡입니다.';
-    	END IF;
-    END $$
-    DELIMITER ;
-```
-
-</div>
-</details>
 
 🎓 회고록
 팀원	회고 내용
