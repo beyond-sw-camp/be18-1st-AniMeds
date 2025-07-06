@@ -218,6 +218,9 @@ BEGIN
 END$$
 DELIMITER ;
 ```
+---
+## 시나리오
+<img width="772" height="664" alt="Image" src="https://github.com/user-attachments/assets/cf0d7496-98c9-443d-8701-577c46fe999c" />
 
 ---
 <details> 
