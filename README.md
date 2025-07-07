@@ -242,6 +242,7 @@
 ## 🗂️ 데이터베이스 설계
 
 ### ERD
+![image](https://github.com/user-attachments/assets/df9b3a9f-e95b-4437-a15b-a3210e2903a6)
 
 
 ### 아키텍처
