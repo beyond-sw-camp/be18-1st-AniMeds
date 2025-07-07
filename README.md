@@ -215,7 +215,37 @@
   <img src="images/ERD_White.png" width="700" alt="ERD Diagram" />
 </p>
 
-### 테이블 관계 시각화
+### 아키텍처# 📋 요구사항 명세
+
+## 🧾 요구사항 정의서
+![image](https://github.com/user-attachments/assets/3bfd4f75-52e3-48b6-b837-25336a56bae1)
+
+ [요구사항 정의서](https://docs.google.com/spreadsheets/d/1ezIGvaFNwkBmDPlIIaDlnmjDzN0-As8Hf1kQjH_DhoM/edit?gid=0#gid=0)
+
+## ✅ 기능 요구사항
+- 사용자 계정 CRUD
+- 동물 등록 및 정보 조회
+- 증상 기반 약물 추천 (금기, 권장용량 고려)
+- 사용자 처방 기록 저장
+- 커뮤니티 글 작성 및 열람
+- 병원 광고 노출 및 클릭 이벤트 추적
+--
+## 🚫 비기능 요구사항
+- 인증 토큰 기반 세션 관리 (JWT 등)
+- 인덱스를 활용한 검색 성능 최적화
+- 반응형 UI 지원 (모바일/PC)
+- 데이터 무결성 보장 (외래키, 제약조건 등)
+
+---
+
+## 🗂️ 데이터베이스 설계
+
+### ERD
+<p align="center">
+  <img src="images/ERD_White.png" width="700" alt="ERD Diagram" />
+</p>
+
+### 아키텍처
 ![Image](https://github.com/user-attachments/assets/d39fcda0-7dba-4f9d-86a3-4240078a4a49)
 
 ### Schema DDL
