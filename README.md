@@ -212,8 +212,9 @@
 
 ### ERD
 <p align="center">
-![image](https://github.com/user-attachments/assets/7f09c22e-e534-4138-b20a-ae09c2ec150c)
 </p>
+![image](https://github.com/user-attachments/assets/16c4ab5d-3b58-4384-87d7-55ff7762f9c1)
+
 
 ### 아키텍처# 📋 요구사항 명세
 
