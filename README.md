@@ -17,7 +17,7 @@
   <img src="https://capsule-render.vercel.app/api?type=soft&color=0:FAF3E0,100:5DA8D2&height=80&section=footer&text=AniMeds&fontSize=40&fontColor=ffffff&animation=fadeIn" />
 </p>
 
-## 📚 목차
+## 📚 Table of Contents
 
 - [👥 팀원 소개](#-팀원-소개)
 - [🌟 프로젝트 개요](#-프로젝트-개요)
@@ -31,12 +31,11 @@
 - [🧪 샘플 데이터 삽입 (DML)](#-샘플-데이터-삽입-dml)
 - [🧠 저장 프로시저 예시](#-저장-프로시저-예시)
 - [💬 시나리오](#-시나리오)
-- [🎓 회고록](#-회고록)
 - [🚀 기술 스택](#-기술-스택)
 - [📁 프로젝트 구조](#-프로젝트-구조)
 - [⬆️ 향후 아이디어](#-향후-아이디어)
 - [🐾 About AniMeds](#-about-animeds)
-
+- [🎓 회고록](#-회고록)
 ---
 
 ## 👥 팀원 소개
