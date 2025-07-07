@@ -212,7 +212,7 @@
 
 ### ERD
 <p align="center">
-  <img src="images/ERD_White.png" width="700" alt="ERD Diagram" />
+  ![image](https://github.com/user-attachments/assets/352588bf-f276-4719-ab82-c5abce4ce225)
 </p>
 
 ### 아키텍처# 📋 요구사항 명세
