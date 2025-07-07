@@ -440,15 +440,6 @@ CREATE INDEX idx_drug_interaction_pair ON DrugInteraction(drug_id_1, drug_id_2);
 </details>
 
 ---
-<details>
-<summary><b>인덱스</b></summary>
-
-![스크린샷 2025-07-06 231903](https://github.com/user-attachments/assets/4d6ddb9f-1c70-4e62-964d-73e5039bd71f)
-
-
-</details>
-
----
 
 ## 🧪 샘플 데이터 삽입 (DML)
 
