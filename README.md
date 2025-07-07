@@ -262,7 +262,7 @@ CREATE TABLE DrugInteraction (
     interaction_detail TEXT,                        -- 상호작용 상세 설명
     FOREIGN KEY (drug_id_1) REFERENCES Drug(drug_id),
     FOREIGN KEY (drug_id_2) REFERENCES Drug(drug_id)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+);
 ```
 
 ### 2. 커뮤니티 게시글
@@ -276,7 +276,7 @@ CREATE TABLE Community (
     content TEXT,                               -- 내용
     created_at DATETIME,                        -- 작성일
     FOREIGN KEY (user_id) REFERENCES User(user_id)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+);
 ```
 
 ### 3. 병원 마스터
@@ -289,7 +289,7 @@ CREATE TABLE Clinic (
     address VARCHAR(255),                       -- 주소
     contact VARCHAR(50),                        -- 연락처
     specialties TEXT                             -- 전문 진료 과목
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+);
 ```
 
 ### 4. 병원 광고 정보
@@ -307,7 +307,7 @@ CREATE TABLE VetAd (
     FOREIGN KEY (clinic_id) REFERENCES Clinic(clinic_id),
     FOREIGN KEY (target_species_id) REFERENCES AnimalSpecies(species_id),
     FOREIGN KEY (target_symptom_id) REFERENCES Symptom(symptom_id)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+);
 ```
 
 ### 5. 광고 로그 기록
@@ -324,7 +324,7 @@ CREATE TABLE VetAdLog (
     FOREIGN KEY (ad_id) REFERENCES VetAd(ad_id),
     FOREIGN KEY (user_id) REFERENCES User(user_id),
     FOREIGN KEY (animal_id) REFERENCES Animal(animal_id)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+);
 ```
 
 ### 6. 병원 광고 예산 관리
@@ -338,7 +338,7 @@ CREATE TABLE VetAdBudget (
     remaining_budget FLOAT,                     -- 남은 예산
     updated_at DATETIME,                        -- 마지막 수정일
     FOREIGN KEY (clinic_id) REFERENCES Clinic(clinic_id)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+);
 ```
 
 ### 7. 제휴사 정보
@@ -350,7 +350,7 @@ CREATE TABLE Partner (
     name VARCHAR(100),                          -- 제휴사 이름
     commission_rate FLOAT,                      -- 수수료율
     api_url VARCHAR(255)                        -- API 연동 URL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+);
 ```
 
 ### 8. 상품 정보
@@ -366,7 +366,7 @@ CREATE TABLE Product (
     price FLOAT,                                -- 가격
     product_link VARCHAR(255),                  -- 상품 링크
     FOREIGN KEY (partner_id) REFERENCES Partner(partner_id)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+);
 ```
 
 ### 9. 증상-상품 매핑
@@ -381,7 +381,7 @@ CREATE TABLE Symptom_Product_Map (
     FOREIGN KEY (symptom_id) REFERENCES Symptom(symptom_id),
     FOREIGN KEY (species_id) REFERENCES AnimalSpecies(species_id),
     FOREIGN KEY (product_id) REFERENCES Product(product_id)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+);
 ```
 
 ### 10. 상품 클릭 로그
@@ -396,7 +396,7 @@ CREATE TABLE ProductClickLog (
     event_type VARCHAR(50),                     -- 이벤트 유형
     FOREIGN KEY (product_id) REFERENCES Product(product_id),
     FOREIGN KEY (user_id) REFERENCES User(user_id)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+);
 ```
 
 ### 11. 관심 상품 저장 내역
@@ -410,7 +410,7 @@ CREATE TABLE UserSavedProduct (
     saved_at DATETIME,                          -- 저장 시각
     FOREIGN KEY (user_id) REFERENCES User(user_id),
     FOREIGN KEY (product_id) REFERENCES Product(product_id)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+);
 ```
 
 ### 12. 상품 태그 정보
@@ -422,7 +422,7 @@ CREATE TABLE ProductTag (
     product_id INT,                             -- 상품 ID
     tag_name VARCHAR(50),                       -- 태그명 (예: 관절, 알러지)
     FOREIGN KEY (product_id) REFERENCES Product(product_id)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+);
 ```
 ### 13. 전체 인덱스 목록
 <details>
