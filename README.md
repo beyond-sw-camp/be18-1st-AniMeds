@@ -242,9 +242,7 @@
 ## 🗂️ 데이터베이스 설계
 
 ### ERD
-<p align="center">
-  <img src="images/ERD_White.png" width="700" alt="ERD Diagram" />
-</p>
+
 
 ### 아키텍처
 ![Image](https://github.com/user-attachments/assets/d39fcda0-7dba-4f9d-86a3-4240078a4a49)
