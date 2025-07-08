@@ -1,0 +1,14 @@
+DELIMITER $$
+
+CREATE PROCEDURE DeletePost(
+    IN p_post_id BIGINT
+)
+BEGIN
+    DELETE FROM community WHERE post_id = p_post_id;
+END $$
+
+DELIMITER ;
+
+CALL DeletePost(7);
+
+DROP PROCEDURE DeletePost;
