@@ -7,6 +7,7 @@ CREATE PROCEDURE AddComment(
 )
 BEGIN
     DECLARE v_count INT DEFAULT 0;
+    DECLARE v_comment_id BIGINT;
 
     -- 게시글 존재 여부 확인
     SELECT COUNT(*) INTO v_count FROM community WHERE post_id = p_post_id;
@@ -25,14 +26,30 @@ BEGIN
         SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Error: 댓글 내용은 비어 있을 수 없습니다.';
     END IF;
 
-    -- 댓글 삽입 (이 시점에서 트리거가 자동 실행됨)
+    -- 댓글 삽입
     INSERT INTO comment (post_id, user_id, content)
     VALUES (p_post_id, p_user_id, p_content);
+
+    -- 마지막으로 삽입된 comment_id 저장
+    SET v_comment_id = LAST_INSERT_ID();
+
+    -- 등록된 댓글 출력
+    SELECT
+        c.comment_id,
+        c.post_id,
+        c.user_id,
+        u.name AS user_name,
+        c.content,
+        c.created_at
+    FROM comment c
+    JOIN `User` u ON c.user_id = u.user_id
+    WHERE c.comment_id = v_comment_id;
 END $$
 
 DELIMITER ;
 
 
+-- 댓글 등록 트리거
 DELIMITER $$
 
 CREATE TRIGGER trg_increase_comment_count
@@ -46,5 +63,14 @@ END $$
 
 DELIMITER ;
 
+CALL AddComment(14, 3, '추천1');
 
-CALL AddComment(11, 1, 'ㅋㅋㅌㅊㅁㅊ');
+-- DROP PROCEDURE addComment;
+
+<img width="719" height="217" alt="Image" src="https://github.com/user-attachments/assets/a255b4ce-b9b8-4924-a81a-a6a5d6f2d5c9" />
+
+<img width="447" height="221" alt="Image" src="https://github.com/user-attachments/assets/df515a5c-957b-4141-920a-c8c0f8051ccc" />
+
+<img width="439" height="220" alt="Image" src="https://github.com/user-attachments/assets/11affb7a-732a-464e-93f8-eb16f2da7131" />
+
+<img width="439" height="228" alt="Image" src="https://github.com/user-attachments/assets/0d7723f3-afb2-4ac8-92d1-c25937e7d215" />
