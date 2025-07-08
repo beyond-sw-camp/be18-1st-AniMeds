@@ -933,6 +933,8 @@ DELIMITER ;
 
 CALL sp_get_symptom_drug_warnings(1, 1);
 ```
+![image](https://github.com/user-attachments/assets/f747c772-9957-4b6a-b9b7-342ce0b4407f)
+
 </details>
 
 <details>
@@ -990,6 +992,8 @@ DELIMITER ;
 
 CALL sp_save_symptom_report_once_per_day(1, 1, 1, '기침 계속함');
 ```
+![image](https://github.com/user-attachments/assets/5b7847c6-be8c-4c3d-8869-f8fa0db4efc9)
+
 </details>
 
 <details>
@@ -1053,6 +1057,8 @@ DELIMITER ;
 
 CALL sp_check_overdose_risk(1, 1);
 ```
+![image](https://github.com/user-attachments/assets/5de21e73-48f2-4917-93f0-48a8f789a3e4)
+
 </details>
 
 <details>
@@ -1097,6 +1103,9 @@ DELIMITER ;
 
 CALL sp_check_interaction_risk(1, 1);
 ```
+![image](https://github.com/user-attachments/assets/fa2bddf2-3373-414a-be5e-7cc13fb0160c)
+
+
 </details>
 
 ### 🛒 3. 커뮤니티 및 상품 관리
