@@ -1096,28 +1096,102 @@ CALL sp_check_interaction_risk(1, 1);
 <details>
 <summary>3-1. 커뮤니티 게시글 목록 조회</summary>
 	
-```
+```sql
+DELIMITER $$
+
+CREATE PROCEDURE GetCommunityPostList()
+BEGIN
+    SELECT 
+        c.post_id AS 게시글ID,
+        c.title AS 제목,
+        c.content AS 내용,
+        u.name AS 작성자,
+        c.post_like AS 좋아요수,
+        c.post_report AS 신고수,
+        c.created_at AS 작성일,
+        c.updated_at AS 수정일,
+        COUNT(cm.comment_id) AS 댓글수
+    FROM community c
+    JOIN User u ON c.user_id = u.user_id
+    LEFT JOIN comment cm ON c.post_id = cm.post_id
+    GROUP BY c.post_id, c.title, c.content, u.name, c.post_like, c.post_report, c.created_at, c.updated_at
+    ORDER BY 게시글ID;
+END $$
+
+DELIMITER ;
 ```
 </details>
 
 <details>
 <summary>3-2. 커뮤니티 게시글 등록</summary>
 	
-```
+```sql
+DELIMITER $$
+
+CREATE PROCEDURE AddCommunityPost (
+    IN 제목 VARCHAR(255),
+    IN 내용 TEXT,
+    IN 작성자ID INT
+)
+BEGIN
+    INSERT INTO community (title, content, user_id)
+    VALUES (제목, 내용, 작성자ID);
+    
+    SELECT LAST_INSERT_ID() AS 게시글ID;
+END $$
+
+DELIMITER ;
 ```
 </details>
 
 <details>
 <summary>3-3. 커뮤니티 댓글 등록</summary>
 	
-```
+```sql
+DELIMITER $$
+
+CREATE PROCEDURE AddComment (
+    IN 게시글ID BIGINT,
+    IN 작성자ID INT,
+    IN 댓글내용 TEXT
+)
+BEGIN
+    INSERT INTO comment (post_id, user_id, content)
+    VALUES (게시글ID, 작성자ID, 댓글내용);
+    
+    -- 방금 생성된 댓글 ID 반환
+    SELECT LAST_INSERT_ID() AS 댓글ID;
+END $$
+
+DELIMITER ;
 ```
 </details>
 
 <details>
 <summary>3-4. 커뮤니티 게시글 신고</summary>
 	
-```
+```sql
+DELIMITER $$
+
+CREATE PROCEDURE ReportCommunityPost (
+    IN 게시글ID BIGINT
+)
+BEGIN
+    -- 신고 수 1 증가
+    UPDATE community
+    SET post_report = post_report + 1
+    WHERE post_id = 게시글ID;
+    
+    -- 갱신된 신고 수 반환
+    SELECT 
+        post_id AS 게시글ID,
+        post_report AS 현재신고수
+    FROM community
+    WHERE post_id = 게시글ID;
+END $$
+
+DELIMITER ;
+
 ```
 </details>
 
