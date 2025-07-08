@@ -505,6 +505,7 @@ DELIMITER ;
 
 <details>
 <summary>1-2. 로그인</summary>
+	
 ```sql
 	
 DELIMITER $$
@@ -542,6 +543,7 @@ END$$
 
 DELIMITER ;
 ```
+
 ![image](https://github.com/user-attachments/assets/f1f24772-52ca-41e6-be62-f4fcc7739497)
 
 ![image](https://github.com/user-attachments/assets/e0439283-9ed6-4836-8b86-37418c61ffed)
@@ -550,6 +552,7 @@ DELIMITER ;
 
 <details>
 <summary>1-3. 로그아웃</summary>
+	
 ```sql
 
 DELIMITER $$
