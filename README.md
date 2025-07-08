@@ -1915,10 +1915,74 @@ CALL getAdLog('', '');
 ### 🛒 5. 상품 및 파트너 관리
 
 <details> 
-<summary>5-1. 상품 목록/상세 조회</summary> 
+<summary>5-1. 상품 목록 조회</summary> 
 	
+```sql
+DELIMITER $$
+
+CREATE PROCEDURE partnerProduct (
+    IN p_partner_name_keyword VARCHAR(100),
+    IN p_product_name_keyword VARCHAR(100)
+)
+BEGIN
+    -- 입력된 키워드가 모두 비어있으면 에러 발생
+    IF (p_partner_name_keyword IS NULL OR p_partner_name_keyword = '') 
+       AND (p_product_name_keyword IS NULL OR p_product_name_keyword = '') THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = '파트너 이름 또는 상품 이름 중 최소 하나는 입력해야 합니다.';
+    END IF;
+
+    -- 파트너 존재 여부 확인 (파트너 이름 키워드가 있을 때만)
+    IF p_partner_name_keyword IS NOT NULL AND p_partner_name_keyword <> '' THEN
+        IF NOT EXISTS (
+            SELECT 1 FROM Partner 
+            WHERE `name` LIKE CONCAT('%', p_partner_name_keyword, '%') COLLATE utf8mb4_general_ci
+        ) THEN
+            SIGNAL SQLSTATE '45000' 
+            SET MESSAGE_TEXT = '해당 이름을 포함하는 파트너가 존재하지 않습니다.';
+        END IF;
+    END IF;
+
+    -- 상품 존재 여부 확인 (상품 이름 키워드가 있을 때만)
+    IF p_product_name_keyword IS NOT NULL AND p_product_name_keyword <> '' THEN
+        IF NOT EXISTS (
+            SELECT 1 FROM Product 
+            WHERE `name` LIKE CONCAT('%', p_product_name_keyword, '%') COLLATE utf8mb4_general_ci
+        ) THEN
+            SIGNAL SQLSTATE '45000' 
+            SET MESSAGE_TEXT = '해당 이름을 포함하는 상품이 존재하지 않습니다.';
+        END IF;
+    END IF;
+
+    -- 결과 조회
+    SELECT 
+        p.`name` AS product_name,
+        pt.`name` AS partner_name,
+        p.price
+    FROM Product p
+    JOIN Partner pt ON p.partner_id = pt.partner_id
+    WHERE (p_partner_name_keyword IS NULL OR p_partner_name_keyword = '' 
+           OR pt.`name` LIKE CONCAT('%', p_partner_name_keyword, '%') COLLATE utf8mb4_general_ci)
+      AND (p_product_name_keyword IS NULL OR p_product_name_keyword = '' 
+           OR p.`name` LIKE CONCAT('%', p_product_name_keyword, '%') COLLATE utf8mb4_general_ci);
+END$$
+
+DELIMITER ;
+
+CALL partnerProduct('', '구토');
+
+-- DROP PROCEDURE partnerProduct;
 ```
-```
+
+<img width="526" height="263" alt="Image" src="https://github.com/user-attachments/assets/eed3cc5c-4182-4bb7-8a83-78c429c73459" />
+
+<img width="364" height="113" alt="Image" src="https://github.com/user-attachments/assets/ee65233e-137d-43ed-a189-c299d6ec3603" />
+
+<img width="500" height="238" alt="Image" src="https://github.com/user-attachments/assets/718f3cb5-c8c6-4770-a07a-c594f291bd15" />
+
+<img width="441" height="232" alt="Image" src="https://github.com/user-attachments/assets/c9a0438c-bf98-4886-9c7a-fe1f4cfca934" />
+
+<img width="443" height="235" alt="Image" src="https://github.com/user-attachments/assets/00ea4016-c799-43a3-957c-fb4be003af3c" />
 </details>
 
 <details> 
