@@ -1,0 +1,43 @@
+DELIMITER $$
+
+CREATE PROCEDURE UpdatePost(
+    IN p_post_id BIGINT,
+    IN p_user_id INT,
+    IN p_title VARCHAR(255),
+    IN p_content TEXT
+)
+BEGIN
+    DECLARE v_count INT DEFAULT 0;
+    DECLARE v_msg VARCHAR(255);
+
+    SELECT COUNT(*) INTO v_count FROM community WHERE post_id = p_post_id;
+    IF v_count = 0 THEN
+        SET v_msg = CONCAT('Error: 게시글(post_id=', p_post_id, ')이 존재하지 않습니다.');
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = v_msg;
+    END IF;
+
+    SELECT COUNT(*) INTO v_count FROM community WHERE post_id = p_post_id AND user_id = p_user_id;
+    IF v_count = 0 THEN
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Error: 게시글 작성자가 아니어서 수정할 수 없습니다.';
+    END IF;
+
+    IF p_title IS NULL OR p_title = '' THEN
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Error: 제목은 필수입니다.';
+    END IF;
+
+    IF p_content IS NULL OR p_content = '' THEN
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Error: 내용은 필수입니다.';
+    END IF;
+
+    UPDATE community
+    SET title = p_title,
+        content = p_content,
+        updated_at = CURRENT_TIMESTAMP
+    WHERE post_id = p_post_id;
+END $$
+
+DELIMITER ;
+
+CALL UpdatePost(10, 1, 'asda', 'qqsd');
+
+DROP PROCEDURE UpdateyPost;
