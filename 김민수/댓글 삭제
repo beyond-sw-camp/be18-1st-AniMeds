@@ -1,0 +1,48 @@
+DELIMITER $$
+
+CREATE PROCEDURE DeleteComment(
+    IN p_comment_id BIGINT,
+    IN p_user_id INT
+)
+BEGIN
+    DECLARE v_count INT DEFAULT 0;
+
+    -- 댓글 존재 여부 확인
+    SELECT COUNT(*) INTO v_count
+    FROM comment
+    WHERE comment_id = p_comment_id;
+    
+    IF v_count = 0 THEN
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Error: 존재하지 않는 댓글입니다.';
+    END IF;
+
+    -- 작성자 본인인지 확인
+    SELECT COUNT(*) INTO v_count
+    FROM comment
+    WHERE comment_id = p_comment_id AND user_id = p_user_id;
+
+    IF v_count = 0 THEN
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Error: 본인의 댓글만 삭제할 수 있습니다.';
+    END IF;
+
+    -- 삭제 수행 (트리거가 comment_count 감소시킴)
+    DELETE FROM comment
+    WHERE comment_id = p_comment_id;
+END $$
+
+DELIMITER ;
+
+DELIMITER $$
+
+CREATE TRIGGER trg_decrease_comment_count
+AFTER DELETE ON comment
+FOR EACH ROW
+BEGIN
+    UPDATE community
+    SET comment_count = comment_count - 1
+    WHERE post_id = OLD.post_id;
+END $$
+
+DELIMITER ;
+
+CALL DeleteComment(10, 1);  -- comment_id=5인 댓글을 user_id=1이 삭제 시도
