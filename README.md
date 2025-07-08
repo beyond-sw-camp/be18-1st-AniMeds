@@ -450,7 +450,8 @@ CREATE INDEX idx_drug_interaction_pair ON DrugInteraction(drug_id_1, drug_id_2);
 
 ## 🧠 프로시저 실행 결과
 👤 1. 사용자 및 반려동물 관리
-<details><summary>1-1. 회원가입</summary>
+<details>
+<summary>1-1. 회원가입</summary>
 
   ```sql
 DELIMITER $$
@@ -502,9 +503,10 @@ DELIMITER ;
 
 </details>
 
-<details> <summary>1-2. 로그인</summary>
-
+<details>
+<summary>1-2. 로그인</summary>
 ```sql
+	
 DELIMITER $$
 
 CREATE PROCEDURE sp_login_user (
@@ -546,6 +548,132 @@ DELIMITER ;
 
 </details>
 
+<details>
+<summary>1-3. 로그아웃</summary>
+```sql
+DELIMITER $$
+
+CREATE PROCEDURE sp_logout_user (
+    IN in_token VARCHAR(255)
+)
+BEGIN
+    DECLARE v_exists INT;
+
+    SELECT COUNT(*) INTO v_exists
+    FROM UserSession
+    WHERE token = in_token COLLATE utf8mb4_unicode_ci;
+
+    IF v_exists = 0 THEN
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = '유효하지 않은 세션 토큰입니다.';
+    END IF;
+
+    DELETE FROM UserSession
+    WHERE token = in_token COLLATE utf8mb4_unicode_ci;
+END$$
+
+DELIMITER ;
+```
+</details>
+
+<details><summary>1-4. 반려동물 등록</summary>
+```sql
+DELIITER $$
+DROP PROCEDURE IF EXISTS sp_add_animal $$
+
+CREATE PROCEDURE sp_add_animal (
+    IN p_user_id INT,
+    IN p_name VARCHAR(255),
+    IN p_species_id INT,
+    IN p_weight FLOAT,
+    IN p_birth_date DATE,
+    OUT out_animal_id INT
+)
+BEGIN
+    DECLARE v_role ENUM('보호자', '수의사', '관리자');
+    DECLARE v_exists INT;
+
+    SELECT COUNT(*) INTO v_exists
+    FROM User
+    WHERE user_id = p_user_id;
+
+    IF v_exists = 0 THEN
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = '존재하지 않는 사용자입니다.';
+    END IF;
+
+    SELECT role INTO v_role
+    FROM User
+    WHERE user_id = p_user_id;
+
+    IF v_role != '보호자' THEN
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = '반려동물은 보호자만 등록할 수 있습니다.';
+    END IF;
+
+    SELECT COUNT(*) INTO v_exists
+    FROM AnimalSpecies
+    WHERE species_id = p_species_id;
+
+    IF v_exists = 0 THEN
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = '존재하지 않는 동물 종입니다.';
+    END IF;
+
+    INSERT INTO Animal (user_id, name, species_id, weight, birth_date)
+    VALUES (p_user_id, p_name, p_species_id, p_weight, p_birth_date);
+
+    SET out_animal_id = LAST_INSERT_ID();
+END $$
+
+DELIMITER ;
+```
+</details>
+
+<details>
+<summary>1-5. 반려동물 목록</summary>
+```sql
+DELIMITER $$
+
+DROP PROCEDURE IF EXISTS sp_get_user_animals $$
+
+CREATE PROCEDURE sp_get_user_animals (
+    IN p_user_id INT
+)
+BEGIN
+    DECLARE v_exists INT;
+
+    SELECT COUNT(*) INTO v_exists
+    FROM User
+    WHERE user_id = p_user_id;
+
+    IF v_exists = 0 THEN
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = '존재하지 않는 사용자입니다.';
+    END IF;
+
+    SELECT COUNT(*) INTO v_exists
+    FROM Animal
+    WHERE user_id = p_user_id;
+
+    IF v_exists = 0 THEN
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = '등록된 반려동물이 없습니다.';
+    END IF;
+
+    SELECT 
+        a.animal_id,
+        a.name,
+        s.species_name,
+        a.weight,
+        a.birth_date
+    FROM Animal a
+    JOIN AnimalSpecies s ON a.species_id = s.species_id
+    WHERE a.user_id = p_user_id;
+END $$
+
+DELIMITER ;
+```
+</details>
+
+<details>
+<summary>1-6. 처방 이력 조회</summary>
+</details>
+```
 -- 여기서 묶음
 ---
 <details>
