@@ -449,7 +449,7 @@ CREATE INDEX idx_drug_interaction_pair ON DrugInteraction(drug_id_1, drug_id_2);
 ---
 
 ## 🧠 프로시저 실행 결과
-👤 1. 사용자 및 반려동물 관리
+### 👤 1. 사용자 및 반려동물 관리
 <details>
 <summary>1-1. 회원가입</summary>
 
@@ -733,6 +733,36 @@ END $$
 
 DELIMITER ;
 ```
+</details>
+
+### 💊 2. 증상 기반 진단 및 약물 추천
+
+<details>
+<summary>2-1. 증상 목록 조회</summary>
+</details>
+
+<details>
+<summary>2-2. 사용자 증상 보고 등록</summary>
+</details>
+
+<details>
+<summary>2-3. 사용자 증상 보고 이력 조회</summary>
+</details>
+
+<details>
+<summary>2-4. 증상에 따른 약물 경고 조회</summary>
+</details>
+
+<details>
+<summary>2-5. 동일 증상 중복 보고 방지</summary>
+</details>
+
+<details>
+<summary>2-6. 종별 약물 복용량 초과 위험 확인</summary>
+</details>
+
+<details>
+<summary>2-7. 증상에 따른 약물 간 상호작용 위험 확인</summary>
 </details>
 
 
