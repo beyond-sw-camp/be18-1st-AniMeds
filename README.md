@@ -765,6 +765,86 @@ DELIMITER ;
 <summary>2-7. 증상에 따른 약물 간 상호작용 위험 확인</summary>
 </details>
 
+### 🛒 3. 커뮤니티 및 상품 관리
+
+<details>
+<summary>3-1. 커뮤니티 게시글 목록 조회</summary>
+</details>
+
+<details>
+<summary>3-2. 커뮤니티 게시글 등록</summary>
+</details>
+
+<details>
+<summary>3-3. 커뮤니티 댓글 등록</summary>
+</details>
+
+<details>
+<summary>3-4. 커뮤니티 게시글 신고</summary>
+</details>
+
+<details>
+<summary>3-5. 상품 목록 조회</summary>
+</details>
+
+<details>
+<summary>3-6. 상품 상세 조회</summary>
+</details>
+
+<details>
+<summary>3-7. 종별 금기/주의 약물 포함 상품 필터링</summary>
+</details>
+
+### 🏥 4. 병원 및 광고 관리
+
+<details> 
+<summary>4-1. 종에 따른 병원 추천</summary> 
+</details> 
+
+<details> 
+<summary>4-2. 광고 예산 소진 리포트</summary> 
+</details> 
+
+<details> 
+<summary>4-3. 만료 광고 병원 자동 삭제</summary> 
+</details> 
+
+<details> 
+<summary>4-4. 병원 상세 정보 조회</summary> 
+</details> 
+
+<details> 
+<summary>4-5. 병원 등록 / 광고 등록 요청</summary>
+</details>
+
+### 🛠️ 5. 기타 관리 기능
+<details> 
+<summary>5-1. 세션 유효성 확인 및 저장</summary> 
+</details> 
+
+<details> 
+<summary>5-2. 종 목록 조회</summary> 
+</details> 
+
+<details> 
+<summary>5-3. 사용자 역할 검증</summary>
+</details> 
+
+<details> 
+<summary>5-4. 증상/약물/종 관리 (관리자 전용)</summary>
+</details> 
+
+<details> 
+<summary>5-5. 로그 저장 또는 에러 로깅 (후속 고려)</summary> 
+</details> 
+
+<details> 
+<summary>5-6. 통계/분석 리포트 제공</summary>
+</details>
+
+<details> 
+<summary>5-7. 데이터 백업 또는 자동 삭제 정책</summary>
+</details>
 
 -- 여기서 묶음
 ---
