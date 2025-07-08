@@ -32,5 +32,10 @@ END$$
 
 DELIMITER ;
 
-
 CALL getClinicAdBudget('');
+
+<img width="418" height="286" alt="Image" src="https://github.com/user-attachments/assets/882f6fb0-6830-4a7d-b405-28bedaa5cc13" />
+
+<img width="412" height="161" alt="Image" src="https://github.com/user-attachments/assets/de9421e2-9918-423a-9ec4-f2d498210cff" />
+
+<img width="437" height="236" alt="Image" src="https://github.com/user-attachments/assets/fd925c45-54f6-42b5-8ce0-8afaf1b38390" />
