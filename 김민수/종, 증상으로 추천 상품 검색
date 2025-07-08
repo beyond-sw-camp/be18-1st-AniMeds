@@ -1,0 +1,43 @@
+DELIMITER $$
+
+CREATE PROCEDURE recommendedProducts (
+	IN p_species_keyword VARCHAR(100),
+   IN p_symptom_keyword VARCHAR(100)
+)
+BEGIN
+   DECLARE v_exists INT DEFAULT 0;
+
+   -- 1. 증상+종 조합이 유효한지 확인
+   SELECT COUNT(*) INTO v_exists
+   FROM symptom_product_map m
+   JOIN Symptom s ON m.symptom_id = s.symptom_id
+   JOIN AnimalSpecies sp ON m.species_id = sp.species_id
+   WHERE s.`description` LIKE CONCAT('%', p_symptom_keyword, '%') COLLATE utf8mb4_general_ci
+   AND sp.`species_name` LIKE CONCAT('%', p_species_keyword, '%') COLLATE utf8mb4_general_ci;
+
+   IF v_exists = 0 THEN
+      SIGNAL SQLSTATE '45000'
+      SET MESSAGE_TEXT = '입력한 증상과 종에 대한 추천 제품이 존재하지 않습니다.';
+   END IF;
+
+   -- 2. 추천 제품 조회
+   SELECT 
+      s.symptom_id, 
+      s.description AS symptom_description,
+      sp.species_name,
+      pd.name AS product_name,
+      pd.price
+   FROM symptom_product_map m
+   JOIN Symptom s ON m.symptom_id = s.symptom_id
+   JOIN AnimalSpecies sp ON m.species_id = sp.species_id
+   JOIN Product pd ON m.product_id = pd.product_id
+   WHERE s.description LIKE CONCAT('%', p_symptom_keyword, '%') COLLATE utf8mb4_general_ci
+   AND sp.species_name LIKE CONCAT('%', p_species_keyword, '%') COLLATE utf8mb4_general_ci;
+END$$
+
+DELIMITER ;
+
+
+CALL recommendedProducts('고양이', '기침');
+
+DROP PROCEDURE recommendedProducts;
