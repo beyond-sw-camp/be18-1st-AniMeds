@@ -1289,11 +1289,53 @@ CALL getClinicAdBudget('');
 
 <details> 
 <summary>4-5. 병원 등록 / 광고 등록 요청</summary>
-	
+병원 등록 
+
 ```sql
 USE employees_db;
 DROP PROCEDURE IF EXISTS AddVetAd;
 DELIMITER $$
+-- clinic 추가 
+CREATE PROCEDURE AddClinic (
+   IN in_name VARCHAR(100) COLLATE utf8mb4_unicode_ci,
+    IN in_address VARCHAR(255) COLLATE utf8mb4_unicode_ci,
+   IN in_phone VARCHAR(20) COLLATE utf8mb4_unicode_ci,
+   IN in_specialties TEXT COLLATE utf8mb4_unicode_ci
+)
+BEGIN
+   -- 병원 중복 체크 (이름 + 주소 조합으로 판단)
+   IF EXISTS (
+      SELECT 1 FROM clinic
+      WHERE `name` = in_name AND address = in_address
+   ) THEN
+      SIGNAL SQLSTATE '45000'
+      SET MESSAGE_TEXT = '이미 등록된 병원입니다.';
+   ELSE
+      -- 병원 정보 삽입
+      INSERT INTO clinic (`name`, address, contact, specialties)
+      VALUES (in_name COLLATE utf8mb4_unicode_ci,
+			in_address  COLLATE utf8mb4_unicode_ci, 
+			in_phone  COLLATE utf8mb4_unicode_ci, 
+			in_specialties);
+      SELECT * FROM clinic;
+   END IF;
+END $$
+
+DELIMITER ;
+
+CALL AddClinic('연세병원', '서울시 강남구 역삼동 123', '02-123-4567', '내과');
+
+```
+![병원 코드 결과](/박채연/addClinic_procedure.png)
+![병원 등록 결과](/박채연/addClinic_result.png)
+
+
+광고 등록 
+
+```sql
+USE employees_db;
+DROP PROCEDURE IF EXISTS AddVetAd;
+
 -- clinic 추가 
 CREATE PROCEDURE AddVetAd(
    IN in_clinic_id INT,
@@ -1314,16 +1356,11 @@ BEGIN
 			AND end_date = in_end_date 
    ) THEN
       SIGNAL SQLSTATE '45000'
-      SET MESSAGE_TEXT = '이미 등록된 병원입니다.';
+      SET MESSAGE_TEXT = '이미 등록된 광고입니다';
    ELSE
       -- 병원 정보 삽입
-      INSERT INTO vetad (clinic_id, target_species_id, target_symptom_id, start_date, end_date)
-      VALUES (   in_clinic_id,
-			in_target_species_id,
-   		in_target_symptom_id,
-   		in_priority,
-   		in_start_date,
-   		in_end_date 
+      INSERT INTO vetad (clinic_id, target_species_id, target_symptom_id, priority, start_date, end_date)
+      VALUES (   in_clinic_id, in_target_species_id, in_target_symptom_id, in_priority, in_start_date, in_end_date 
    	);
       SELECT * FROM vetad;
    END IF;
@@ -1331,53 +1368,15 @@ END $$
 
 DELIMITER ;
 
-CALL AddClinic('연세병원', '서울시 강남구 역삼동 123', '02-123-4567', '내과');
-```
+CALL AddVetAd(1, 1, 7, 11, CURDATE(), CURDATE());
 
-```sql
-USE employees_db;
-DROP PROCEDURE IF EXISTS AddVetAd;
-DELIMITER $$
--- clinic 추가 
-CREATE PROCEDURE AddVetAd(
-   IN in_clinic_id INT,
-	IN in_target_species_id INT,
-   IN in_target_symptom_id INT,
-   IN in_priority INT,
-   IN in_start_date DATE,
-   IN in_end_date DATE
-)
-BEGIN
-   -- 병원 중복 체크 (이름 + 주소 조합으로 판단)
-   IF EXISTS (
-      SELECT 1 FROM vetad 
-      WHERE `clinic_id` = in_clinic_id 
-			AND target_species_id = in_target_species_id
-			AND target_symptom_id = in_target_symptom_id
-			AND start_date = in_start_date
-			AND end_date = in_end_date 
-   ) THEN
-      SIGNAL SQLSTATE '45000'
-      SET MESSAGE_TEXT = '이미 등록된 병원입니다.';
-   ELSE
-      -- 병원 정보 삽입
-      INSERT INTO vetad (clinic_id, target_species_id, target_symptom_id, start_date, end_date)
-      VALUES (   in_clinic_id,
-			in_target_species_id,
-   		in_target_symptom_id,
-   		in_priority,
-   		in_start_date,
-   		in_end_date 
-   	);
-      SELECT * FROM vetad;
-   END IF;
-END $$
-
-DELIMITER ;
-
-CALL AddClinic('연세병원', '서울시 강남구 역삼동 123', '02-123-4567', '내과');
 
 ```
+
+![광고 코드 결과](/박채연/addVetAd_procedure.png)
+![광고 등록 결과](/박채연/addVetAd_result.png)
+
+
 
 </details>
 <details>
