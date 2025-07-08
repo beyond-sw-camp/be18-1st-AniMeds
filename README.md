@@ -577,6 +577,8 @@ END$$
 
 DELIMITER ;
 ```
+![image](https://github.com/user-attachments/assets/a4910d3c-b0b1-4f89-9b90-371ce1e0b31f)
+![image](https://github.com/user-attachments/assets/d08ad692-b7f0-49f8-ad2b-84cfaa734626)
 
 </details>
 
@@ -631,6 +633,7 @@ END $$
 
 DELIMITER ;
 ```
+
 </details>
 
 <details>
@@ -676,6 +679,9 @@ END $$
 
 DELIMITER ;
 ```
+![image](https://github.com/user-attachments/assets/52d3e7ae-b6c8-42b0-bf91-a3be75d62360)
+![image](https://github.com/user-attachments/assets/acd43f31-b0aa-4ea8-a6cb-3e881bb4c8df)
+
 </details>
 
 <details>
@@ -733,6 +739,9 @@ END $$
 
 DELIMITER ;
 ```
+![image](https://github.com/user-attachments/assets/1a1b6ecf-1b14-46ad-8e1e-c4bc7b59f34c)
+![image](https://github.com/user-attachments/assets/afd4f182-6976-4d96-aabd-953f03c6707f)
+
 </details>
 
 ### 💊 2. 증상 기반 진단 및 약물 추천
