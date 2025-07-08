@@ -1637,7 +1637,7 @@ DROP PROCEDURE recommendedProducts;
 </details>
 
 <details> 
-<summary>5-4. 파트너사 상품 검색 조회</summary> 
+<summary>5-3. 파트너사 상품 검색 조회</summary> 
 	
 ```
 DELIMITER $$
@@ -1706,7 +1706,12 @@ DROP PROCEDURE partnerProduct;
 
 <img width="443" height="235" alt="Image" src="https://github.com/user-attachments/assets/00ea4016-c799-43a3-957c-fb4be003af3c" />
 </details>
-
+<details> 
+<summary>5-4. 제휴 파트너 등록 요청 / 관리</summary> 
+	
+```
+```
+</details>
 ### 🛠️ 6. 추후 개선사항
 
 <details> 
@@ -1757,12 +1762,7 @@ DROP PROCEDURE partnerProduct;
 ```
 ```
 </details>
-<details> 
-<summary>6-8. 제휴 파트너 등록 요청 / 관리</summary> 
-	
-```
-```
-</details>
+
 
 -- 여기서 묶음
 ---
