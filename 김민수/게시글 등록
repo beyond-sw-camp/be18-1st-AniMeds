@@ -24,5 +24,14 @@ END $$
 
 DELIMITER ;
 
-
 CALL Posting('testtest', 'dd', 1);
+
+<img width="310" height="86" alt="Image" src="https://github.com/user-attachments/assets/7d4275f5-29d5-4d38-be40-b047597b5122" />
+
+<img width="1034" height="43" alt="Image" src="https://github.com/user-attachments/assets/24b3be9d-a05c-4311-82ca-cf8ffcc2a7fc" />
+
+<img width="442" height="222" alt="Image" src="https://github.com/user-attachments/assets/dfb5e1d3-682e-477f-bfc6-5eb4326ec242" />
+
+<img width="441" height="217" alt="Image" src="https://github.com/user-attachments/assets/10ab0ea0-55ad-4e5c-9f1f-688709fe34ca" />
+
+<img width="441" height="224" alt="Image" src="https://github.com/user-attachments/assets/5cb8d33d-20fe-4823-a6d9-09c40c937a6b" />
