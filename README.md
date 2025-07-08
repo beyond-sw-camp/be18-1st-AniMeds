@@ -739,6 +739,24 @@ DELIMITER ;
 
 <details>
 <summary>2-1. 증상 목록 조회</summary>
+```sql
+DELIMITER $$
+
+DROP PROCEDURE IF EXISTS get_symptom_list $$
+
+CREATE PROCEDURE get_symptom_list()
+BEGIN
+    SELECT 
+        symptom_id,
+        description
+    FROM Symptom
+    ORDER BY symptom_id ASC;
+END $$
+
+DELIMITER ;
+
+CALL get_symptom_list();
+```
 </details>
 
 <details>
