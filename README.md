@@ -631,8 +631,9 @@ END $$
 
 DELIMITER ;
 ```
-![image](https://github.com/user-attachments/assets/4cc0b336-ad3a-444f-89b1-63cbaf753e9f)
-![image](https://github.com/user-attachments/assets/c8db92f4-ee53-47b4-8090-3c863b939d24)
+![image](https://github.com/user-attachments/assets/bbbf7c5e-5976-4e11-9c3c-97d5bf25c1fa)
+![image](https://github.com/user-attachments/assets/b9b4da83-6a07-4684-be8f-33dca14be3c9)
+
 
 </details>
 
