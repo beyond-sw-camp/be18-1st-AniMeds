@@ -12,6 +12,9 @@
 </p>
 
 ---
+<p align="center">
+  <img src="https://capsule-render.vercel.app/api?type=soft&color=0:5DA8D2,100:FAF3E0&height=80&section=footer&text=Team%20Pets&fontSize=40&fontColor=ffffff&animation=fadeIn" />
+</p>
 
 <p align="center">
   <img src="https://capsule-render.vercel.app/api?type=soft&color=0:FAF3E0,100:5DA8D2&height=80&section=footer&text=AniMeds&fontSize=40&fontColor=ffffff&animation=fadeIn" />
