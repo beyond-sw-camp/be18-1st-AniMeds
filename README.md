@@ -1178,6 +1178,55 @@ CALL sp_check_interaction_risk(1, 1);
 ```
 ```
 </details>
+<details>
+<summary>4-6. 광고 로그 조회 (병원명/이벤트별 필터)</summary>
+
+```sql
+DELIMITER $$
+
+CREATE PROCEDURE getAdLog (
+    IN p_clinic_name VARCHAR(100),
+    IN p_event_type VARCHAR(20)
+)
+BEGIN
+    DECLARE v_log_count INT DEFAULT 0;
+    DECLARE v_clinic_name VARCHAR(100);
+    DECLARE v_event_type VARCHAR(20);
+
+    SET v_clinic_name = NULLIF(TRIM(p_clinic_name), '');
+    SET v_event_type = NULLIF(TRIM(p_event_type), '');
+
+    SELECT COUNT(*) INTO v_log_count
+    FROM vetad v
+    JOIN vetadlog vl ON vl.ad_id = v.ad_id
+    JOIN clinic c ON c.clinic_id = v.clinic_id
+    WHERE (v_event_type IS NULL OR vl.event_type COLLATE utf8mb4_general_ci = v_event_type COLLATE utf8mb4_general_ci)
+      AND (v_clinic_name IS NULL OR c.`name` COLLATE utf8mb4_general_ci LIKE CONCAT('%', v_clinic_name, '%'));
+
+    IF v_log_count = 0 THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = '해당 조건의 광고 로그가 존재하지 않습니다.';
+    END IF;
+
+    SELECT 
+        v.ad_id,
+        c.`name` AS clinic_name,
+        vl.event_type,
+        vl.event_time
+    FROM vetad v
+    JOIN vetadlog vl ON vl.ad_id = v.ad_id
+    JOIN clinic c ON c.clinic_id = v.clinic_id
+    WHERE (v_event_type IS NULL OR vl.event_type COLLATE utf8mb4_general_ci = v_event_type COLLATE utf8mb4_general_ci)
+      AND (v_clinic_name IS NULL OR c.`name` COLLATE utf8mb4_general_ci LIKE CONCAT('%', v_clinic_name, '%'))
+    ORDER BY vl.event_time DESC;
+END$$
+
+DELIMITER ;
+
+CALL getAdLog('', '');
+```
+
+</details>
 
 ### 🛠️ 5. 기타 관리 기능
 <details> 
