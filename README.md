@@ -1652,7 +1652,8 @@ DROP PROCEDURE partnerProduct;
 ```
 </details>
 
-### 🛠️ 6. 기타 관리 기능
+### 🛠️ 6. 추후 개선사항
+
 <details> 
 <summary>6-1. 세션 유효성 확인 및 저장</summary> 
 	
@@ -1682,7 +1683,7 @@ DROP PROCEDURE partnerProduct;
 </details>
 
 <details> 
-<summary>5-5. 로그 저장 또는 에러 로깅 (후속 고려)</summary> 
+<summary>6-5. 로그 저장 또는 에러 로깅 (후속 고려)</summary> 
 	
 ```
 ```
