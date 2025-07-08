@@ -1152,10 +1152,51 @@ CALL sp_check_interaction_risk(1, 1);
 </details>
 
 <details> 
-<summary>4-2. 광고 예산 소진 리포트</summary> 
+<summary>4-2. 병원 광고 예산 조회</summary> 
 	
 ```
+DELIMITER $$
+
+CREATE PROCEDURE getClinicAdBudget (
+    IN p_clinic_name VARCHAR(100)
+)
+BEGIN
+    DECLARE v_clinic_name VARCHAR(100);
+    DECLARE v_exist_count INT DEFAULT 0;
+
+    SET v_clinic_name = NULLIF(TRIM(p_clinic_name), '');
+
+    -- 병원 존재 여부 체크 (조건에 맞는 병원)
+    SELECT COUNT(*) INTO v_exist_count
+    FROM Clinic
+    WHERE v_clinic_name IS NULL OR name LIKE CONCAT('%', v_clinic_name, '%') COLLATE utf8mb4_general_ci;
+
+    IF v_exist_count = 0 THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = '조건에 맞는 병원이 존재하지 않습니다.';
+    END IF;
+
+    -- 결과 조회
+    SELECT 
+        c.name AS clinic_name, 
+        b.total_budget, 
+        b.remaining_budget
+    FROM VetAdBudget b
+    JOIN Clinic c ON b.clinic_id = c.clinic_id
+    WHERE v_clinic_name IS NULL 
+       OR c.name LIKE CONCAT('%', v_clinic_name, '%') COLLATE utf8mb4_general_ci;
+END$$
+
+DELIMITER ;
 ```
+CALL getClinicAdBudget('');
+
+<img width="418" height="286" alt="Image" src="https://github.com/user-attachments/assets/882f6fb0-6830-4a7d-b405-28bedaa5cc13" />
+
+<img width="412" height="161" alt="Image" src="https://github.com/user-attachments/assets/de9421e2-9918-423a-9ec4-f2d498210cff" />
+
+<img width="437" height="236" alt="Image" src="https://github.com/user-attachments/assets/fd925c45-54f6-42b5-8ce0-8afaf1b38390" />
+
 </details>
 
 <details> 
