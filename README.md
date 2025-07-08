@@ -550,6 +550,7 @@ DELIMITER ;
 
 <details>
 <summary>1-3. 로그아웃</summary>
+
 ```sql
 DELIMITER $$
 
@@ -575,7 +576,9 @@ DELIMITER ;
 ```
 </details>
 
-<details><summary>1-4. 반려동물 등록</summary>
+<details>
+<summary>1-4. 반려동물 등록</summary>
+
 ```sql
 DELIITER $$
 DROP PROCEDURE IF EXISTS sp_add_animal $$
@@ -628,6 +631,7 @@ DELIMITER ;
 
 <details>
 <summary>1-5. 반려동물 목록</summary>
+
 ```sql
 DELIMITER $$
 
@@ -672,6 +676,59 @@ DELIMITER ;
 
 <details>
 <summary>1-6. 처방 이력 조회</summary>
+
+```sql
+DELIMITER $$
+
+DROP PROCEDURE IF EXISTS sp_get_animal_prescription_history $$
+
+CREATE PROCEDURE sp_get_animal_prescription_history (
+    IN p_user_id INT,
+    IN p_animal_id INT
+)
+BEGIN
+    DECLARE v_exists INT;
+
+    SELECT COUNT(*) INTO v_exists
+    FROM User
+    WHERE user_id = p_user_id;
+
+    IF v_exists = 0 THEN
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = '존재하지 않는 사용자입니다.';
+    END IF;
+
+    SELECT COUNT(*) INTO v_exists
+    FROM Animal
+    WHERE animal_id = p_animal_id AND user_id = p_user_id;
+
+    IF v_exists = 0 THEN
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = '해당 반려동물은 이 사용자에게 속하지 않습니다.';
+    END IF;
+
+    SELECT COUNT(*) INTO v_exists
+    FROM PrescriptionRecord
+    WHERE animal_id = p_animal_id;
+
+    IF v_exists = 0 THEN
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = '처방 이력이 없습니다.';
+    END IF;
+
+    SELECT 
+        pr.record_id,
+        d.drug_name,
+        s.description AS symptom,
+        pr.dose_given,
+        pr.date_given,
+        pr.notes
+    FROM PrescriptionRecord pr
+    JOIN Drug d ON pr.drug_id = d.drug_id
+    JOIN Symptom s ON pr.symptom_id = s.symptom_id
+    WHERE pr.animal_id = p_animal_id
+    ORDER BY pr.date_given DESC;
+END $$
+
+DELIMITER ;
+```
 </details>
 ```
 -- 여기서 묶음
