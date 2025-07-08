@@ -1,0 +1,18 @@
+DELIMITER //
+
+CREATE OR REPLACE PROCEDURE GetClinicByName(
+    IN in_name VARCHAR(255) CHARACTER SET UTF8MB4 COLLATE utf8mb4_unicode_ci 
+)
+BEGIN
+    SELECT
+        clinic_id,
+        name,
+        address,
+        contact,
+        specialties
+    FROM Clinic
+    WHERE name = in_name
+    LIMIT 1;
+END //
+
+DELIMITER ;
