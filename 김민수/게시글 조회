@@ -1,0 +1,30 @@
+DELIMITER $$
+
+CREATE PROCEDURE SearchPost(
+	IN search_title VARCHAR(255)
+)
+BEGIN
+   SELECT
+      c.post_id,
+      u.name,
+      c.title,
+      c.content,
+      c.post_like,
+      c.post_report,
+      c.created_at,
+      c.updated_at,
+      COUNT(cm.comment_id) AS comment_count
+   FROM community c
+   JOIN `User` u ON c.user_id = u.user_id
+   LEFT JOIN comment cm ON c.post_id = cm.post_id
+   WHERE c.title LIKE CONCAT('%', search_title, '%')
+   GROUP BY c.post_id, c.title, c.content, c.created_at, c.updated_at, c.post_like, c.post_report, u.name
+   ORDER BY c.created_at DESC;
+END $$
+
+DELIMITER ;
+
+
+CALL SearchPost('입니다');
+
+-- DROP PROCEDURE SearchPost;
