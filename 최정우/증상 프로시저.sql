@@ -354,4 +354,96 @@ DELIMITER ;
 
 CALL sp_check_interaction_risk(1, 1); -- 기침, 고양이
 
-----------------
+-- 수의사가 처방전을 작성 --------------
+
+DELIMITER $$
+
+DROP PROCEDURE IF EXISTS sp_add_prescription $$
+
+CREATE PROCEDURE sp_add_prescription (
+    IN p_user_id INT,
+    IN p_animal_id INT,
+    IN p_symptom_id INT,
+    IN p_drug_id INT,
+    IN p_dose_given FLOAT,
+    IN p_date_given DATE,
+    IN p_notes TEXT
+)
+BEGIN
+    DECLARE v_role ENUM('보호자', '수의사', '관리자');
+    DECLARE v_species_id INT;
+    DECLARE v_contraindicated BOOLEAN DEFAULT FALSE;
+    DECLARE v_min_dose FLOAT;
+    DECLARE v_max_dose FLOAT;
+    DECLARE v_exists INT;
+
+    -- 1. 사용자 존재 여부 + 역할 확인
+    SELECT COUNT(*) INTO v_exists FROM User WHERE user_id = p_user_id;
+    IF v_exists = 0 THEN
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = '존재하지 않는 사용자입니다.';
+    END IF;
+
+    SELECT role INTO v_role FROM User WHERE user_id = p_user_id;
+    IF v_role != '수의사' THEN
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = '수의사만 처방 등록이 가능합니다.';
+    END IF;
+
+    -- 2. 반려동물 존재 여부 및 종 ID
+    SELECT COUNT(*) INTO v_exists FROM Animal WHERE animal_id = p_animal_id;
+    IF v_exists = 0 THEN
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = '존재하지 않는 반려동물입니다.';
+    END IF;
+
+    SELECT species_id INTO v_species_id FROM Animal WHERE animal_id = p_animal_id;
+
+    -- 3. 증상 존재 여부
+    SELECT COUNT(*) INTO v_exists FROM Symptom WHERE symptom_id = p_symptom_id;
+    IF v_exists = 0 THEN
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = '존재하지 않는 증상입니다.';
+    END IF;
+
+    -- 4. 약물 존재 여부
+    SELECT COUNT(*) INTO v_exists FROM Drug WHERE drug_id = p_drug_id;
+    IF v_exists = 0 THEN
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = '존재하지 않는 약물입니다.';
+    END IF;
+
+    -- 5. 금기 여부 + 용량 확인
+    SELECT contraindicated, min_dose, max_dose
+    INTO v_contraindicated, v_min_dose, v_max_dose
+    FROM DrugSpeciesMapping
+    WHERE drug_id = p_drug_id AND species_id = v_species_id;
+
+    IF v_contraindicated THEN
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = '이 종에 금기된 약물로 처방할 수 없습니다.';
+    END IF;
+
+    --  복용량 체크
+    IF p_dose_given < v_min_dose OR p_dose_given > v_max_dose THEN
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = '복용량이 허용 범위를 벗어났습니다.';
+    END IF;
+
+    -- 6. 처방 기록 삽입
+    INSERT INTO PrescriptionRecord (
+        user_id, animal_id, drug_id, symptom_id,
+        dose_given, date_given, notes
+    ) VALUES (
+        p_user_id, p_animal_id, p_drug_id, p_symptom_id,
+        p_dose_given, p_date_given, p_notes
+    );
+END $$
+
+DELIMITER ;
+
+CALL sp_add_prescription(
+    3,           -- user_id (김수의, 수의사)
+    1,           -- animal_id (나비)
+    1,           -- symptom_id (기침)
+    1,           -- drug_id (페토민)
+    5.0,         -- dose_given
+    CURDATE(),   -- date_given
+    '기침 완화 목적' -- notes
+);
+
+
+
