@@ -1525,36 +1525,36 @@ CALL getAdLog('', '');
 ```
 </details>
 <details> 
-<summary>4-5. 제휴 파트너 등록 요청 / 관리</summary> 
+<summary>5-5. 제휴 파트너 등록 요청 / 관리</summary> 
 	
 ```
 ```
 </details>
 
-### 🛠️ 5. 기타 관리 기능
+### 🛠️ 6. 기타 관리 기능
 <details> 
-<summary>5-1. 세션 유효성 확인 및 저장</summary> 
-	
-```
-```
-</details>
-
-<details> 
-<summary>5-2. 종 목록 조회</summary> 
+<summary>6-1. 세션 유효성 확인 및 저장</summary> 
 	
 ```
 ```
 </details>
 
 <details> 
-<summary>5-3. 사용자 역할 검증</summary>
+<summary>6-2. 종 목록 조회</summary> 
 	
 ```
 ```
 </details>
 
 <details> 
-<summary>5-4. 증상/약물/종 관리 (관리자 전용)</summary>
+<summary>6-3. 사용자 역할 검증</summary>
+	
+```
+```
+</details>
+
+<details> 
+<summary>6-4. 증상/약물/종 관리 (관리자 전용)</summary>
 	
 ```
 ```
@@ -1568,14 +1568,14 @@ CALL getAdLog('', '');
 </details>
 
 <details> 
-<summary>5-6. 통계/분석 리포트 제공</summary>
+<summary>6-6. 통계/분석 리포트 제공</summary>
 	
 ```
 ```
 </details>
 
 <details> 
-<summary>5-7. 데이터 백업 또는 자동 삭제 정책</summary>
+<summary>6-7. 데이터 백업 또는 자동 삭제 정책</summary>
 	
 ```
 ```
