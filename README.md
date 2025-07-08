@@ -543,10 +543,8 @@ END$$
 
 DELIMITER ;
 ```
-
-![image](https://github.com/user-attachments/assets/f1f24772-52ca-41e6-be62-f4fcc7739497)
-
-![image](https://github.com/user-attachments/assets/e0439283-9ed6-4836-8b86-37418c61ffed)
+![image](https://github.com/user-attachments/assets/c11b7a60-a321-47eb-9419-d2163f10c03c)
+![image](https://github.com/user-attachments/assets/09fe096e-dc91-4a97-acdf-f46682d6d5df)
 
 </details>
 
