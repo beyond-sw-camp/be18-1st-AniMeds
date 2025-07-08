@@ -1,4 +1,4 @@
--- 병원마다 특화 동물
+-- 병원 주력 광고
 
 DELIMITER $$
 
@@ -39,3 +39,9 @@ END$$
 DELIMITER ;
 
 CALL getVetAdInfo('');
+
+<img width="479" height="283" alt="Image" src="https://github.com/user-attachments/assets/65470974-9e4c-4be0-b4e0-3e2d31b51a8c" />
+
+<img width="479" height="254" alt="Image" src="https://github.com/user-attachments/assets/1f91732a-0396-45c9-9fc9-5e9687bec376" />
+
+<img width="488" height="311" alt="Image" src="https://github.com/user-attachments/assets/f00e6099-bf9f-444b-811b-b4ea24b362b4" />=
