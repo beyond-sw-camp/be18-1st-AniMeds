@@ -820,7 +820,9 @@ DELIMITER ;
 
 <details>
 <summary>2-3. 사용자 증상 보고 이력 조회</summary>
-	```DELIMITER $$
+	
+```
+DELIMITER $$
 
 DROP PROCEDURE IF EXISTS get_symptom_report_history $$
 
