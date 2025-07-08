@@ -1175,7 +1175,7 @@ DELIMITER ;
 </details>
 
 <details>
-<summary>3-4. 커뮤니티 게시글 삭제</summary>
+<summary>3-4. 커뮤니티 게시글 수정</summary>
 	
 ```sql
 
@@ -1183,7 +1183,7 @@ DELIMITER ;
 </details>
 
 <details>
-<summary>3-5. 커뮤니티 게시글 수정</summary>
+<summary>3-5. 커뮤니티 게시글 삭제</summary>
 	
 ```sql
 
