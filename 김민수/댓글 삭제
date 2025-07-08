@@ -28,6 +28,9 @@ BEGIN
     -- 삭제 수행 (트리거가 comment_count 감소시킴)
     DELETE FROM comment
     WHERE comment_id = p_comment_id;
+    
+    -- 성공 메시지 출력
+    SELECT '댓글이 성공적으로 삭제되었습니다.' AS message;
 END $$
 
 DELIMITER ;
@@ -45,4 +48,12 @@ END $$
 
 DELIMITER ;
 
-CALL DeleteComment(10, 1);  -- comment_id=5인 댓글을 user_id=1이 삭제 시도
+CALL DeleteComment(17, 3);
+
+-- DROP PROCEDURE deletecomment;
+
+<img width="303" height="111" alt="Image" src="https://github.com/user-attachments/assets/c2df7827-bc9f-4cfc-ae5f-73a5c1a89c6c" />
+
+<img width="438" height="220" alt="Image" src="https://github.com/user-attachments/assets/365119c3-cb79-42d3-8210-07b6dd51ecdf" />
+
+<img width="440" height="219" alt="Image" src="https://github.com/user-attachments/assets/6fe3c323-1d8c-4b66-a29c-c18f5205e5d8" />
