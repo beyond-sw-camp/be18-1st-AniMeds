@@ -1126,27 +1126,77 @@ CALL sp_check_interaction_risk(1, 1);
 ```sql
 DELIMITER $$
 
-CREATE PROCEDURE GetCommunityPostList()
+CREATE PROCEDURE SearchPost(
+    IN search_title VARCHAR(255)
+)
 BEGIN
-    SELECT 
-        c.post_id AS 게시글ID,
-        c.title AS 제목,
-        c.content AS 내용,
-        u.name AS 작성자,
-        c.post_like AS 좋아요수,
-        c.post_report AS 신고수,
-        c.created_at AS 작성일,
-        c.updated_at AS 수정일,
-        COUNT(cm.comment_id) AS 댓글수
-    FROM community c
-    JOIN User u ON c.user_id = u.user_id
-    LEFT JOIN comment cm ON c.post_id = cm.post_id
-    GROUP BY c.post_id, c.title, c.content, u.name, c.post_like, c.post_report, c.created_at, c.updated_at
-    ORDER BY 게시글ID;
+    DECLARE v_count INT DEFAULT 0;
+    DECLARE v_msg VARCHAR(255);
+
+    -- 검색어가 NULL 또는 빈 문자열이면 전체 조회
+    IF search_title IS NULL OR search_title = '' THEN
+
+        SELECT
+            c.post_id,
+            u.name,
+            c.title,
+            c.content,
+            c.post_like,
+            c.post_report,
+            c.created_at,
+            c.updated_at,
+            COUNT(cm.comment_id) AS comment_count
+        FROM community c
+        JOIN `User` u ON c.user_id = u.user_id
+        LEFT JOIN comment cm ON c.post_id = cm.post_id
+        GROUP BY c.post_id, c.title, c.content, c.created_at, c.updated_at, c.post_like, c.post_report, u.name
+        ORDER BY c.created_at DESC;
+
+    ELSE
+        -- 검색 결과 개수 확인
+        SELECT COUNT(*) INTO v_count
+        FROM community
+        WHERE title LIKE CONCAT('%', search_title, '%');
+
+        -- 검색 결과 없으면 예외 발생
+        IF v_count = 0 THEN
+            SET v_msg = CONCAT('Error: "', search_title, '"에 해당하는 게시글이 없습니다.');
+            SIGNAL SQLSTATE '45000'
+            SET MESSAGE_TEXT = v_msg;
+        END IF;
+
+        -- 검색 결과 조회
+        SELECT
+            c.post_id,
+            u.name,
+            c.title,
+            c.content,
+            c.post_like,
+            c.post_report,
+            c.created_at,
+            c.updated_at,
+            COUNT(cm.comment_id) AS comment_count
+        FROM community c
+        JOIN `User` u ON c.user_id = u.user_id
+        LEFT JOIN comment cm ON c.post_id = cm.post_id
+        WHERE c.title LIKE CONCAT('%', search_title, '%')
+        GROUP BY c.post_id, c.title, c.content, c.created_at, c.updated_at, c.post_like, c.post_report, u.name
+        ORDER BY c.created_at DESC;
+    END IF;
 END $$
 
 DELIMITER ;
+
+
+CALL SearchPost('가나다');
+
+-- DROP PROCEDURE SearchPost;
 ```
+<img width="1144" height="404" alt="Image" src="https://github.com/user-attachments/assets/e72d0e3a-aa04-49e6-af51-186da17c2de0" />
+
+<img width="1060" height="379" alt="Image" src="https://github.com/user-attachments/assets/d2e2fae0-399e-4332-a59f-9ab6627d8e3b" />
+
+<img width="437" height="229" alt="Image" src="https://github.com/user-attachments/assets/70cc3484-a86c-44dd-a783-6c8dff5747d8" />
 </details>
 
 <details>
@@ -1155,20 +1205,42 @@ DELIMITER ;
 ```sql
 DELIMITER $$
 
-CREATE PROCEDURE AddCommunityPost (
-    IN 제목 VARCHAR(255),
-    IN 내용 TEXT,
-    IN 작성자ID INT
+CREATE PROCEDURE Posting(
+   IN p_title VARCHAR(255),
+   IN p_content TEXT,
+   IN p_user_id INT
 )
 BEGIN
-    INSERT INTO community (title, content, user_id)
-    VALUES (제목, 내용, 작성자ID);
-    
-    SELECT LAST_INSERT_ID() AS 게시글ID;
+   IF p_title IS NULL OR p_title = '' THEN
+      SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Error: 제목은 필수입니다.';
+   END IF;
+
+   IF p_content IS NULL OR p_content = '' THEN
+      SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Error: 내용은 필수입니다.';
+   END IF;
+
+   IF NOT EXISTS (SELECT 1 FROM `User` WHERE user_id = p_user_id) THEN
+      SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Error: 유효하지 않은 작성자입니다.';
+   END IF;
+
+   INSERT INTO community (title, content, user_id)
+   VALUES (p_title, p_content, p_user_id);
 END $$
 
 DELIMITER ;
+
+CALL Posting('testtest', 'dd', 1);
 ```
+
+<img width="310" height="86" alt="Image" src="https://github.com/user-attachments/assets/7d4275f5-29d5-4d38-be40-b047597b5122" />
+
+<img width="1034" height="43" alt="Image" src="https://github.com/user-attachments/assets/24b3be9d-a05c-4311-82ca-cf8ffcc2a7fc" />
+
+<img width="442" height="222" alt="Image" src="https://github.com/user-attachments/assets/dfb5e1d3-682e-477f-bfc6-5eb4326ec242" />
+
+<img width="441" height="217" alt="Image" src="https://github.com/user-attachments/assets/10ab0ea0-55ad-4e5c-9f1f-688709fe34ca" />
+
+<img width="441" height="224" alt="Image" src="https://github.com/user-attachments/assets/5cb8d33d-20fe-4823-a6d9-09c40c937a6b" />
 </details>
 
 
@@ -1205,16 +1277,118 @@ DELIMITER ;
 <summary>3-4. 커뮤니티 게시글 수정</summary>
 	
 ```sql
+DELIMITER $$
 
+CREATE PROCEDURE UpdatePost(
+    IN p_post_id BIGINT,
+    IN p_user_id INT,
+    IN p_title VARCHAR(255),
+    IN p_content TEXT
+)
+BEGIN
+    DECLARE v_count INT DEFAULT 0;
+    DECLARE v_msg VARCHAR(255);
+
+    SELECT COUNT(*) INTO v_count FROM community WHERE post_id = p_post_id;
+    IF v_count = 0 THEN
+        SET v_msg = CONCAT('Error: 게시글(post_id=', p_post_id, ')이 존재하지 않습니다.');
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = v_msg;
+    END IF;
+
+    SELECT COUNT(*) INTO v_count FROM community WHERE post_id = p_post_id AND user_id = p_user_id;
+    IF v_count = 0 THEN
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Error: 게시글 작성자가 아니어서 수정할 수 없습니다.';
+    END IF;
+
+    IF p_title IS NULL OR p_title = '' THEN
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Error: 제목은 필수입니다.';
+    END IF;
+
+    IF p_content IS NULL OR p_content = '' THEN
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Error: 내용은 필수입니다.';
+    END IF;
+
+    UPDATE community
+    SET title = p_title,
+        content = p_content,
+        updated_at = CURRENT_TIMESTAMP
+    WHERE post_id = p_post_id;
+END $$
+
+DELIMITER ;
+
+CALL UpdatePost(10, 1, 'asda', 'qqsd');
+
+-- DROP PROCEDURE UpdateyPost;
 ```
+
+<img width="540" height="119" alt="Image" src="https://github.com/user-attachments/assets/efbd1f68-c721-4556-b54d-831a76b37a43" />
+
+<img width="1069" height="44" alt="Image" src="https://github.com/user-attachments/assets/dfe19e77-6dce-4d07-85ef-885c27744d25" />
+
+<img width="520" height="234" alt="Image" src="https://github.com/user-attachments/assets/1bdebc99-6621-4638-886e-3fa4667ba309" />
+
+<img width="530" height="236" alt="Image" src="https://github.com/user-attachments/assets/7dbf4195-5ddd-44e8-9d4e-cc00d2a875f1" />
+
+<img width="452" height="220" alt="Image" src="https://github.com/user-attachments/assets/a7439748-5f56-4b33-9f27-391d373cf4f9" />
+
+<img width="440" height="219" alt="Image" src="https://github.com/user-attachments/assets/beb254dc-8b01-4630-911d-e442a9fef6a9" />
 </details>
 
 <details>
 <summary>3-5. 커뮤니티 게시글 삭제</summary>
 	
 ```sql
+DELIMITER $$
 
+CREATE PROCEDURE DeletePost(
+    IN p_post_id BIGINT,
+    IN p_user_id INT
+)
+BEGIN
+    DECLARE v_user_exists INT DEFAULT 0;
+    DECLARE v_post_exists INT DEFAULT 0;
+
+    -- 1. user_id 존재 여부 확인
+    SELECT COUNT(*) INTO v_user_exists
+    FROM user
+    WHERE user_id = p_user_id;
+
+    IF v_user_exists = 0 THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = '해당 사용자가 존재하지 않습니다.';
+    END IF;
+
+    -- 2. 해당 user_id가 작성한 post_id 존재 여부 확인
+    SELECT COUNT(*) INTO v_post_exists
+    FROM community
+    WHERE post_id = p_post_id AND user_id = p_user_id;
+
+    IF v_post_exists = 0 THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = '해당 사용자의 게시글이 존재하지 않습니다.';
+    END IF;
+
+    -- 3. 삭제 수행
+    DELETE FROM community
+    WHERE post_id = p_post_id AND user_id = p_user_id;
+
+    -- 성공 메시지 출력
+    SELECT '게시글이 성공적으로 삭제되었습니다.' AS message;
+END $$
+
+DELIMITER ;
+
+CALL DeletePost(121, 10);
+
+-- DROP PROCEDURE DeletePost;
 ```
+
+<img width="413" height="125" alt="Image" src="https://github.com/user-attachments/assets/0bbd0160-514e-4801-808a-5d864daa5d8d" />
+
+<img width="470" height="223" alt="Image" src="https://github.com/user-attachments/assets/419880f1-9a45-4988-91a6-5f1d4c57bb3a" />
+
+<img width="472" height="230" alt="Image" src="https://github.com/user-attachments/assets/f7dfed21-ce8a-42dd-b71f-2c288de74821" />
 </details>
 
 <details>
@@ -1223,36 +1397,207 @@ DELIMITER ;
 ```sql
 DELIMITER $$
 
-CREATE PROCEDURE AddComment (
-    IN 게시글ID BIGINT,
-    IN 작성자ID INT,
-    IN 댓글내용 TEXT
+CREATE PROCEDURE AddComment(
+    IN p_post_id BIGINT,
+    IN p_user_id INT,
+    IN p_content TEXT
 )
 BEGIN
+    DECLARE v_count INT DEFAULT 0;
+    DECLARE v_comment_id BIGINT;
+
+    -- 게시글 존재 여부 확인
+    SELECT COUNT(*) INTO v_count FROM community WHERE post_id = p_post_id;
+    IF v_count = 0 THEN
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Error: 존재하지 않는 게시글입니다.';
+    END IF;
+
+    -- 사용자 존재 여부 확인
+    SELECT COUNT(*) INTO v_count FROM `User` WHERE user_id = p_user_id;
+    IF v_count = 0 THEN
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Error: 유효하지 않은 사용자입니다.';
+    END IF;
+
+    -- 댓글 내용 확인
+    IF p_content IS NULL OR p_content = '' THEN
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Error: 댓글 내용은 비어 있을 수 없습니다.';
+    END IF;
+
+    -- 댓글 삽입
     INSERT INTO comment (post_id, user_id, content)
-    VALUES (게시글ID, 작성자ID, 댓글내용);
-    
-    -- 방금 생성된 댓글 ID 반환
-    SELECT LAST_INSERT_ID() AS 댓글ID;
+    VALUES (p_post_id, p_user_id, p_content);
+
+    -- 마지막으로 삽입된 comment_id 저장
+    SET v_comment_id = LAST_INSERT_ID();
+
+    -- 등록된 댓글 출력
+    SELECT
+        c.comment_id,
+        c.post_id,
+        c.user_id,
+        u.name AS user_name,
+        c.content,
+        c.created_at
+    FROM comment c
+    JOIN `User` u ON c.user_id = u.user_id
+    WHERE c.comment_id = v_comment_id;
 END $$
 
 DELIMITER ;
+
+
+-- 댓글 등록 트리거
+DELIMITER $$
+
+CREATE TRIGGER trg_increase_comment_count
+AFTER INSERT ON comment
+FOR EACH ROW
+BEGIN
+    UPDATE community
+    SET comment_count = comment_count + 1
+    WHERE post_id = NEW.post_id;
+END $$
+
+DELIMITER ;
+
+CALL AddComment(14, 3, '추천1');
+
+-- DROP PROCEDURE addComment;
 ```
+
+<img width="719" height="217" alt="Image" src="https://github.com/user-attachments/assets/a255b4ce-b9b8-4924-a81a-a6a5d6f2d5c9" />
+
+<img width="447" height="221" alt="Image" src="https://github.com/user-attachments/assets/df515a5c-957b-4141-920a-c8c0f8051ccc" />
+
+<img width="439" height="220" alt="Image" src="https://github.com/user-attachments/assets/11affb7a-732a-464e-93f8-eb16f2da7131" />
+
+<img width="439" height="228" alt="Image" src="https://github.com/user-attachments/assets/0d7723f3-afb2-4ac8-92d1-c25937e7d215" />
 </details>
+
 <details>
 <summary>3-7. 커뮤니티 댓글 수정</summary>
 	
 ```sql
+DELIMITER $$
 
+CREATE PROCEDURE UpdateComment(
+    IN p_comment_id BIGINT,
+    IN p_user_id INT,
+    IN p_content TEXT
+)
+BEGIN
+    DECLARE v_count INT DEFAULT 0;
+
+    -- 댓글 존재 여부 확인
+    SELECT COUNT(*) INTO v_count
+    FROM comment
+    WHERE comment_id = p_comment_id;
+
+    IF v_count = 0 THEN
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Error: 존재하지 않는 댓글입니다.';
+    END IF;
+
+    -- 작성자 본인인지 확인
+    SELECT COUNT(*) INTO v_count
+    FROM comment
+    WHERE comment_id = p_comment_id AND user_id = p_user_id;
+
+    IF v_count = 0 THEN
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Error: 본인의 댓글만 수정할 수 있습니다.';
+    END IF;
+
+    -- 수정 내용 비어 있는지 확인
+    IF p_content IS NULL OR p_content = '' THEN
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Error: 수정할 내용이 비어 있습니다.';
+    END IF;
+
+    -- 댓글 내용 수정
+    UPDATE comment
+    SET content = p_content,
+        updated_at = CURRENT_TIMESTAMP
+    WHERE comment_id = p_comment_id;
+END $$
+
+DELIMITER ;
+
+CALL UpdateComment(11, 1, 'ㅋㅋ');
 ```
+
+<img width="446" height="102" alt="Image" src="https://github.com/user-attachments/assets/26eb7d11-80c7-4b51-b607-f34a9ae2110c" />
+
+<img width="1005" height="46" alt="Image" src="https://github.com/user-attachments/assets/bdf0e421-9b43-46a5-82c6-9ee7b8af02d0" />
+
+<img width="442" height="216" alt="Image" src="https://github.com/user-attachments/assets/5d76d7a6-bc77-4387-9f9b-c79a17328d1d" />
+
+<img width="438" height="225" alt="Image" src="https://github.com/user-attachments/assets/a0481843-67d2-4e5f-92d5-10f4f1ee2241" />
+
+<img width="442" height="220" alt="Image" src="https://github.com/user-attachments/assets/d29199a6-7478-4654-8725-32cad753b5a1" />
 </details>
 
 <details>
 <summary>3-8. 커뮤니티 댓글 삭제</summary>
 	
 ```sql
+DELIMITER $$
 
+CREATE PROCEDURE DeleteComment(
+    IN p_comment_id BIGINT,
+    IN p_user_id INT
+)
+BEGIN
+    DECLARE v_count INT DEFAULT 0;
+
+    -- 댓글 존재 여부 확인
+    SELECT COUNT(*) INTO v_count
+    FROM comment
+    WHERE comment_id = p_comment_id;
+    
+    IF v_count = 0 THEN
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Error: 존재하지 않는 댓글입니다.';
+    END IF;
+
+    -- 작성자 본인인지 확인
+    SELECT COUNT(*) INTO v_count
+    FROM comment
+    WHERE comment_id = p_comment_id AND user_id = p_user_id;
+
+    IF v_count = 0 THEN
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Error: 본인의 댓글만 삭제할 수 있습니다.';
+    END IF;
+
+    -- 삭제 수행 (트리거가 comment_count 감소시킴)
+    DELETE FROM comment
+    WHERE comment_id = p_comment_id;
+    
+    -- 성공 메시지 출력
+    SELECT '댓글이 성공적으로 삭제되었습니다.' AS message;
+END $$
+
+DELIMITER ;
+
+DELIMITER $$
+
+CREATE TRIGGER trg_decrease_comment_count
+AFTER DELETE ON comment
+FOR EACH ROW
+BEGIN
+    UPDATE community
+    SET comment_count = comment_count - 1
+    WHERE post_id = OLD.post_id;
+END $$
+
+DELIMITER ;
+
+CALL DeleteComment(17, 3);
+
+-- DROP PROCEDURE deletecomment;
 ```
+
+<img width="303" height="111" alt="Image" src="https://github.com/user-attachments/assets/c2df7827-bc9f-4cfc-ae5f-73a5c1a89c6c" />
+
+<img width="438" height="220" alt="Image" src="https://github.com/user-attachments/assets/365119c3-cb79-42d3-8210-07b6dd51ecdf" />
+
+<img width="440" height="219" alt="Image" src="https://github.com/user-attachments/assets/6fe3c323-1d8c-4b66-a29c-c18f5205e5d8" />
 </details>
 
 ### 🏥 4. 병원 및 광고 관리
