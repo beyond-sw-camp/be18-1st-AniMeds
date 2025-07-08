@@ -1,0 +1,43 @@
+DELIMITER $$
+
+CREATE PROCEDURE UpdateComment(
+    IN p_comment_id BIGINT,
+    IN p_user_id INT,
+    IN p_content TEXT
+)
+BEGIN
+    DECLARE v_count INT DEFAULT 0;
+
+    -- 댓글 존재 여부 확인
+    SELECT COUNT(*) INTO v_count
+    FROM comment
+    WHERE comment_id = p_comment_id;
+
+    IF v_count = 0 THEN
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Error: 존재하지 않는 댓글입니다.';
+    END IF;
+
+    -- 작성자 본인인지 확인
+    SELECT COUNT(*) INTO v_count
+    FROM comment
+    WHERE comment_id = p_comment_id AND user_id = p_user_id;
+
+    IF v_count = 0 THEN
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Error: 본인의 댓글만 수정할 수 있습니다.';
+    END IF;
+
+    -- 수정 내용 비어 있는지 확인
+    IF p_content IS NULL OR p_content = '' THEN
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Error: 수정할 내용이 비어 있습니다.';
+    END IF;
+
+    -- 댓글 내용 수정
+    UPDATE comment
+    SET content = p_content,
+        updated_at = CURRENT_TIMESTAMP
+    WHERE comment_id = p_comment_id;
+END $$
+
+DELIMITER ;
+
+CALL UpdateComment(11, 1, 'ㅋㅋ');
