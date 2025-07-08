@@ -41,3 +41,13 @@ DELIMITER ;
 CALL recommendedProducts('고양이', '기침');
 
 DROP PROCEDURE recommendedProducts;
+
+<img width="626" height="261" alt="Image" src="https://github.com/user-attachments/assets/cf3536e4-1d54-4f5c-aeac-fbdc2302b6b7" />
+
+<img width="629" height="110" alt="Image" src="https://github.com/user-attachments/assets/15af841e-6a32-492c-a2fc-080b5d5ab7db" />
+
+<img width="620" height="108" alt="Image" src="https://github.com/user-attachments/assets/83d3de6c-26b7-4204-8e9e-ae347e5f8318" />
+
+<img width="439" height="232" alt="Image" src="https://github.com/user-attachments/assets/27c67816-14b1-455d-a855-a8ed05e58504" />
+
+<img width="437" height="233" alt="Image" src="https://github.com/user-attachments/assets/716ffba7-90c7-4de6-baec-7d4bed962402" />
