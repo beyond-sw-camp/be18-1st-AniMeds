@@ -1,0 +1,26 @@
+DELIMITER $$
+
+CREATE PROCEDURE DeletePost(
+    IN p_post_id BIGINT,
+    OUT p_result VARCHAR(255)
+)
+BEGIN
+    DECLARE v_count INT DEFAULT 0;
+
+    -- 삭제할 게시글 존재 여부 확인
+    SELECT COUNT(*) INTO v_count FROM community WHERE post_id = p_post_id;
+
+    IF v_count = 0 THEN
+        SET p_result = CONCAT('삭제할 게시글이 존재하지 않습니다.');
+    ELSE
+        DELETE FROM community WHERE post_id = p_post_id;
+        SET p_result = CONCAT('게시글 등록 완료.');
+    END IF;
+END $$
+
+DELIMITER ;
+
+CALL DeletePost(7,  @result);
+SELECT @result;
+
+DROP PROCEDURE DeletePost;
