@@ -1227,27 +1227,6 @@ DELIMITER ;
 
 ```
 </details>
-<details>
-
-<summary>3-9. 상품 목록 조회</summary>
-	
-```
-```
-</details>
-
-<details>
-<summary>3-10. 상품 상세 조회</summary>
-	
-```
-```
-</details>
-
-<details>
-<summary>3-11. 종별 금기/주의 약물 포함 상품 필터링</summary>
-	
-```
-```
-</details>
 
 ### 🏥 4. 병원 및 광고 관리
 
@@ -1516,6 +1495,40 @@ CALL getAdLog('', '');
 
 <img width="438" height="232" alt="Image" src="https://github.com/user-attachments/assets/abdca541-91ee-40ba-a80f-2b1a96a401e7" />
 
+</details>
+
+### 🛒 5. 상품 및 파트너 관리
+
+<details> 
+<summary>5-1. 상품 목록 조회</summary> 
+	
+```
+```
+</details>
+<details> 
+<summary>5-2. 상품 상세 조회</summary> 
+	
+```
+```
+</details>
+<details> 
+<summary>5-3. 종별 금기/주의 약물 포함 상품 필터링</summary> 
+	
+```
+```
+</details>
+
+<details> 
+<summary>5-4. 파트너사 상품 검색 조회</summary> 
+	
+```
+```
+</details>
+<details> 
+<summary>4-5. 제휴 파트너 등록 요청 / 관리</summary> 
+	
+```
+```
 </details>
 
 ### 🛠️ 5. 기타 관리 기능
