@@ -1,4 +1,3 @@
-<details>
 <p align="center">
   <img src="https://github.com/user-attachments/assets/33172a31-5efb-4c38-bd91-208887c8c167" width="200" alt="AniMeds Logo" />
 </p>
@@ -445,7 +444,7 @@ CREATE INDEX idx_drug_interaction_pair ON DrugInteraction(drug_id_1, drug_id_2);
 - [data/sample_data.sql](data/sample_data.sql)  
 - 총 100건의 더미 데이터 삽입: `User`, `Animal`, `Symptom`, `Drug` 등
 - 삽입 순서: User → Species → Animal → Symptom → Drug → Mapping
-</details>
+  
 ---
 
 ## 🧠 프로시저 실행 결과
