@@ -1144,31 +1144,10 @@ DELIMITER ;
 ```
 </details>
 
-<details>
-<summary>3-3. 커뮤니티 댓글 등록</summary>
-	
-```sql
-DELIMITER $$
 
-CREATE PROCEDURE AddComment (
-    IN 게시글ID BIGINT,
-    IN 작성자ID INT,
-    IN 댓글내용 TEXT
-)
-BEGIN
-    INSERT INTO comment (post_id, user_id, content)
-    VALUES (게시글ID, 작성자ID, 댓글내용);
-    
-    -- 방금 생성된 댓글 ID 반환
-    SELECT LAST_INSERT_ID() AS 댓글ID;
-END $$
-
-DELIMITER ;
-```
-</details>
 
 <details>
-<summary>3-4. 커뮤니티 게시글 신고</summary>
+<summary>3-3. 커뮤니티 게시글 신고</summary>
 	
 ```sql
 DELIMITER $$
@@ -1196,7 +1175,7 @@ DELIMITER ;
 </details>
 
 <details>
-<summary>3-5. 커뮤니티 게시글 삭제</summary>
+<summary>3-4. 커뮤니티 게시글 삭제</summary>
 	
 ```sql
 
@@ -1204,7 +1183,7 @@ DELIMITER ;
 </details>
 
 <details>
-<summary>3-6. 커뮤니티 게시글 수정</summary>
+<summary>3-5. 커뮤니티 게시글 수정</summary>
 	
 ```sql
 
@@ -1212,21 +1191,59 @@ DELIMITER ;
 </details>
 
 <details>
-<summary>3-7. 상품 목록 조회</summary>
+<summary>3-6. 커뮤니티 댓글 등록</summary>
+	
+```sql
+DELIMITER $$
+
+CREATE PROCEDURE AddComment (
+    IN 게시글ID BIGINT,
+    IN 작성자ID INT,
+    IN 댓글내용 TEXT
+)
+BEGIN
+    INSERT INTO comment (post_id, user_id, content)
+    VALUES (게시글ID, 작성자ID, 댓글내용);
+    
+    -- 방금 생성된 댓글 ID 반환
+    SELECT LAST_INSERT_ID() AS 댓글ID;
+END $$
+
+DELIMITER ;
+```
+</details>
+<details>
+<summary>3-7. 커뮤니티 댓글 수정</summary>
+	
+```sql
+
+```
+</details>
+
+<details>
+<summary>3-8. 커뮤니티 댓글 삭제</summary>
+	
+```sql
+
+```
+</details>
+<details>
+
+<summary>3-9. 상품 목록 조회</summary>
 	
 ```
 ```
 </details>
 
 <details>
-<summary>3-8. 상품 상세 조회</summary>
+<summary>3-10. 상품 상세 조회</summary>
 	
 ```
 ```
 </details>
 
 <details>
-<summary>3-9. 종별 금기/주의 약물 포함 상품 필터링</summary>
+<summary>3-11. 종별 금기/주의 약물 포함 상품 필터링</summary>
 	
 ```
 ```
