@@ -1,0 +1,22 @@
+DELIMITER $$
+
+CREATE PROCEDURE getClinicAdBudget (
+    IN p_clinic_name VARCHAR(100)
+)
+BEGIN
+    DECLARE v_clinic_name VARCHAR(100);
+    SET v_clinic_name = NULLIF(TRIM(p_clinic_name), '');
+
+    SELECT 
+        c.name AS clinic_name, 
+        b.total_budget, 
+        b.remaining_budget
+    FROM VetAdBudget b
+    JOIN Clinic c ON b.clinic_id = c.clinic_id
+    WHERE v_clinic_name IS NULL 
+       OR c.name LIKE CONCAT('%', v_clinic_name, '%') COLLATE utf8mb4_general_ci;
+END$$
+
+DELIMITER ;
+
+CALL getClinicAdBudget('병원');
