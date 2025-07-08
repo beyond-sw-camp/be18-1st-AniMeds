@@ -2180,16 +2180,11 @@ DROP PROCEDURE partnerProduct;
 <details>
 
 </details>
+
 ## 💬 시나리오
 <img width="600" height="600" alt="Image" src="https://github.com/user-attachments/assets/cf0d7496-98c9-443d-8701-577c46fe999c" />
 
----
-## 🚀 기술 스택
-DB: Maria db
 
-## 📌 프로젝트 구조
-
----
 
 ## ⬆️ 향후 아이디어
 
