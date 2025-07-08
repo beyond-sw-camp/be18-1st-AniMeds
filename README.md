@@ -758,6 +758,7 @@ DELIMITER ;
 
 CALL get_symptom_list();
 ```
+![image](https://github.com/user-attachments/assets/c9212a53-a376-4ca7-8b11-fde0cfce89e1)
 
 </details>
 
