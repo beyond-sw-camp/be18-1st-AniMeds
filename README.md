@@ -1196,21 +1196,37 @@ DELIMITER ;
 </details>
 
 <details>
-<summary>3-5. 상품 목록 조회</summary>
+<summary>3-5. 커뮤니티 게시글 삭제</summary>
+	
+```sql
+
+```
+</details>
+
+<details>
+<summary>3-6. 커뮤니티 게시글 수정</summary>
+	
+```sql
+
+```
+</details>
+
+<details>
+<summary>3-7. 상품 목록 조회</summary>
 	
 ```
 ```
 </details>
 
 <details>
-<summary>3-6. 상품 상세 조회</summary>
+<summary>3-8. 상품 상세 조회</summary>
 	
 ```
 ```
 </details>
 
 <details>
-<summary>3-7. 종별 금기/주의 약물 포함 상품 필터링</summary>
+<summary>3-9. 종별 금기/주의 약물 포함 상품 필터링</summary>
 	
 ```
 ```
