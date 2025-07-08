@@ -1,0 +1,32 @@
+DELIMITER $$
+
+CREATE OR REPLACE PROCEDURE RecommendClinicBySpeciesName(
+	IN speciesName VARCHAR(100) 
+)
+BEGIN
+    DECLARE targetSpeciesId INT;
+
+    -- 1️⃣ 입력한 종 이름으로 species_id 조회
+    SELECT species_id INTO targetSpeciesId
+    FROM AnimalSpecies
+    WHERE species_name = speciesName
+    LIMIT 1;
+
+    -- 2️⃣ species_id가 존재하면 병원 추천
+    IF targetSpeciesId IS NOT NULL THEN
+        SELECT 
+            c.name AS clinic_name,
+            s.species_name,
+            v.priority
+        FROM VetAd v
+        JOIN Clinic c ON v.clinic_id = c.clinic_id
+        JOIN AnimalSpecies s ON v.target_species_id = s.species_id
+        WHERE v.target_species_id = targetSpeciesId
+        ORDER BY v.priority DESC;
+    ELSE -- 검색한 동물이 존재하지 않을 경우 오류처리 
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = '관련 병원이 존재하지 않습니다';
+    END IF;
+END $$
+
+DELIMITER;
