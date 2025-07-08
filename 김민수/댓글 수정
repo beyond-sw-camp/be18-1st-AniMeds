@@ -41,3 +41,13 @@ END $$
 DELIMITER ;
 
 CALL UpdateComment(11, 1, 'ㅋㅋ');
+
+<img width="446" height="102" alt="Image" src="https://github.com/user-attachments/assets/26eb7d11-80c7-4b51-b607-f34a9ae2110c" />
+
+<img width="1005" height="46" alt="Image" src="https://github.com/user-attachments/assets/bdf0e421-9b43-46a5-82c6-9ee7b8af02d0" />
+
+<img width="442" height="216" alt="Image" src="https://github.com/user-attachments/assets/5d76d7a6-bc77-4387-9f9b-c79a17328d1d" />
+
+<img width="438" height="225" alt="Image" src="https://github.com/user-attachments/assets/a0481843-67d2-4e5f-92d5-10f4f1ee2241" />
+
+<img width="442" height="220" alt="Image" src="https://github.com/user-attachments/assets/d29199a6-7478-4654-8725-32cad753b5a1" />
