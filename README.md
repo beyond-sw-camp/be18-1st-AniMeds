@@ -1570,19 +1570,14 @@ CALL getAdLog('', '');
 ### 🛒 5. 상품 및 파트너 관리
 
 <details> 
-<summary>5-1. 상품 목록 조회</summary> 
+<summary>5-1. 상품 목록/상세 조회</summary> 
 	
 ```
 ```
 </details>
+
 <details> 
-<summary>5-2. 상품 상세 조회</summary> 
-	
-```
-```
-</details>
-<details> 
-<summary>5-3. 종별 금기/주의 약물 포함 상품 필터링</summary> 
+<summary>5-2. 종별 금기/주의 약물 포함 상품 필터링</summary> 
 	
 ```
 DELIMITER $$
@@ -1711,12 +1706,6 @@ DROP PROCEDURE partnerProduct;
 
 <img width="443" height="235" alt="Image" src="https://github.com/user-attachments/assets/00ea4016-c799-43a3-957c-fb4be003af3c" />
 </details>
-<details> 
-<summary>5-5. 제휴 파트너 등록 요청 / 관리</summary> 
-	
-```
-```
-</details>
 
 ### 🛠️ 6. 추후 개선사항
 
@@ -1764,6 +1753,12 @@ DROP PROCEDURE partnerProduct;
 
 <details> 
 <summary>6-7. 데이터 백업 또는 자동 삭제 정책</summary>
+	
+```
+```
+</details>
+<details> 
+<summary>6-8. 제휴 파트너 등록 요청 / 관리</summary> 
 	
 ```
 ```
