@@ -1960,7 +1960,10 @@ BEGIN
     SELECT 
         p.`name` AS product_name,
         pt.`name` AS partner_name,
-        p.price
+        p.price,
+        p.description,
+        p.image_url,
+        p.product_link
     FROM Product p
     JOIN Partner pt ON p.partner_id = pt.partner_id
     WHERE (p_partner_name_keyword IS NULL OR p_partner_name_keyword = '' 
@@ -1975,16 +1978,15 @@ CALL partnerProduct('', '구토');
 
 -- DROP PROCEDURE partnerProduct;
 ```
+<img width="876" height="267" alt="Image" src="https://github.com/user-attachments/assets/a02ea34f-b532-45ac-b47a-fc000c80407c" />
 
-<img width="526" height="263" alt="Image" src="https://github.com/user-attachments/assets/eed3cc5c-4182-4bb7-8a83-78c429c73459" />
+<img width="781" height="112" alt="Image" src="https://github.com/user-attachments/assets/8d1aa5d2-64cb-414b-96ae-ecdd61804f2e" />
 
-<img width="364" height="113" alt="Image" src="https://github.com/user-attachments/assets/ee65233e-137d-43ed-a189-c299d6ec3603" />
+<img width="439" height="232" alt="Image" src="https://github.com/user-attachments/assets/7d2c9eb1-ccf5-41d3-acf4-5d8858007097" />
 
-<img width="500" height="238" alt="Image" src="https://github.com/user-attachments/assets/718f3cb5-c8c6-4770-a07a-c594f291bd15" />
+<img width="435" height="234" alt="Image" src="https://github.com/user-attachments/assets/0fdb415f-6c70-47e6-bd13-479371130162" />
 
-<img width="441" height="232" alt="Image" src="https://github.com/user-attachments/assets/c9a0438c-bf98-4886-9c7a-fe1f4cfca934" />
-
-<img width="443" height="235" alt="Image" src="https://github.com/user-attachments/assets/00ea4016-c799-43a3-957c-fb4be003af3c" />
+<img width="439" height="233" alt="Image" src="https://github.com/user-attachments/assets/de05d7eb-7c15-40a7-a954-d2d1c069eff6" />
 </details>
 
 <details> 
