@@ -1515,14 +1515,131 @@ CALL getAdLog('', '');
 <summary>5-3. 종별 금기/주의 약물 포함 상품 필터링</summary> 
 	
 ```
+DELIMITER $$
+
+CREATE PROCEDURE recommendedProducts (
+	IN p_species_keyword VARCHAR(100),
+   IN p_symptom_keyword VARCHAR(100)
+)
+BEGIN
+   DECLARE v_exists INT DEFAULT 0;
+
+   -- 1. 증상+종 조합이 유효한지 확인
+   SELECT COUNT(*) INTO v_exists
+   FROM symptom_product_map m
+   JOIN Symptom s ON m.symptom_id = s.symptom_id
+   JOIN AnimalSpecies sp ON m.species_id = sp.species_id
+   WHERE s.`description` LIKE CONCAT('%', p_symptom_keyword, '%') COLLATE utf8mb4_general_ci
+   AND sp.`species_name` LIKE CONCAT('%', p_species_keyword, '%') COLLATE utf8mb4_general_ci;
+
+   IF v_exists = 0 THEN
+      SIGNAL SQLSTATE '45000'
+      SET MESSAGE_TEXT = '입력한 증상과 종에 대한 추천 제품이 존재하지 않습니다.';
+   END IF;
+
+   -- 2. 추천 제품 조회
+   SELECT 
+      s.symptom_id, 
+      s.description AS symptom_description,
+      sp.species_name,
+      pd.name AS product_name,
+      pd.price
+   FROM symptom_product_map m
+   JOIN Symptom s ON m.symptom_id = s.symptom_id
+   JOIN AnimalSpecies sp ON m.species_id = sp.species_id
+   JOIN Product pd ON m.product_id = pd.product_id
+   WHERE s.description LIKE CONCAT('%', p_symptom_keyword, '%') COLLATE utf8mb4_general_ci
+   AND sp.species_name LIKE CONCAT('%', p_species_keyword, '%') COLLATE utf8mb4_general_ci;
+END$$
+
+DELIMITER ;
+
+
+CALL recommendedProducts('고양이', '기침');
+
+DROP PROCEDURE recommendedProducts;
 ```
+
+<img width="626" height="261" alt="Image" src="https://github.com/user-attachments/assets/cf3536e4-1d54-4f5c-aeac-fbdc2302b6b7" />
+
+<img width="629" height="110" alt="Image" src="https://github.com/user-attachments/assets/15af841e-6a32-492c-a2fc-080b5d5ab7db" />
+
+<img width="620" height="108" alt="Image" src="https://github.com/user-attachments/assets/83d3de6c-26b7-4204-8e9e-ae347e5f8318" />
+
+<img width="439" height="232" alt="Image" src="https://github.com/user-attachments/assets/27c67816-14b1-455d-a855-a8ed05e58504" />
+
+<img width="437" height="233" alt="Image" src="https://github.com/user-attachments/assets/716ffba7-90c7-4de6-baec-7d4bed962402" />
 </details>
 
 <details> 
 <summary>5-4. 파트너사 상품 검색 조회</summary> 
 	
 ```
+DELIMITER $$
+
+CREATE PROCEDURE partnerProduct (
+    IN p_partner_name_keyword VARCHAR(100),
+    IN p_product_name_keyword VARCHAR(100)
+)
+BEGIN
+    -- 입력된 키워드가 모두 비어있으면 에러 발생
+    IF (p_partner_name_keyword IS NULL OR p_partner_name_keyword = '') 
+       AND (p_product_name_keyword IS NULL OR p_product_name_keyword = '') THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = '파트너 이름 또는 상품 이름 중 최소 하나는 입력해야 합니다.';
+    END IF;
+
+    -- 파트너 존재 여부 확인 (파트너 이름 키워드가 있을 때만)
+    IF p_partner_name_keyword IS NOT NULL AND p_partner_name_keyword <> '' THEN
+        IF NOT EXISTS (
+            SELECT 1 FROM Partner 
+            WHERE `name` LIKE CONCAT('%', p_partner_name_keyword, '%') COLLATE utf8mb4_general_ci
+        ) THEN
+            SIGNAL SQLSTATE '45000' 
+            SET MESSAGE_TEXT = '해당 이름을 포함하는 파트너가 존재하지 않습니다.';
+        END IF;
+    END IF;
+
+    -- 상품 존재 여부 확인 (상품 이름 키워드가 있을 때만)
+    IF p_product_name_keyword IS NOT NULL AND p_product_name_keyword <> '' THEN
+        IF NOT EXISTS (
+            SELECT 1 FROM Product 
+            WHERE `name` LIKE CONCAT('%', p_product_name_keyword, '%') COLLATE utf8mb4_general_ci
+        ) THEN
+            SIGNAL SQLSTATE '45000' 
+            SET MESSAGE_TEXT = '해당 이름을 포함하는 상품이 존재하지 않습니다.';
+        END IF;
+    END IF;
+
+    -- 결과 조회
+    SELECT 
+        p.`name` AS product_name,
+        pt.`name` AS partner_name,
+        p.price
+    FROM Product p
+    JOIN Partner pt ON p.partner_id = pt.partner_id
+    WHERE (p_partner_name_keyword IS NULL OR p_partner_name_keyword = '' 
+           OR pt.`name` LIKE CONCAT('%', p_partner_name_keyword, '%') COLLATE utf8mb4_general_ci)
+      AND (p_product_name_keyword IS NULL OR p_product_name_keyword = '' 
+           OR p.`name` LIKE CONCAT('%', p_product_name_keyword, '%') COLLATE utf8mb4_general_ci);
+END$$
+
+DELIMITER ;
+
+CALL partnerProduct('', '구토');
+
+DROP PROCEDURE partnerProduct;
 ```
+
+<img width="526" height="263" alt="Image" src="https://github.com/user-attachments/assets/eed3cc5c-4182-4bb7-8a83-78c429c73459" />
+
+<img width="364" height="113" alt="Image" src="https://github.com/user-attachments/assets/ee65233e-137d-43ed-a189-c299d6ec3603" />
+
+<img width="500" height="238" alt="Image" src="https://github.com/user-attachments/assets/718f3cb5-c8c6-4770-a07a-c594f291bd15" />
+
+<img width="441" height="232" alt="Image" src="https://github.com/user-attachments/assets/c9a0438c-bf98-4886-9c7a-fe1f4cfca934" />
+
+<img width="443" height="235" alt="Image" src="https://github.com/user-attachments/assets/00ea4016-c799-43a3-957c-fb4be003af3c" />
 </details>
 <details> 
 <summary>5-5. 제휴 파트너 등록 요청 / 관리</summary> 
