@@ -739,6 +739,7 @@ DELIMITER ;
 
 <details>
 <summary>2-1. 증상 목록 조회</summary>
+	
 ```sql
 DELIMITER $$
 
@@ -757,6 +758,7 @@ DELIMITER ;
 
 CALL get_symptom_list();
 ```
+
 </details>
 
 <details>
