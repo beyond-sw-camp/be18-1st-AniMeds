@@ -1,30 +1,73 @@
 DELIMITER $$
 
 CREATE PROCEDURE SearchPost(
-	IN search_title VARCHAR(255)
+    IN search_title VARCHAR(255)
 )
 BEGIN
-   SELECT
-      c.post_id,
-      u.name,
-      c.title,
-      c.content,
-      c.post_like,
-      c.post_report,
-      c.created_at,
-      c.updated_at,
-      COUNT(cm.comment_id) AS comment_count
-   FROM community c
-   JOIN `User` u ON c.user_id = u.user_id
-   LEFT JOIN comment cm ON c.post_id = cm.post_id
-   WHERE c.title LIKE CONCAT('%', search_title, '%')
-   GROUP BY c.post_id, c.title, c.content, c.created_at, c.updated_at, c.post_like, c.post_report, u.name
-   ORDER BY c.created_at DESC;
+    DECLARE v_count INT DEFAULT 0;
+    DECLARE v_msg VARCHAR(255);
+
+    -- 검색어가 NULL 또는 빈 문자열이면 전체 조회
+    IF search_title IS NULL OR search_title = '' THEN
+
+        SELECT
+            c.post_id,
+            u.name,
+            c.title,
+            c.content,
+            c.post_like,
+            c.post_report,
+            c.created_at,
+            c.updated_at,
+            COUNT(cm.comment_id) AS comment_count
+        FROM community c
+        JOIN `User` u ON c.user_id = u.user_id
+        LEFT JOIN comment cm ON c.post_id = cm.post_id
+        GROUP BY c.post_id, c.title, c.content, c.created_at, c.updated_at, c.post_like, c.post_report, u.name
+        ORDER BY c.created_at DESC;
+
+    ELSE
+        -- 검색 결과 개수 확인
+        SELECT COUNT(*) INTO v_count
+        FROM community
+        WHERE title LIKE CONCAT('%', search_title, '%');
+
+        -- 검색 결과 없으면 예외 발생
+        IF v_count = 0 THEN
+            SET v_msg = CONCAT('Error: "', search_title, '"에 해당하는 게시글이 없습니다.');
+            SIGNAL SQLSTATE '45000'
+            SET MESSAGE_TEXT = v_msg;
+        END IF;
+
+        -- 검색 결과 조회
+        SELECT
+            c.post_id,
+            u.name,
+            c.title,
+            c.content,
+            c.post_like,
+            c.post_report,
+            c.created_at,
+            c.updated_at,
+            COUNT(cm.comment_id) AS comment_count
+        FROM community c
+        JOIN `User` u ON c.user_id = u.user_id
+        LEFT JOIN comment cm ON c.post_id = cm.post_id
+        WHERE c.title LIKE CONCAT('%', search_title, '%')
+        GROUP BY c.post_id, c.title, c.content, c.created_at, c.updated_at, c.post_like, c.post_report, u.name
+        ORDER BY c.created_at DESC;
+    END IF;
 END $$
 
 DELIMITER ;
 
 
-CALL SearchPost('입니다');
+CALL SearchPost('가나다');
 
 -- DROP PROCEDURE SearchPost;
+
+<img width="1144" height="404" alt="Image" src="https://github.com/user-attachments/assets/e72d0e3a-aa04-49e6-af51-186da17c2de0" />
+
+<img width="1060" height="379" alt="Image" src="https://github.com/user-attachments/assets/d2e2fae0-399e-4332-a59f-9ab6627d8e3b" />
+
+<img width="437" height="229" alt="Image" src="https://github.com/user-attachments/assets/70cc3484-a86c-44dd-a783-6c8dff5747d8" />
