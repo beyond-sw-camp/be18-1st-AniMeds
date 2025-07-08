@@ -1,0 +1,19 @@
+-- 특정 동물의 복약 이력 조회
+-- 입력값으로 동물의 animal_id를 넣으면 복약 이력이 나옴
+DELIMITER $$
+CREATE OR REPLACE PROCEDURE preRecord(
+    IN p_animal_id INT 
+)
+BEGIN
+    SELECT a.name AS animal_name, s.symptom_id, d.drug_name, p.dose_given, p.notes
+    FROM prescriptionrecord p
+    JOIN Animal a ON p.animal_id = a.animal_id
+    JOIN Drug d ON p.drug_id = d.drug_id
+    JOIN Symptom s ON p.symptom_id = s.symptom_id
+    -- WHERE a.user_id = 1;
+    WHERE p.animal_id = p_animal_id
+    ORDER BY p.notes DESC;
+END$$
+DELIMITER ;
+
+CALL preRecord(1);
