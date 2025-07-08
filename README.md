@@ -1362,14 +1362,57 @@ CALL getClinicAdBudget('');
 <summary>4-3. 만료 광고 병원 자동 삭제</summary> 
 	
 ```
+DELIMITER $$
+
+CREATE PROCEDURE DeleteClinicsWithExpiredAds()
+BEGIN
+    -- VetAd에서 만료된 광고가 있는 병원의 ID를 가져온다
+    CREATE TEMPORARY TABLE tmp_expired_clinic_ids AS
+    SELECT DISTINCT clinic_id
+    FROM VetAd
+    WHERE end_date < CURDATE();
+
+    -- 해당 병원을 Clinic 테이블에서 삭제
+    DELETE FROM Clinic
+    WHERE clinic_id IN (SELECT clinic_id FROM tmp_expired_clinic_ids);
+
+    -- 임시 테이블 제거
+    DROP TEMPORARY TABLE tmp_expired_clinic_ids;
+END$$
+
+DELIMITER ;
 ```
+
+<img width="863" height="134" alt="Image" src="https://github.com/user-attachments/assets/d68890cb-4e3b-4701-96c8-67346aaf8fb2" />
+<img width="866" height="194" alt="Image" src="https://github.com/user-attachments/assets/da9ab379-3e90-4b6c-9490-3c014f30f7c6" />
+
 </details>
 
 <details> 
 <summary>4-4. 병원 상세 정보 조회</summary> 
 	
 ```
+DELIMITER //
+
+CREATE OR REPLACE PROCEDURE GetClinicByName(
+    IN in_name VARCHAR(255) CHARACTER SET UTF8MB4 COLLATE utf8mb4_unicode_ci 
+)
+BEGIN
+    SELECT
+        clinic_id,
+        name,
+        address,
+        contact,
+        specialties
+    FROM Clinic
+    WHERE name = in_name
+    LIMIT 1;
+END //
+
+DELIMITER ;
 ```
+<img width="1920" height="1080" alt="Image" src="https://github.com/user-attachments/assets/375eeb17-bca3-449f-aec8-5eb2180781f7" />
+
 </details>
 
 <details> 
