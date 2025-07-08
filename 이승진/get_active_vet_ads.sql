@@ -25,4 +25,4 @@ DELIMITER ;
 
 CALL GetActiveVetAdsWithRemainingDays();
 
-c:\Users\poket\OneDrive\바탕 화면\사진\Screenshots\스크린샷 2025-07-08 122647.png
+-- 참고 이미지: [img/img-get_active_vet_ads.png](img/img-get_active_vet_ads.png)
