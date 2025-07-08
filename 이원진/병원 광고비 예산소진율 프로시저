@@ -1,0 +1,17 @@
+DELIMITER $$
+
+CREATE PROCEDURE GetBudgetConsumptionReport()
+BEGIN
+    SELECT 
+        c.name AS clinic_name,
+        b.total_budget,
+        b.remaining_budget,
+        (b.total_budget - b.remaining_budget) AS consumed_budget,
+        ROUND(((b.total_budget - b.remaining_budget) / b.total_budget) * 100, 2) AS consumption_rate
+    FROM 
+        VetAdBudget b
+    JOIN 
+        Clinic c ON b.clinic_id = c.clinic_id;
+END$$
+
+DELIMITER ;
