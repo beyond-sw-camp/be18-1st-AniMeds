@@ -38,7 +38,10 @@ BEGIN
     SELECT 
         p.`name` AS product_name,
         pt.`name` AS partner_name,
-        p.price
+        p.price,
+        p.description,
+        p.image_url,
+        p.product_link
     FROM Product p
     JOIN Partner pt ON p.partner_id = pt.partner_id
     WHERE (p_partner_name_keyword IS NULL OR p_partner_name_keyword = '' 
@@ -51,7 +54,7 @@ DELIMITER ;
 
 CALL partnerProduct('', '구토');
 
-DROP PROCEDURE partnerProduct;
+-- DROP PROCEDURE partnerProduct;
 
 <img width="526" height="263" alt="Image" src="https://github.com/user-attachments/assets/eed3cc5c-4182-4bb7-8a83-78c429c73459" />
 
