@@ -550,8 +550,7 @@ DELIMITER ;
 
 <details>
 <summary>1-3. 로그아웃</summary>
-
-```sql
+<pre><code class="language-sql">
 DELIMITER $$
 
 CREATE PROCEDURE sp_logout_user (
@@ -573,7 +572,7 @@ BEGIN
 END$$
 
 DELIMITER ;
-```
+</code></pre>
 </details>
 
 <details>
