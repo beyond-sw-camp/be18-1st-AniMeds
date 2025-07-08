@@ -210,7 +210,10 @@
 ## 🗂️ 데이터베이스 설계
 
 ### ERD
-![image](https://github.com/user-attachments/assets/df9b3a9f-e95b-4437-a15b-a3210e2903a6)
+## 📌 ERD 구조도
+
+![ERD 이미지](https://github.com/beyond-sw-camp/be18-1st-AniMeds/blob/main/이승진/img/18_5_ERD_page.jpg?raw=true)
+
 
 
 ### 아키텍처
