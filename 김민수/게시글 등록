@@ -1,0 +1,21 @@
+DELIMITER $$
+
+CREATE PROCEDURE Posting(
+    IN p_title VARCHAR(255),
+    IN p_content TEXT,
+    IN p_user_id INT
+)
+BEGIN
+    INSERT INTO community (title, content, user_id)
+    VALUES (p_title, p_content, p_user_id);
+
+    -- 마지막에 생성된 AUTO_INCREMENT ID를 OUT 파라미터에 저장
+    -- SET p_post_id = LAST_INSERT_ID();
+END $$
+
+DELIMITER ;
+
+-- 실행 예시
+CALL Posting('test2', 'test2.', 1);
+
+DROP PROCEDURE Posting;
