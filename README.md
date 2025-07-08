@@ -763,107 +763,468 @@ CALL get_symptom_list();
 
 <details>
 <summary>2-2. 사용자 증상 보고 등록</summary>
+
+```DELIMITER $$
+
+DROP PROCEDURE IF EXISTS save_user_symptom_report $$
+
+CREATE PROCEDURE save_user_symptom_report (
+    IN p_user_id INT,
+    IN p_animal_id INT,
+    IN p_symptom_id INT,
+    IN p_custom_description TEXT
+)
+BEGIN
+    DECLARE v_exists INT;
+
+    SELECT COUNT(*) INTO v_exists
+    FROM User
+    WHERE user_id = p_user_id;
+    IF v_exists = 0 THEN
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = '존재하지 않는 사용자입니다.';
+    END IF;
+
+    SELECT COUNT(*) INTO v_exists
+    FROM Animal
+    WHERE animal_id = p_animal_id AND user_id = p_user_id;
+    IF v_exists = 0 THEN
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = '해당 동물은 사용자 소유가 아닙니다.';
+    END IF;
+
+    SELECT COUNT(*) INTO v_exists
+    FROM Symptom
+    WHERE symptom_id = p_symptom_id;
+    IF v_exists = 0 THEN
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = '존재하지 않는 증상입니다.';
+    END IF;
+
+    INSERT INTO UserSymptomReport (
+        user_id,
+        animal_id,
+        symptom_id,
+        custom_description,
+        reported_at
+    ) VALUES (
+        p_user_id,
+        p_animal_id,
+        p_symptom_id,
+        p_custom_description,
+        NOW()
+    );
+END $$
+
+DELIMITER ;
+
+```
 </details>
 
 <details>
 <summary>2-3. 사용자 증상 보고 이력 조회</summary>
+	```DELIMITER $$
+
+DROP PROCEDURE IF EXISTS get_symptom_report_history $$
+
+CREATE PROCEDURE get_symptom_report_history (
+    IN p_user_id INT,
+    IN p_animal_id INT
+)
+BEGIN
+    DECLARE v_exists INT;
+
+    SELECT COUNT(*) INTO v_exists
+    FROM User
+    WHERE user_id = p_user_id;
+    IF v_exists = 0 THEN
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = '존재하지 않는 사용자입니다.';
+    END IF;
+
+    SELECT COUNT(*) INTO v_exists
+    FROM Animal
+    WHERE animal_id = p_animal_id AND user_id = p_user_id;
+    IF v_exists = 0 THEN
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = '해당 동물은 사용자 소유가 아닙니다.';
+    END IF;
+
+    SELECT COUNT(*) INTO v_exists
+    FROM UserSymptomReport
+    WHERE animal_id = p_animal_id;
+    IF v_exists = 0 THEN
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = '증상 보고 이력이 없습니다.';
+    END IF;
+
+    SELECT 
+        sr.report_id,
+        s.description AS symptom,
+        sr.custom_description,
+        sr.reported_at
+    FROM UserSymptomReport sr
+    JOIN Symptom s ON sr.symptom_id = s.symptom_id
+    WHERE sr.animal_id = p_animal_id
+    ORDER BY sr.reported_at DESC;
+END $$
+
+DELIMITER ;
+```
+
 </details>
 
 <details>
 <summary>2-4. 증상에 따른 약물 경고 조회</summary>
+
+```
+DELIMITER $$
+
+DROP PROCEDURE IF EXISTS sp_get_symptom_drug_warnings $$
+
+CREATE PROCEDURE sp_get_symptom_drug_warnings (
+    IN p_species_id INT,
+    IN p_symptom_id INT
+)
+BEGIN
+    DECLARE v_exists INT;
+
+    SELECT COUNT(*) INTO v_exists
+    FROM AnimalSpecies
+    WHERE species_id = p_species_id;
+    IF v_exists = 0 THEN
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = '존재하지 않는 동물 종입니다.';
+    END IF;
+
+    SELECT COUNT(*) INTO v_exists
+    FROM Symptom
+    WHERE symptom_id = p_symptom_id;
+    IF v_exists = 0 THEN
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = '존재하지 않는 증상입니다.';
+    END IF;
+
+    SELECT COUNT(*) INTO v_exists
+    FROM DrugWarning
+    WHERE (species_id = p_species_id OR species_id IS NULL)
+      AND (symptom_id = p_symptom_id OR symptom_id IS NULL);
+    IF v_exists = 0 THEN
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = '관련 약물 경고가 없습니다.';
+    END IF;
+
+    SELECT 
+        dw.drug_id,
+        d.drug_name,
+        dw.warning_type,
+        dw.description,
+        dw.severity,
+        dw.source
+    FROM DrugWarning dw
+    JOIN Drug d ON dw.drug_id = d.drug_id
+    WHERE (dw.species_id = p_species_id OR dw.species_id IS NULL)
+      AND (dw.symptom_id = p_symptom_id OR dw.symptom_id IS NULL)
+    ORDER BY dw.severity DESC;
+END $$
+
+DELIMITER ;
+
+CALL sp_get_symptom_drug_warnings(1, 1);
+```
 </details>
 
 <details>
 <summary>2-5. 동일 증상 중복 보고 방지</summary>
+	
+```
+DELIMITER $$
+
+DROP PROCEDURE IF EXISTS sp_save_symptom_report_once_per_day $$
+
+CREATE PROCEDURE sp_save_symptom_report_once_per_day (
+    IN p_user_id INT,
+    IN p_animal_id INT,
+    IN p_symptom_id INT,
+    IN p_custom_description TEXT
+)
+BEGIN
+    DECLARE v_exists INT;
+
+    SELECT COUNT(*) INTO v_exists FROM User WHERE user_id = p_user_id;
+    IF v_exists = 0 THEN
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = '존재하지 않는 사용자입니다.';
+    END IF;
+
+    SELECT COUNT(*) INTO v_exists
+    FROM Animal WHERE animal_id = p_animal_id AND user_id = p_user_id;
+    IF v_exists = 0 THEN
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = '해당 동물은 사용자 소유가 아닙니다.';
+    END IF;
+
+    SELECT COUNT(*) INTO v_exists FROM Symptom WHERE symptom_id = p_symptom_id;
+    IF v_exists = 0 THEN
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = '존재하지 않는 증상입니다.';
+    END IF;
+
+    SELECT COUNT(*) INTO v_exists
+    FROM UserSymptomReport
+    WHERE user_id = p_user_id
+      AND animal_id = p_animal_id
+      AND symptom_id = p_symptom_id
+      AND DATE(reported_at) = CURDATE();
+
+    IF v_exists > 0 THEN
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = '오늘은 이 증상에 대해 이미 보고했습니다.';
+    END IF;
+
+    INSERT INTO UserSymptomReport (
+        user_id, animal_id, symptom_id, custom_description, reported_at
+    ) VALUES (
+        p_user_id, p_animal_id, p_symptom_id, p_custom_description, NOW()
+    );
+END $$
+
+DELIMITER ;
+
+CALL sp_save_symptom_report_once_per_day(1, 1, 1, '기침 계속함');
+```
 </details>
 
 <details>
 <summary>2-6. 종별 약물 복용량 초과 위험 확인</summary>
+	
+```
+DELIMITER $$
+
+DROP PROCEDURE IF EXISTS sp_check_overdose_risk $$
+
+CREATE PROCEDURE sp_check_overdose_risk (
+    IN p_animal_id INT,
+    IN p_symptom_id INT
+)
+BEGIN
+    DECLARE v_species_id INT;
+    DECLARE v_weight FLOAT;
+    DECLARE v_exists INT;
+
+    SELECT COUNT(*) INTO v_exists FROM Animal WHERE animal_id = p_animal_id;
+    IF v_exists = 0 THEN
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = '존재하지 않는 반려동물입니다.';
+    END IF;
+
+    SELECT species_id, weight INTO v_species_id, v_weight
+    FROM Animal
+    WHERE animal_id = p_animal_id;
+
+    IF v_weight IS NULL THEN
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = '반려동물의 체중 정보가 필요합니다.';
+    END IF;
+
+    SELECT COUNT(*) INTO v_exists FROM Symptom WHERE symptom_id = p_symptom_id;
+    IF v_exists = 0 THEN
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = '존재하지 않는 증상입니다.';
+    END IF;
+
+    SELECT
+        d.drug_id,
+        d.drug_name,
+        dsm.recommended_dose,
+        dsm.max_dose,
+        ROUND(v_weight * dsm.recommended_dose, 2) AS calculated_dose,
+        CASE
+            WHEN (v_weight * dsm.recommended_dose > dsm.max_dose) THEN 'Y'
+            ELSE 'N'
+        END AS over_limit,
+        dw.description AS warning
+    FROM Symptom_Drug_Map sdm
+    JOIN Drug d ON sdm.drug_id = d.drug_id
+    JOIN DrugSpeciesMapping dsm 
+        ON d.drug_id = dsm.drug_id AND dsm.species_id = v_species_id
+    LEFT JOIN DrugWarning dw 
+        ON dw.drug_id = d.drug_id
+        AND (dw.species_id = v_species_id OR dw.species_id IS NULL)
+        AND (dw.symptom_id = p_symptom_id OR dw.symptom_id IS NULL)
+    WHERE sdm.symptom_id = p_symptom_id;
+END $$
+
+DELIMITER ;
+
+CALL sp_check_overdose_risk(1, 1);
+```
 </details>
 
 <details>
 <summary>2-7. 증상에 따른 약물 간 상호작용 위험 확인</summary>
+	
+```
+DELIMITER $$
+
+DROP PROCEDURE IF EXISTS sp_check_interaction_risk $$
+
+CREATE PROCEDURE sp_check_interaction_risk (
+    IN p_symptom_id INT,
+    IN p_species_id INT
+)
+BEGIN
+    SELECT
+        d.drug_id,
+        d.drug_name,
+        di.interaction_risk,
+        di.interaction_detail,
+        d_other.drug_name AS interacts_with
+    FROM Symptom_Drug_Map sdm
+    JOIN Drug d ON sdm.drug_id = d.drug_id
+
+    JOIN DrugSpeciesMapping dsm ON d.drug_id = dsm.drug_id
+        AND dsm.species_id = p_species_id
+
+    LEFT JOIN DrugInteraction di 
+        ON di.drug_id_low = d.drug_id OR di.drug_id_high = d.drug_id
+
+    LEFT JOIN Drug d_other 
+        ON d_other.drug_id = 
+           IF(di.drug_id_low = d.drug_id, di.drug_id_high, 
+              IF(di.drug_id_high = d.drug_id, di.drug_id_low, NULL))
+
+    WHERE sdm.symptom_id = p_symptom_id
+      AND d_other.drug_id IS NOT NULL
+    ORDER BY d.drug_id, interacts_with;
+END $$
+
+DELIMITER ;
+
+CALL sp_check_interaction_risk(1, 1);
+```
 </details>
 
 ### 🛒 3. 커뮤니티 및 상품 관리
 
 <details>
 <summary>3-1. 커뮤니티 게시글 목록 조회</summary>
+	
+```
+```
 </details>
 
 <details>
 <summary>3-2. 커뮤니티 게시글 등록</summary>
+	
+```
+```
 </details>
 
 <details>
 <summary>3-3. 커뮤니티 댓글 등록</summary>
+	
+```
+```
 </details>
 
 <details>
 <summary>3-4. 커뮤니티 게시글 신고</summary>
+	
+```
+```
 </details>
 
 <details>
 <summary>3-5. 상품 목록 조회</summary>
+	
+```
+```
 </details>
 
 <details>
 <summary>3-6. 상품 상세 조회</summary>
+	
+```
+```
 </details>
 
 <details>
 <summary>3-7. 종별 금기/주의 약물 포함 상품 필터링</summary>
+	
+```
+```
 </details>
 
 ### 🏥 4. 병원 및 광고 관리
 
 <details> 
 <summary>4-1. 종에 따른 병원 추천</summary> 
-</details> 
+	
+```
+```
+</details>
 
 <details> 
 <summary>4-2. 광고 예산 소진 리포트</summary> 
-</details> 
+	
+```
+```
+</details>
 
 <details> 
 <summary>4-3. 만료 광고 병원 자동 삭제</summary> 
-</details> 
+	
+```
+```
+</details>
 
 <details> 
 <summary>4-4. 병원 상세 정보 조회</summary> 
-</details> 
+	
+```
+```
+</details>
 
 <details> 
 <summary>4-5. 병원 등록 / 광고 등록 요청</summary>
+	
+```
+```
 </details>
 
 ### 🛠️ 5. 기타 관리 기능
 <details> 
 <summary>5-1. 세션 유효성 확인 및 저장</summary> 
-</details> 
+	
+```
+```
+</details>
 
 <details> 
 <summary>5-2. 종 목록 조회</summary> 
-</details> 
+	
+```
+```
+</details>
 
 <details> 
 <summary>5-3. 사용자 역할 검증</summary>
-</details> 
+	
+```
+```
+</details>
 
 <details> 
 <summary>5-4. 증상/약물/종 관리 (관리자 전용)</summary>
-</details> 
+	
+```
+```
+</details>
 
 <details> 
 <summary>5-5. 로그 저장 또는 에러 로깅 (후속 고려)</summary> 
-</details> 
+	
+```
+```
+</details>
 
 <details> 
 <summary>5-6. 통계/분석 리포트 제공</summary>
+	
+```
+```
 </details>
 
 <details> 
 <summary>5-7. 데이터 백업 또는 자동 삭제 정책</summary>
+	
+```
+```
 </details>
 
 -- 여기서 묶음
