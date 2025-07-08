@@ -633,6 +633,8 @@ END $$
 
 DELIMITER ;
 ```
+![image](https://github.com/user-attachments/assets/4cc0b336-ad3a-444f-89b1-63cbaf753e9f)
+![image](https://github.com/user-attachments/assets/c8db92f4-ee53-47b4-8090-3c863b939d24)
 
 </details>
 
