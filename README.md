@@ -1216,7 +1216,7 @@ CALL getClinicAdBudget('');
 <details> 
 <summary>4-5. 병원 등록 / 광고 등록 요청</summary>
 	
-```
+```sql
 USE employees_db;
 DROP PROCEDURE IF EXISTS AddVetAd;
 DELIMITER $$
