@@ -1,0 +1,19 @@
+DELIMITER $$
+
+CREATE PROCEDURE DeleteClinicsWithExpiredAds()
+BEGIN
+    -- VetAd에서 만료된 광고가 있는 병원의 ID를 가져온다
+    CREATE TEMPORARY TABLE tmp_expired_clinic_ids AS
+    SELECT DISTINCT clinic_id
+    FROM VetAd
+    WHERE end_date < CURDATE();
+
+    -- 해당 병원을 Clinic 테이블에서 삭제
+    DELETE FROM Clinic
+    WHERE clinic_id IN (SELECT clinic_id FROM tmp_expired_clinic_ids);
+
+    -- 임시 테이블 제거
+    DROP TEMPORARY TABLE tmp_expired_clinic_ids;
+END$$
+
+DELIMITER ;
