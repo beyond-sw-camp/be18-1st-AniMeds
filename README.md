@@ -1196,21 +1196,37 @@ DELIMITER ;
 </details>
 
 <details>
-<summary>3-5. 상품 목록 조회</summary>
+<summary>3-5. 커뮤니티 게시글 삭제</summary>
+	
+```sql
+
+```
+</details>
+
+<details>
+<summary>3-6. 커뮤니티 게시글 수정</summary>
+	
+```sql
+
+```
+</details>
+
+<details>
+<summary>3-7. 상품 목록 조회</summary>
 	
 ```
 ```
 </details>
 
 <details>
-<summary>3-6. 상품 상세 조회</summary>
+<summary>3-8. 상품 상세 조회</summary>
 	
 ```
 ```
 </details>
 
 <details>
-<summary>3-7. 종별 금기/주의 약물 포함 상품 필터링</summary>
+<summary>3-9. 종별 금기/주의 약물 포함 상품 필터링</summary>
 	
 ```
 ```
@@ -1219,10 +1235,56 @@ DELIMITER ;
 ### 🏥 4. 병원 및 광고 관리
 
 <details> 
-<summary>4-1. 종에 따른 병원 추천</summary> 
+<summary>4-1. 종에 따른 병원 추천 및 병원 광고 타겟 정보 조회</summary> 
 	
 ```
+DELIMITER $$
+
+CREATE PROCEDURE getVetAdInfo (
+    IN p_clinic_name VARCHAR(100)
+)
+BEGIN
+    DECLARE v_clinic_name VARCHAR(100);
+    DECLARE v_exist_count INT DEFAULT 0;
+
+    SET v_clinic_name = NULLIF(TRIM(p_clinic_name), '');
+
+    -- 병원 존재 여부 체크
+    SELECT COUNT(*) INTO v_exist_count
+    FROM Clinic
+    WHERE v_clinic_name IS NULL
+       OR name LIKE CONCAT('%', v_clinic_name, '%') COLLATE utf8mb4_general_ci;
+
+    IF v_exist_count = 0 THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = '조건에 맞는 병원이 존재하지 않습니다.';
+    END IF;
+
+    -- 결과 조회
+    SELECT 
+        c.name AS clinic_name,
+        s.species_name,
+        sy.symptom_id,
+        v.priority
+    FROM VetAd v
+    JOIN Clinic c ON v.clinic_id = c.clinic_id
+    JOIN AnimalSpecies s ON v.target_species_id = s.species_id
+    JOIN Symptom sy ON v.target_symptom_id = sy.symptom_id
+    WHERE v_clinic_name IS NULL
+       OR c.name LIKE CONCAT('%', v_clinic_name, '%') COLLATE utf8mb4_general_ci;
+END$$
+
+DELIMITER ;
+
+CALL getVetAdInfo('');
 ```
+
+<img width="479" height="283" alt="Image" src="https://github.com/user-attachments/assets/65470974-9e4c-4be0-b4e0-3e2d31b51a8c" />
+
+<img width="479" height="254" alt="Image" src="https://github.com/user-attachments/assets/1f91732a-0396-45c9-9fc9-5e9687bec376" />
+
+<img width="488" height="311" alt="Image" src="https://github.com/user-attachments/assets/f00e6099-bf9f-444b-811b-b4ea24b362b4" />=
+
 </details>
 
 <details> 
