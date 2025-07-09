@@ -905,10 +905,8 @@ END $$
 
 DELIMITER ;
 ```
-![image](https://github.com/user-attachments/assets/828e7226-c2eb-49e2-a0e3-6cd7bb856704)
-![image](https://github.com/user-attachments/assets/eddda707-400f-4b4b-8bb6-3c1ce5362fbb)
-![image](https://github.com/user-attachments/assets/f7c8fe4e-7e84-41ee-b48e-29782918132a)
-![image](https://github.com/user-attachments/assets/40804ce6-10d5-4fd6-b9eb-b2c8a4d3cf04)
+![image](https://github.com/user-attachments/assets/92cb0952-c621-4d81-916a-4b796452d9a6)
+
 
 </details>
 
