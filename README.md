@@ -216,10 +216,10 @@
 
 
 
-### 아키텍처
+### 📌 아키텍처
 ![Image](https://github.com/user-attachments/assets/d39fcda0-7dba-4f9d-86a3-4240078a4a49)
 
-### Schema DDL
+### 📌 Schema DDL
 ### 1. 약물 간 상호작용 정보
 
 ```sql
