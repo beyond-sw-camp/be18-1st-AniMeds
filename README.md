@@ -239,17 +239,36 @@ CREATE TABLE DrugInteraction (
 );
 ```
 
-### 2. 커뮤니티 게시글
+### 2. 커뮤니티 게시글과 댓글
 
 ```sql
 -- 커뮤니티에 작성된 게시글 정보를 저장
 CREATE TABLE Community (
-    post_id INT PRIMARY KEY AUTO_INCREMENT,     -- 게시글 ID
+    post_id BIGINT PRIMARY KEY AUTO_INCREMENT,  -- 게시글 ID
     user_id INT,                                -- 작성자 사용자 ID
     title VARCHAR(255),                         -- 제목
     content TEXT,                               -- 내용
     created_at DATETIME,                        -- 작성일
-    FOREIGN KEY (user_id) REFERENCES User(user_id)
+    updated_at DATETIME,                        -- 수정일
+    post_like INT,                              -- 좋아요 수
+    post_report INT,                            -- 신고 수
+    comment_count INT                           -- 댓글 수
+    FOREIGN KEY (user_id) REFERENCES User(user_id) ON DELETE CASCADE ON UPDATE CASCADE
+);
+```
+
+```sql
+CREATE TABLE comment (
+   comment_id BIGINT AUTO_INCREMENT PRIMARY KEY,       -- 댓글 ID
+   post_id BIGINT NOT NULL,                            -- 댓글이 달린 게시글 ID
+   user_id INT NOT NULL,                               -- 댓글 작성자 ID
+   content TEXT NOT NULL,                              -- 댓글 내용
+   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,     -- 댓글 작성일
+   updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,  -- 댓글 수정일
+   comment_like INT DEFAULT 0,                         -- 댓글 좋아요 수
+   comment_report INT DEFAULT 0,                       -- 댓글 신고 수
+   FOREIGN KEY (post_id) REFERENCES community(post_id) ON DELETE CASCADE ON UPDATE CASCADE,
+   FOREIGN KEY (user_id) REFERENCES User(user_id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 ```
 
@@ -2213,6 +2232,6 @@ DROP PROCEDURE partnerProduct;
 
 <div align="center">
   
-[📚목차](#-목차)
+[📚Table of Contents](#-Table-of-Contents)
 
 </div>
