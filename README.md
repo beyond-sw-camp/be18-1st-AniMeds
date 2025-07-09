@@ -1027,7 +1027,9 @@ DELIMITER ;
 
 CALL sp_save_symptom_report_once_per_day(1, 1, 1, '기침 계속함');
 ```
-![image](https://github.com/user-attachments/assets/5b7847c6-be8c-4c3d-8869-f8fa0db4efc9)
+
+![image](https://github.com/user-attachments/assets/51188f12-3778-4a38-b59a-047df342c478)
+
 
 </details>
 
@@ -1092,7 +1094,9 @@ DELIMITER ;
 
 CALL sp_check_overdose_risk(1, 1);
 ```
-![image](https://github.com/user-attachments/assets/5de21e73-48f2-4917-93f0-48a8f789a3e4)
+
+![image](https://github.com/user-attachments/assets/6a5e8ff8-fa00-4b0b-a7fc-e042adbd1dfb)
+
 
 </details>
 
