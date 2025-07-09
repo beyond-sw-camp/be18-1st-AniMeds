@@ -34,8 +34,6 @@
 - [🧪 샘플 데이터 삽입 (DML)](#-샘플-데이터-삽입-dml)
 - [🧠 프로시저 실행 결과](#-프로시저-실행-결과)
 - [💬 시나리오](#-시나리오)
-- [🚀 기술 스택](#-기술-스택)
-- [📁 프로젝트 구조](#-프로젝트-구조)
 - [⬆️ 향후 아이디어](#-향후-아이디어)
 - [🐾 About AniMeds](#-about-animeds)
 - [🎓 회고록](#-회고록)
@@ -2214,7 +2212,6 @@ DROP PROCEDURE partnerProduct;
 
 ## 💬 시나리오
 <img width="600" height="600" alt="Image" src="https://github.com/user-attachments/assets/cf0d7496-98c9-443d-8701-577c46fe999c" />
-
 
 
 ## ⬆️ 향후 아이디어
