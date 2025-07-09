@@ -209,6 +209,7 @@
 ---
 ## 📋 테이블 명세
  [테이블 명세서](https://docs.google.com/spreadsheets/d/1pvDg1Zh4sYirmvEUPdn1LMNOMgDtHDM6_Z2AHGiUiY4/edit?gid=0#gid=0)
+
 ---
 
 ## 🧩 데이터베이스 설계
