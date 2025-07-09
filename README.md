@@ -1298,6 +1298,12 @@ END $$
 DELIMITER ;
 
 ```
+![image](https://github.com/user-attachments/assets/247fb9ae-d183-4c43-891c-0da1638d2c8b)
+-- 신고수가 10을 넘으면 트리거를 통해 자동으로 community_trash_bin 테이블에 들어갑니다.
+![image](https://github.com/user-attachments/assets/5ba2d3d6-fd9f-4183-8ac7-acafa20f1701)
+-- 관리자는 쿼리문으로 매주(혹은 매일) 쓰레기통에 있는 게시글 아이디와 같은 게시글을 지움
+![image](https://github.com/user-attachments/assets/9ebef00b-9c37-4235-b350-7354e24c8190)
+
 </details>
 
 <details>
