@@ -767,6 +767,56 @@ DELIMITER ;
 
 </details>
 
+<details>
+<summary>1-7. 전체 종 조회</summary>
+
+```sql
+DELIMITER $$
+
+CREATE PROCEDURE GetAnimalSpecies(
+	IN input_species_name VARCHAR(255)
+)
+BEGIN
+    DECLARE matched_count INT;
+
+    IF input_species_name IS NULL OR TRIM(input_species_name) = '' THEN
+        -- 입력값이 없으면 전체 출력
+        SELECT * FROM animalspecies;
+    ELSE
+        -- 입력값이 있을 경우 부분 검색 수행
+        SELECT COUNT(*) INTO matched_count
+        FROM animalspecies
+        WHERE species_name COLLATE utf8mb4_general_ci
+              LIKE CONCAT('%', input_species_name COLLATE utf8mb4_general_ci, '%');
+
+        IF matched_count > 0 THEN
+            SELECT * FROM animalspecies
+            WHERE species_name COLLATE utf8mb4_general_ci
+                  LIKE CONCAT('%', input_species_name COLLATE utf8mb4_general_ci, '%');
+        ELSE
+            SIGNAL SQLSTATE '45000'
+            SET MESSAGE_TEXT = '일치하는 종이 없습니다.';
+        END IF;
+    END IF;
+END $$
+
+DELIMITER ;
+
+CALL GetAnimalSpecies('악어');
+
+-- DROP PROCEDURE getanimalspecies;
+```
+
+
+<img width="415" height="279" alt="Image" src="https://github.com/user-attachments/assets/53c52cea-2961-4af9-978b-8b5c5954097c" />
+
+<img width="399" height="192" alt="Image" src="https://github.com/user-attachments/assets/b69d3d71-8ce6-47bb-99c6-d615e7f1aeee" />
+
+<img width="490" height="301" alt="Image" src="https://github.com/user-attachments/assets/29cf8927-804b-4094-8001-00f4e13dc83e" />
+
+
+</details>
+
 ### 💊 2. 증상 기반 진단 및 약물 추천
 
 <details>
