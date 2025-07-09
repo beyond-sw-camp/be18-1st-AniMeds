@@ -567,8 +567,8 @@ END$$
 
 DELIMITER ;
 ```
-![image](https://github.com/user-attachments/assets/c11b7a60-a321-47eb-9419-d2163f10c03c)
-![image](https://github.com/user-attachments/assets/09fe096e-dc91-4a97-acdf-f46682d6d5df)
+![image](https://github.com/user-attachments/assets/c8e0bc7e-73b0-460a-8581-eb6e48fc274a)
+![image](https://github.com/user-attachments/assets/7afe6407-707f-4134-b525-ca5725e31a20)
 
 </details>
 
