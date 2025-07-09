@@ -967,7 +967,8 @@ DELIMITER ;
 
 CALL sp_get_symptom_drug_warnings(1, 1);
 ```
-![image](https://github.com/user-attachments/assets/f747c772-9957-4b6a-b9b7-342ce0b4407f)
+![image](https://github.com/user-attachments/assets/28f4768b-696f-4f7b-9d08-6d445a832053)
+
 
 </details>
 
