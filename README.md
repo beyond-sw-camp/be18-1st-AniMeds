@@ -1353,7 +1353,7 @@ CALL UpdatePost(10, 1, 'asda', 'qqsd');
 
 <img width="540" height="119" alt="Image" src="https://github.com/user-attachments/assets/efbd1f68-c721-4556-b54d-831a76b37a43" />
 
-<img width="1069" height="44" alt="Image" src="https://github.com/user-attachments/assets/dfe19e77-6dce-4d07-85ef-885c27744d25" />
+<img width="1180" height="23" alt="Image" src="https://github.com/user-attachments/assets/1815b8be-2ee8-4542-99d8-01c1c154d805" />
 
 <img width="520" height="234" alt="Image" src="https://github.com/user-attachments/assets/1bdebc99-6621-4638-886e-3fa4667ba309" />
 
