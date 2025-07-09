@@ -177,7 +177,7 @@
 ---
 
 ## 📅 프로젝트 진행 일정 (WBS)
-![image](https://github.com/user-attachments/assets/7112814b-3aa7-48ec-8944-a977059e8d3e)
+![image](https://github.com/user-attachments/assets/9d1d1e32-abb0-469e-9b6b-89b275c0ad54)
 
 
 [프로젝트 진행 일정(wbs)](https://docs.google.com/spreadsheets/d/1220bBuBJ12cd4qBncc2iErHQUT1RVwtTA3J0CJ5_gtg/edit?gid=0#gid=0)
