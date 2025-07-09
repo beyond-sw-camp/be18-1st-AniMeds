@@ -206,14 +206,18 @@
 - 데이터 무결성 보장 (외래키, 제약조건 등)
 
 ---
+## 테이블 명세
+![image](https://github.com/user-attachments/assets/ce557d85-e882-4777-984f-03e90c6f72ac)
+
+ [테이블 명세서](https://docs.google.com/spreadsheets/d/1pvDg1Zh4sYirmvEUPdn1LMNOMgDtHDM6_Z2AHGiUiY4/edit?gid=0#gid=0)
+ 
+---
 
 ## 🧩 데이터베이스 설계
 
 ### 📌 ERD 구조도
 
 ![ERD 이미지](https://github.com/beyond-sw-camp/be18-1st-AniMeds/blob/main/이승진/img/18_5_ERD_page.jpg?raw=true)
-
-
 
 ### 📌 아키텍처
 ![Image](https://github.com/user-attachments/assets/d39fcda0-7dba-4f9d-86a3-4240078a4a49)
