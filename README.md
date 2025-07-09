@@ -26,8 +26,11 @@
 - [📋 요구사항 명세](#-요구사항-명세)
   - [✅ 기능 요구사항](#-기능-요구사항)
   - [🚫 비기능 요구사항](#-비기능-요구사항)
-- [📋 테이블 명세](#-테이블-명세)
 - [🧩 데이터베이스 설계](#-데이터베이스-설계)
+  - [📌 ERD 구조도](#ERD-구조도) 
+  - [📋 테이블 명세](#-테이블-명세)
+  - [📌 아키텍처](#아키텍처)
+  - [📌 Schema DDL](#Schma-DDL)
 - [🧪 샘플 데이터 삽입 (DML)](#-샘플-데이터-삽입-dml)
 - [🧠 프로시저 실행 결과](#-프로시저-실행-결과)
 - [💬 시나리오](#-시나리오)
@@ -207,16 +210,15 @@
 - 데이터 무결성 보장 (외래키, 제약조건 등)
 
 ---
-## 📋 테이블 명세
- [테이블 명세서](https://docs.google.com/spreadsheets/d/1pvDg1Zh4sYirmvEUPdn1LMNOMgDtHDM6_Z2AHGiUiY4/edit?gid=0#gid=0)
-
----
 
 ## 🧩 데이터베이스 설계
 
 ### 📌 ERD 구조도
 
 ![ERD 이미지](https://github.com/beyond-sw-camp/be18-1st-AniMeds/blob/main/이승진/img/18_5_ERD_page.jpg?raw=true)
+
+### 📋 테이블 명세
+ [테이블 명세서](https://docs.google.com/spreadsheets/d/1pvDg1Zh4sYirmvEUPdn1LMNOMgDtHDM6_Z2AHGiUiY4/edit?gid=0#gid=0)
 
 ### 📌 아키텍처
 ![Image](https://github.com/user-attachments/assets/d39fcda0-7dba-4f9d-86a3-4240078a4a49)
